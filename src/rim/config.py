@@ -26,8 +26,11 @@ class DatasetConfig(StrictModel):
     fields: tuple[str, ...] = ("title", "text")
     # Fraction of queries assigned to the dev split when the dataset has no native split.
     dev_fraction: float = Field(default=0.3, gt=0.0, lt=1.0)
-    max_docs: int | None = None
+    # Cap on queries per split, for smoke runs. Queries are taken in ID order.
     max_queries: int | None = None
+    # Optional qrels column (for example the DAPFAM domain label) by which test
+    # metrics are also reported separately.
+    qrels_group: str | None = None
 
 
 class BM25Config(StrictModel):
@@ -81,6 +84,9 @@ class RerankerConfig(StrictModel):
     max_length: int = 512
     batch_size: int = 32
     depths: tuple[int, ...] = (10, 20, 50, 100)
+    # Dev queries used to select the rerank depth (first N in ID order). Bounds the
+    # cost of tuning; test queries are always reranked in full.
+    max_dev_queries: int | None = None
 
 
 class EvalConfig(StrictModel):
@@ -89,6 +95,8 @@ class EvalConfig(StrictModel):
     n_bootstrap: int = 10_000
     n_permutations: int = 10_000
     confidence: float = 0.95
+    # Number of test queries on which per-stage latency is measured, one query at a time.
+    n_latency_queries: int = 50
 
 
 class RetrievalExperimentConfig(StrictModel):

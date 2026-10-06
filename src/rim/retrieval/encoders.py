@@ -66,7 +66,7 @@ class SentenceTransformerEncoder:
         self.device = device
         self.model = SentenceTransformer(config.model_id, revision=config.revision, device=device)
         self.model.max_seq_length = config.max_seq_length
-        self.dim = int(self.model.get_sentence_embedding_dimension())
+        self.dim = int(self.model.encode(["dimension probe"]).shape[1])
         self.n_parameters = sum(p.numel() for p in self.model.parameters())
         # The revision actually loaded, so a run without a pinned revision is still traceable.
         self.resolved_revision = config.revision or _resolved_revision(config.model_id)

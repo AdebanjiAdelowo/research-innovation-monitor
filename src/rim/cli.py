@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 
 
 def _prepare(args: argparse.Namespace) -> None:
@@ -16,6 +17,23 @@ def _prepare(args: argparse.Namespace) -> None:
         print(f"{name}: {manifest.n_documents} documents, {manifest.n_queries} queries -> {path}")
 
 
+def _prepare_nsf(args: argparse.Namespace) -> None:
+    from rim.config import data_dir
+    from rim.data.loaders import nsf
+
+    awards, _ = nsf.prepare(data_dir(), args.first_year, args.last_year)
+    print(f"nsf_awards: {len(awards)} awards")
+
+
+def _retrieval(args: argparse.Namespace) -> None:
+    from rim.config import RetrievalExperimentConfig, load_config
+    from rim.experiments.retrieval import format_table, run_retrieval_experiment
+
+    summary = run_retrieval_experiment(load_config(args.config, RetrievalExperimentConfig))
+    print(format_table(summary))
+    print(f"\nrun {summary['run_id']}")
+
+
 def _env(_: argparse.Namespace) -> None:
     from rim.provenance import environment_info, git_info
 
@@ -23,6 +41,10 @@ def _env(_: argparse.Namespace) -> None:
 
 
 def main(argv: list[str] | None = None) -> None:
+    from rim.net import force_ipv4_if_requested
+
+    force_ipv4_if_requested()
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s: %(message)s")
     parser = argparse.ArgumentParser(prog="rim", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -30,6 +52,15 @@ def main(argv: list[str] | None = None) -> None:
     prepare.add_argument("names", nargs="+")
     prepare.add_argument("--force", action="store_true")
     prepare.set_defaults(func=_prepare)
+
+    nsf = sub.add_parser("prepare-nsf", help="download NSF award abstracts (resumable)")
+    nsf.add_argument("first_year", type=int)
+    nsf.add_argument("last_year", type=int)
+    nsf.set_defaults(func=_prepare_nsf)
+
+    retrieval = sub.add_parser("retrieval", help="run a retrieval experiment (RQ1, RQ2)")
+    retrieval.add_argument("config")
+    retrieval.set_defaults(func=_retrieval)
 
     env = sub.add_parser("env", help="print the provenance of this environment")
     env.set_defaults(func=_env)
