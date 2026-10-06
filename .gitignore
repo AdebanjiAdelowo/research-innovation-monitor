@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+
+# Data: nothing downloaded or derived from third-party datasets is tracked.
+data/raw/*
+data/processed/*
+data/cache/
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Model weights, embeddings, indices, archives
+*.npy
+*.npz
+*.pt
+*.bin
+*.safetensors
+*.faiss
+*.zip
+*.tar
+*.tar.gz
+*.parquet
+!tests/fixtures/**/*.parquet
+
+# Results: summaries, run records and figures are tracked; bulky per-run dumps are not.
+results/**/runs_raw/
+results/**/*.trec
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+.ipynb_checkpoints/

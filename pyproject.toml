@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "research-innovation-monitor"
+version = "0.1.0"
+description = "Hybrid retrieval, citation-grounded generation and quantitative trend analysis over scientific literature, patents and research grants."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+authors = [{ name = "Adebanji Adelowo" }]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pandas>=2.1",
+    "pyarrow>=15",
+    "pydantic>=2.6",
+    "pyyaml>=6",
+    "scikit-learn>=1.4",
+    "httpx>=0.27",
+    "snowballstemmer>=2.2",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# Neural encoders, rerankers and local generation. Not needed for the unit tests.
+ml = ["torch>=2.2", "sentence-transformers>=3.0", "transformers>=4.41"]
+# Dataset download from the Hugging Face Hub.
+data = ["huggingface_hub>=0.23", "fsspec>=2024.2"]
+app = ["fastapi>=0.110", "uvicorn>=0.29", "streamlit>=1.33"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[project.scripts]
+rim = "rim.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rim"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "ml: needs the optional neural dependencies and model weights",
+    "network: needs network access",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]

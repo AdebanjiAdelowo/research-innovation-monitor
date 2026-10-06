@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      # The neural extra is not installed: unit tests use deterministic stand-ins
+      # for encoders, rerankers and language models, and need no secrets or downloads.
+      - name: Install
+        run: uv pip install --system -e ".[app,dev]"
+      - name: Lint
+        run: ruff check .
+      - name: Test
+        run: pytest -m "not ml and not network"
