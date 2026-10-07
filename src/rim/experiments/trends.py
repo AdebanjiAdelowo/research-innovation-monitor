@@ -38,8 +38,8 @@ log = logging.getLogger(__name__)
 # Sentence appended to NSF abstracts from 2018 on. Left in place it would be a
 # time-dependent feature unrelated to the research content.
 _NSF_BOILERPLATE = re.compile(
-    r"This award reflects NSF'?s statutory mission and has been deemed worthy of support "
-    r"through evaluation using the Foundation'?s intellectual merit and broader impacts "
+    r"This award reflects NSF['’]?s statutory mission and has been deemed worthy of support "
+    r"through evaluation using the Foundation['’]?s intellectual merit and broader impacts "
     r"review criteria\.?",
     re.I,
 )
