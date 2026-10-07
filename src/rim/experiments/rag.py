@@ -126,9 +126,14 @@ def run_rag_experiment(
             {"role": "generator", "name": provider_cfg.name, **provider.describe()}
         )
         pipeline = RagPipeline(
-            searcher, provider, "hybrid", cfg.rerank_depth, cfg.max_passages,
-            cfg.max_passage_words, cfg.max_tokens,
-        )  # fmt: skip
+            searcher,
+            provider,
+            "hybrid",
+            cfg.rerank_depth,
+            cfg.max_passages,
+            cfg.max_passage_words,
+            cfg.max_tokens,
+        )
         log.info("generator %s: %d questions x %d conditions", provider_cfg.name, len(queries), 2)
         for qid, text in zip(queries["query_id"], queries["text"], strict=True):
             gold = set(qrels.get(qid, {}))

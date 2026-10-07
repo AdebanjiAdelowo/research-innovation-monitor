@@ -211,3 +211,156 @@ def test_lead_lag_test_detects_planted_lead_and_is_quiet_on_noise():
         n_permutations=300,
     )
     assert (independent["q_value"] > 0.05).all()
+
+
+# ------------------------------------------------------- experiment and loaders
+
+
+def test_arxiv_parsing_uses_first_version_year_and_primary_category():
+    import json
+
+    from rim.data.loaders.arxiv import iter_records, parse_record
+
+    raw = {
+        "id": "2101.00001",
+        "title": "A  title\n here",
+        "abstract": " Some\n abstract. ",
+        "categories": "cs.LG stat.ML",
+        "versions": [
+            {"version": "v1", "created": "Thu, 31 Dec 2020 23:10:00 GMT"},
+            {"version": "v2", "created": "Mon, 4 Jul 2022 10:00:00 GMT"},
+        ],
+    }
+    row = parse_record(raw, {"cs.LG"}, 2015, 2024)
+    assert row == {
+        "doc_id": "arxiv:2101.00001",
+        "title": "A title here",
+        "text": "Some abstract.",
+        "year": 2020,
+        "primary_category": "cs.LG",
+    }
+    assert parse_record(raw, {"stat.ML"}, 2015, 2024) is None  # secondary category only
+    assert parse_record(raw, {"cs.LG"}, 2021, 2024) is None  # first version out of range
+    assert parse_record({**raw, "versions": []}, {"cs.LG"}, 2015, 2024) is None
+    lines = [json.dumps(raw), "", json.dumps({**raw, "id": "x", "categories": "math.AG"})]
+    assert [r["doc_id"] for r in iter_records(lines, ["cs.LG"], 2015, 2024)] == ["arxiv:2101.00001"]
+
+
+def test_nsf_award_parsing_drops_contact_fields():
+    from rim.data.loaders.nsf import parse_award
+
+    raw = {
+        "id": "1942742",
+        "title": "CAREER:  Structural  Complexity",
+        "abstractText": "The field\r\nof ...",
+        "date": "01/16/2020",
+        "dirAbbr": "CSE",
+        "divAbbr": "CCF",
+        "estimatedTotalAmt": "427398",
+        "awardeeName": "University",
+        "piEmail": "x@y.edu",
+        "pdPIName": "A Person",
+        "poPhone": "1",
+    }
+    row = parse_award(raw)
+    assert row["doc_id"] == "nsf:1942742" and row["year"] == 2020 and row["amount_usd"] == 427398.0
+    assert row["title"] == "CAREER: Structural Complexity" and row["text"] == "The field of ..."
+    assert not any("pi" in k.lower() or "po" in k.lower() or "email" in k.lower() for k in row)
+    assert parse_award({"id": "", "title": "x"}) is None
+    assert parse_award({"id": "1", "title": "t", "date": "bad"})["year"] is None
+
+
+def test_text_cleaning_removes_time_dependent_boilerplate():
+    from rim.experiments.trends import clean_text
+
+    text = (
+        "We study operators.<br/>This award reflects NSF's statutory mission and has been deemed "
+        "worthy of support through evaluation using the Foundation's intellectual merit and "
+        "broader impacts review criteria."
+    )
+    assert clean_text(text) == "We study operators."
+
+
+def test_trend_experiment_end_to_end(tmp_path):
+    import pandas as pd
+
+    from rim.experiments.trends import TrendExperimentConfig, run_trend_experiment
+    from rim.retrieval.encoders import HashingEncoder
+
+    # A corpus whose vocabulary shifts over time: topic words rise or fall by year.
+    rng = np.random.default_rng(0)
+    vocab = {
+        "rise": ["neural", "operator", "surrogate", "learning", "network"],
+        "fall": ["finite", "element", "mesh", "solver", "stiffness"],
+        "flat": ["protein", "genome", "cell", "sequencing", "assay"],
+    }
+    rows = []
+    for year in range(2010, 2022):
+        p_rise = 0.1 + 0.05 * (year - 2010)
+        probs = {"rise": p_rise, "fall": 0.75 - p_rise, "flat": 0.25}
+        for i in range(150):
+            topic = rng.choice(list(probs), p=list(probs.values()))
+            words = rng.choice(vocab[topic], size=30)
+            rows.append(
+                {"doc_id": f"syn:{year}-{i}", "title": topic, "text": " ".join(words), "year": year}
+            )
+    corpus = pd.DataFrame(rows)
+    secondary = corpus.sample(frac=0.5, random_state=1).reset_index(drop=True)
+
+    cfg = TrendExperimentConfig.model_validate(
+        {
+            "experiment": "trends_toy",
+            "device": "cpu",
+            "corpus": {"name": "syn", "first_year": 2010, "last_year": 2021},
+            "secondary": {"name": "syn2", "first_year": 2010, "last_year": 2021},
+            "encoder": {"name": "hash", "kind": "hashing", "dim": 128},
+            "k": 3,
+            "k_sensitivity": [4],
+            "k_scan": [2, 3, 5],
+            "scan_sample": 600,
+            "pca_dim": 8,
+            "cutoffs": [2015, 2016, 2017, 2018],
+            "horizons": [1, 2],
+            "n_permutations": 300,
+        }
+    )
+    import rim.experiments.trends as trends_module
+
+    original = trends_module.encode_documents_cached
+    trends_module.encode_documents_cached = lambda enc, texts, cache, dtype="float32": (
+        HashingEncoder(128).encode_documents(texts),
+        {"cache_hit": False},
+    )
+    try:
+        summary = run_trend_experiment(cfg, corpus, secondary, tmp_path)
+    finally:
+        trends_module.encode_documents_cached = original
+
+    out = tmp_path / "trends_toy"
+    assert (
+        summary["trend_counts"].get("rising", 0) >= 1
+        and summary["trend_counts"].get("falling", 0) >= 1
+    )
+    assert (
+        "neural" in summary["top_rising"][0]["terms"]
+        or "operator" in summary["top_rising"][0]["terms"]
+    )
+    assert set(summary["backtest"]) == {"3", "4"}
+    assert (
+        len(summary["consecutive_cutoff_ari"]) == 3 and min(summary["consecutive_cutoff_ari"]) > 0.9
+    )
+    assert summary["subsample_stability_at_k"]["ari_mean"] > 0.9
+    assert {r["lag_years"] for r in summary["lead_lag"]["by_lag"]} == set(range(-3, 4))
+    for name in (
+        "topic_trends.csv",
+        "topic_trends.png",
+        "backtest.png",
+        "backtest_scores.csv",
+        "forecasts.csv",
+        "k_scan.csv",
+        "lead_lag.csv",
+        "run.json",
+    ):
+        assert (out / name).exists(), name
+    scores = pd.read_csv(out / "backtest_scores.csv")
+    assert set(scores["predictor"]) == {"persistence", "last_growth", "linear_trend", "ridge"}

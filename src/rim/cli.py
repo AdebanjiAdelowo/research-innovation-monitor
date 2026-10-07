@@ -90,6 +90,20 @@ def _rag(args: argparse.Namespace) -> None:
     print(f"\nrun {summary['run_id']}")
 
 
+def _trends(args: argparse.Namespace) -> None:
+    from rim.config import load_config
+    from rim.experiments.trends import TrendExperimentConfig, run_trend_experiment
+
+    summary = run_trend_experiment(load_config(args.config, TrendExperimentConfig))
+    print(f"{summary['n_documents']} documents, k={summary['k']}, trends {summary['trend_counts']}")
+    for row in summary["backtest"][str(summary["k"])]:
+        print(
+            f"  {row['predictor']} h={row['horizon']}: spearman={row['spearman']:.3f} "
+            f"mae={row['mae']:.4f}"
+        )
+    print(f"\nrun {summary['run_id']}")
+
+
 def _env(_: argparse.Namespace) -> None:
     from rim.provenance import environment_info, git_info
 
@@ -134,6 +148,10 @@ def main(argv: list[str] | None = None) -> None:
     rag = sub.add_parser("rag", help="run the grounded-generation experiment (RQ4)")
     rag.add_argument("config")
     rag.set_defaults(func=_rag)
+
+    trends = sub.add_parser("trends", help="run the trend experiment (RQ5, RQ6)")
+    trends.add_argument("config")
+    trends.set_defaults(func=_trends)
 
     env = sub.add_parser("env", help="print the provenance of this environment")
     env.set_defaults(func=_env)
