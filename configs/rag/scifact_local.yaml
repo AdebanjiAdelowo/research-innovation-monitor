@@ -1,0 +1,35 @@
+# RQ4 at development scale on a laptop: 100 SciFact test claims, a 3B local model
+# and a model-free extractive baseline. Retrieval settings are those selected on dev
+# in results/retrieval_scifact (BM25 k1 and b, convex fusion weight; no reranker,
+# which lowered dev nDCG). The judge and its threshold come from
+# results/judge_validation.
+experiment: rag_scifact_local
+seed: 13
+device: auto
+dataset: scifact
+n_questions: 100
+question_template: "Is the following claim supported by the evidence? Claim: {query}"
+encoder:
+  name: bge-small
+  model_id: BAAI/bge-small-en-v1.5
+  revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a
+  query_prefix: "Represent this sentence for searching relevant passages: "
+  max_seq_length: 512
+k1: 1.2
+b: 0.5
+fusion: convex
+alpha: 0.6
+max_passages: 5
+max_passage_words: 220
+max_tokens: 300
+providers:
+  - name: extractive
+    kind: extractive
+  - name: llama3.2-3b
+    kind: ollama
+    options: {model: "llama3.2"}
+judge:
+  kind: nli
+  model_id: MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
+  revision: 6f5cf0a2b59cabb106aca4c287eed12e357e90eb
+  threshold: 0.4

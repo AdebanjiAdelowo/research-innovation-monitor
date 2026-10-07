@@ -1,0 +1,95 @@
+{
+  "artifacts": {
+    "dev_scores.csv": "8ee2dbeac7768177e480664532c0b74d352e03825f3dac269fc7459de418d5f1",
+    "summary.json": "abb047752f0fee6cc0d073267e3eac2c7ac21e67f5b2228449fa3f1427716872"
+  },
+  "config": {
+    "device": "auto",
+    "experiment": "judge_validation",
+    "judges": [
+      {
+        "max_length": 512,
+        "model_id": "cross-encoder/nli-deberta-v3-xsmall",
+        "name": "nli-deberta-v3-xsmall",
+        "revision": "a150876415327c80daeff35ca6f68f5ed8cf5c24"
+      },
+      {
+        "max_length": 512,
+        "model_id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+        "name": "deberta-v3-base-mnli-fever-anli",
+        "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb"
+      }
+    ],
+    "n_bootstrap": 10000,
+    "output_dir": "results",
+    "seed": 13,
+    "thresholds": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ]
+  },
+  "config_sha256": "91e473f4172e7be281a327f4614eb40f2b407dc4281925f15a40de86cd7650e0",
+  "datasets": [],
+  "environment": {
+    "hardware": {
+      "cpu_count": 11,
+      "device": "mps",
+      "machine": "arm64",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "processor": "arm"
+    },
+    "packages": {
+      "huggingface_hub": "1.33.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.1.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.14.1",
+      "transformers": "5.19.0"
+    },
+    "python": "3.12.2"
+  },
+  "experiment": "judge_validation",
+  "finished_at": "2026-10-07T00:27:27Z",
+  "git": {
+    "commit": "a999236a5698232cbcd68e83956c097224ec0ded",
+    "dirty": false,
+    "source": "git"
+  },
+  "models": [
+    {
+      "device": "mps",
+      "entailment_index": 1,
+      "kind": "nli",
+      "max_length": 512,
+      "model_id": "cross-encoder/nli-deberta-v3-xsmall",
+      "name": "nli-deberta-v3-xsmall",
+      "revision": "a150876415327c80daeff35ca6f68f5ed8cf5c24",
+      "role": "judge"
+    },
+    {
+      "device": "mps",
+      "entailment_index": 0,
+      "kind": "nli",
+      "max_length": 512,
+      "model_id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "name": "deberta-v3-base-mnli-fever-anli",
+      "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+      "role": "judge"
+    }
+  ],
+  "notes": [],
+  "run_id": "judge_validation-20261007T002027Z-a999236-91e473f4",
+  "seed": 13,
+  "started_at": "2026-10-07T00:20:27Z"
+}
