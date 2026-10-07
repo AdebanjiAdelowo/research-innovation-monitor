@@ -42,3 +42,8 @@ results/**/*.trec
 .vscode/
 .idea/
 .ipynb_checkpoints/
+
+# Result files that quote benchmark text (queries, passages). They are written by the
+# runs and listed with checksums in run.json, but are not redistributed here.
+results/**/answers.jsonl
+results/**/subqueries.csv

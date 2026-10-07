@@ -1,0 +1,159 @@
+{
+  "artifacts": {
+    "answers.jsonl": "20b20cb3659d66cda5c00bc65708a779f46a80c3d4c4252b26550fca1d814ccc",
+    "per_answer.csv": "cefb5776ecf7fb4c79475ef63a40a65418a802d449e50af54bf6518c04dfde32",
+    "summary.json": "6b2174aec59e8b05b907a0c91caf7b4d9aa37d1db757227d37ba49f0b048f2fb"
+  },
+  "config": {
+    "alpha": 0.6,
+    "b": 0.5,
+    "dataset": "scifact",
+    "device": "auto",
+    "encoder": {
+      "batch_size": 64,
+      "dim": 256,
+      "doc_prefix": "",
+      "dtype": "float32",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "name": "bge-small",
+      "normalize": true,
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+    },
+    "experiment": "rag_scifact_local",
+    "fusion": "convex",
+    "judge": {
+      "kind": "nli",
+      "max_length": 512,
+      "model_id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+      "threshold": 0.4
+    },
+    "k1": 1.2,
+    "max_passage_words": 220,
+    "max_passages": 5,
+    "max_tokens": 300,
+    "n_bootstrap": 10000,
+    "n_questions": 100,
+    "output_dir": "results",
+    "providers": [
+      {
+        "kind": "extractive",
+        "name": "extractive",
+        "options": {}
+      },
+      {
+        "kind": "ollama",
+        "name": "llama3.2-3b",
+        "options": {
+          "model": "llama3.2"
+        }
+      }
+    ],
+    "question_template": "Is the following claim supported by the evidence? Claim: {query}",
+    "rerank_depth": 0,
+    "reranker": null,
+    "rrf_k": 60,
+    "seed": 13
+  },
+  "config_sha256": "4161e98d28d36cfac19b2fd69049b75794e7fc0caeb107f20fff0e3c79315c7e",
+  "datasets": [
+    {
+      "files": {
+        "corpus.parquet": "c73ea964e514cb76fbc00d32ec557d66830c562b061582da2ac0f46be1cf49e8",
+        "qrels.parquet": "a181a5d19456a77ef7d82db2298f05f4a9174a0a070a2a870fdf0cf8905c7336",
+        "queries.parquet": "5c1e8083d08d3a423bd697a5e5b569d0915d04190bba753fb04346161442dadb"
+      },
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "n_documents": 5183,
+      "n_qrels": 1258,
+      "n_queries": 1109,
+      "name": "scifact",
+      "notes": "Queries without relevance judgments are dropped.",
+      "redistributable": true,
+      "retrieved_at": "2026-10-06T23:17:58Z",
+      "revision": "b3b5335604bf5ee3c4447671af975ea25143d4f5 (qrels 2938d17dc3b09882fdb8c12bbbe2e2dc0e75a029)",
+      "source": "BEIR",
+      "source_url": "https://huggingface.co/datasets/BeIR/scifact"
+    }
+  ],
+  "environment": {
+    "hardware": {
+      "cpu_count": 11,
+      "device": "mps",
+      "machine": "arm64",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "processor": "arm"
+    },
+    "packages": {
+      "huggingface_hub": "1.33.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.1.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.14.1",
+      "transformers": "5.19.0"
+    },
+    "python": "3.12.2"
+  },
+  "experiment": "rag_scifact_local",
+  "finished_at": "2026-10-07T01:29:31Z",
+  "git": {
+    "commit": "bf542c89972b90995ba3a82d4a6f24b8e9c18e55",
+    "dirty": false,
+    "dirty_paths": [],
+    "source": "git"
+  },
+  "models": [
+    {
+      "batch_size": 64,
+      "device": "mps",
+      "dim": 384,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "n_parameters": 33360000,
+      "normalize": true,
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "device": "mps",
+      "entailment_index": 0,
+      "kind": "nli",
+      "max_length": 512,
+      "model_id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+      "role": "judge",
+      "threshold": 0.4
+    },
+    {
+      "kind": "extractive",
+      "max_sentences": 3,
+      "min_overlap": 0.34,
+      "name": "extractive",
+      "role": "generator"
+    },
+    {
+      "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+      "kind": "ollama",
+      "model": "llama3.2",
+      "name": "llama3.2-3b",
+      "role": "generator",
+      "temperature": 0.0
+    }
+  ],
+  "notes": [],
+  "run_id": "rag_scifact_local-20261007T011007Z-bf542c8-4161e98d",
+  "seed": 13,
+  "started_at": "2026-10-07T01:10:07Z"
+}

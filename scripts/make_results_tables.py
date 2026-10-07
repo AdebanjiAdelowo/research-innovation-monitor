@@ -319,6 +319,12 @@ def trends_section() -> list[str]:
             f"| {row['predictor'].replace('_', ' ')} | {row['horizon']} | {row['n_cutoffs']} | "
             f"{f(row['spearman'])} | {f(row['precision_top10pct'])} | {f(row['mae'], 4)} |"
         )
+    out += [
+        "",
+        "Ridge needs earlier cut-offs with known outcomes for training, so it is scored on fewer "
+        "cut-offs and its row is not directly comparable with the others. The paired comparison "
+        "below uses only the topic and cut-off pairs both predictors share.",
+    ]
     out += ["", "Paired comparison of absolute forecast errors (topic by cut-off):", "",
             "| Horizon | Predictor | Baseline | Pairs | MAE difference | p (Holm) |", "|---:|---|---|---:|---:|---:|"]  # fmt: skip
     for c in s["backtest_error_comparisons"]:

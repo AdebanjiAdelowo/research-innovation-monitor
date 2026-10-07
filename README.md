@@ -55,6 +55,45 @@ forecasts are backtested against what happened next.
 ## Key findings
 
 <!-- findings:start -->
+From the runs reported under [Results](#results). All are local runs with small models;
+the larger-model runs are listed there as PENDING.
+
+1. **Hybrid retrieval beat BM25 on all four benchmarks, and beat the best dense
+   encoder on three** (nDCG@10, tuned convex fusion). LitSearch: 0.533 against 0.437
+   for BM25 and 0.450 for dense. SciFact: 0.733 against 0.683 and 0.706. Patents
+   (DAPFAM): 0.228 against 0.193 and 0.218. On SCIDOCS the hybrid (0.210) was not
+   distinguishable from the best dense encoder (0.208, p = 0.13).
+2. **A small dense encoder alone did not reliably beat a tuned BM25.** The difference
+   was not significant on LitSearch (p = 0.52) or SciFact (p = 0.34).
+3. **Tuned score fusion was at least as good as reciprocal rank fusion**:
+   significantly better on LitSearch and SCIDOCS, indistinguishable on SciFact and
+   DAPFAM.
+4. **Patent retrieval across technology classes largely failed for every method.**
+   nDCG@10 was about 0.24 when query and target share an IPC class and about 0.02
+   when they do not.
+5. **The small MS MARCO cross-encoder made rankings worse on every benchmark and at
+   every depth, while multiplying latency.** On LitSearch nDCG@10 fell from 0.533 to
+   0.511 at depth 10 and 0.487 at depth 100, with median latency rising from 17 ms
+   to 78 ms and 452 ms. The decrease at the selected depth was significant after
+   correction on SCIDOCS and DAPFAM, and not on LitSearch or SciFact.
+6. **Query decomposition with a 3B model did not help.** On multi-aspect queries
+   (DORIS-MAE) no condition differed significantly from no decomposition, including
+   the dataset authors' own aspects. On LitSearch it lowered nDCG@10 from 0.511 to
+   0.411 (p < 0.001).
+7. **About half of the sentences written by a 3B model were not supported by the
+   passages they cited**, according to an entailment judge with a measured balanced
+   accuracy of 0.76. Citation recall was 0.52 (95% CI 0.44 to 0.61). With the gold
+   evidence removed, the model still made claims in 51 of 100 answers. The same judge
+   scored verbatim extracts at 0.89, which bounds how much of the gap is judge error.
+8. **No router was reliable on paraphrased requests.** A rule-based router scored
+   1.00 on templated requests written by its author and 0.56 on model-written
+   paraphrases; a 3B model scored 0.49, rarely missing a needed tool but calling an
+   unneeded one in about half of the requests.
+9. **Extrapolating recent topic growth predicted the wrong direction.** On NSF awards,
+   the latest one-year growth and a five-year linear trend both correlated
+   *negatively* with realised growth (Spearman -0.35 and -0.22 at one year), and both
+   had larger errors than assuming no change. A ridge model on trend features reached
+   a Spearman of 0.37 and a small but significant error reduction over no change.
 <!-- findings:end -->
 
 ## Architecture
@@ -308,11 +347,70 @@ Reranking the hybrid (convex) candidates with `minilm-l6-ce`, by depth (no reran
 | ndcg@10 | 0.202 | 0.194 | 0.181 | 0.166 |
 | Median latency (ms) | 150 | 270 | 614 | 1097 |
 
-**DAPFAM (patents)**: not run.
+**DAPFAM (patents)**: 45,336 documents, 892 test and 355 dev queries. Run [`retrieval_dapfam-20261007T011024Z-bf542c8-3121204c`](results/retrieval_dapfam/run.json), commit `bf542c8`, device `mps`.
+
+| System | ndcg@10 | 95% CI | Recall@20 | Recall@100 | MRR@10 | Median latency (ms) |
+|---|---:|---|---:|---:|---:|---:|
+| bm25 | 0.193 | [0.179, 0.208] | 0.124 | 0.252 | 0.405 | 0.7 |
+| dense:minilm-l6 | 0.210 | [0.196, 0.225] | 0.140 | 0.299 | 0.428 | 43.6 |
+| dense:bge-small | 0.218 | [0.203, 0.233] | 0.143 | 0.302 | 0.444 | 71.8 |
+| hybrid (RRF) | 0.226 | [0.211, 0.241] | 0.153 | 0.309 | 0.448 | 72.5 |
+| hybrid (convex) | 0.228 | [0.214, 0.244] | 0.152 | 0.312 | 0.455 | 72.5 |
+| hybrid (convex)+rerank:minilm-l6-ce@10 | 0.218 | [0.204, 0.233] | 0.152 | 0.312 | 0.415 | 137.0 |
+
+Selected on dev: BM25 k1=0.9, b=0.9; hybrid encoder `bge-small`; RRF k=20; convex weight of the dense score 0.7. Latency is for the hybrid encoder's pipeline; fused systems share one latency because fusion itself takes well under a millisecond.
+
+| Comparison (ndcg@10, test) | Difference | 95% CI | p (Holm) |
+|---|---:|---|---:|
+| dense:bge-small vs bm25 | +0.024 | [+0.015, +0.034] | <0.001 |
+| hybrid (RRF) vs bm25 | +0.032 | [+0.026, +0.039] | <0.001 |
+| hybrid (RRF) vs dense:bge-small | +0.008 | [+0.002, +0.014] | 0.027 |
+| hybrid (convex) vs bm25 | +0.035 | [+0.027, +0.044] | <0.001 |
+| hybrid (convex) vs dense:bge-small | +0.011 | [+0.007, +0.015] | <0.001 |
+| hybrid (convex) vs hybrid (RRF) | +0.003 | [-0.002, +0.007] | 0.211 |
+| hybrid (convex)+rerank:minilm-l6-ce@10 vs hybrid (convex) | -0.010 | [-0.014, -0.007] | <0.001 |
+
+Reranking the hybrid (convex) candidates with `minilm-l6-ce`, by depth (no reranking: 0.228):
+
+| Depth | 10 | 20 | 50 | 100 |
+|---|---:|---:|---:|---:|
+| ndcg@10 | 0.218 | 0.204 | 0.186 | 0.177 |
+| Median latency (ms) | 137 | 215 | 344 | 592 |
+
+By relevance domain (IN: query and target share an IPC class; OUT: they do not):
+
+| Domain | Queries | bm25 | dense:bge-small | hybrid (RRF) | hybrid (convex) |
+|---|---:|---:|---:|---:|---:|
+| IN | 870 | 0.200 | 0.224 | 0.234 | 0.236 |
+| OUT | 652 | 0.015 | 0.017 | 0.015 | 0.017 |
 
 ### RQ3: query decomposition
 
-Not run.
+Run [`decomposition-20261007T001313Z-c5b978b-348f7363`](results/decomposition/run.json), commit `c5b978b`, device `mps`.
+
+**dorismae**: 66 test queries, ranking within the candidate pool.
+
+| Condition | ndcg@10 | 95% CI | Sub-queries per query | Difference vs none | p (Holm) | Improved / harmed |
+|---|---:|---|---:|---:|---:|---|
+| none | 0.722 | [0.693, 0.750] | 0.0 |  | |  |
+| sentence | 0.709 | [0.680, 0.737] | 5.8 | -0.013 | 0.270 | 24 / 42 |
+| llm:llama3.2-3b | 0.720 | [0.690, 0.747] | 3.9 | -0.003 | 0.789 | 33 / 32 |
+| oracle_aspects | 0.733 | [0.709, 0.755] | 5.6 | +0.010 | 0.668 | 32 / 34 |
+
+**litsearch**: 424 test queries, ranking within the full corpus.
+
+| Condition | ndcg@10 | 95% CI | Sub-queries per query | Difference vs none | p (Holm) | Improved / harmed |
+|---|---:|---|---:|---:|---:|---|
+| none | 0.511 | [0.471, 0.552] | 0.0 |  | |  |
+| sentence | 0.509 | [0.469, 0.550] | 0.1 | -0.002 | 0.366 | 1 / 4 |
+| llm:llama3.2-3b | 0.411 | [0.371, 0.450] | 4.0 | -0.101 | <0.001 | 60 / 130 |
+
+By `specificity` as annotated in the dataset:
+
+| specificity | Queries | none | sentence | llm:llama3.2-3b |
+|---|---:|---:|---:|---:|
+| 0 | 113 | 0.370 | 0.368 | 0.332 |
+| 1 | 311 | 0.563 | 0.560 | 0.439 |
 
 ### RQ4: grounded generation
 
@@ -323,7 +421,18 @@ Entailment judges against human SciFact evidence labels (340 dev pairs; threshol
 | nli-deberta-v3-xsmall | 0.1 | 0.603 | 0.766 | 0.261 | 0.054 | 0.769 |
 | deberta-v3-base-mnli-fever-anli | 0.4 | 0.755 | 0.725 | 0.688 | 0.178 | 0.858 |
 
-Generation experiment: not run.
+Generation on 100 SciFact test claims, judge `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` at threshold 0.4. Run [`rag_scifact_local-20261007T011007Z-bf542c8-4161e98d`](results/rag_scifact_local/run.json), commit `bf542c8`, device `mps`.
+
+| Generator | Evidence | Pure abstention | Abstention with claims | Answers with claims | Citation recall | Citation precision | Unsupported sentences | Uncited sentences | Cited documents judged relevant |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| extractive | available | 0.560 | 0.000 | 44 | 0.890 [0.803, 0.962] | 0.890 [0.803, 0.962] | 0.110 [0.038, 0.197] | 0.000 [0.000, 0.000] | 0.576 [0.447, 0.701] |
+| extractive | withheld | 0.740 | 0.000 | 26 | 0.808 [0.686, 0.917] | 0.808 [0.686, 0.917] | 0.192 [0.083, 0.314] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| llama3.2-3b | available | 0.200 | 0.090 | 80 | 0.525 [0.441, 0.610] | 0.552 [0.465, 0.639] | 0.475 [0.390, 0.559] | 0.135 [0.076, 0.198] | 0.579 [0.489, 0.671] |
+| llama3.2-3b | withheld | 0.490 | 0.090 | 51 | 0.448 [0.337, 0.562] | 0.529 [0.403, 0.649] | 0.552 [0.438, 0.663] | 0.224 [0.127, 0.328] | 0.000 [0.000, 0.000] |
+
+A pure abstention makes no claim. An abstention with claims contains the abstention phrase and at least one other sentence; those sentences are scored like any others. Citation metrics are over answers with at least one claim and are conditional on the judge above. With evidence withheld no cited document can be one the benchmark judges relevant, so that column is zero by construction.
+
+`llama3.2-3b`: median generation time 5.2 s, mean 1690 prompt and 62 completion tokens per answer; median retrieval time 10 ms.
 
 ### Tool routing
 
@@ -339,7 +448,77 @@ F1, unnecessary calls and missed tools are on the paraphrased requests.
 
 ### RQ5: trend forecasting
 
-Not run.
+NSF awards, 173,768 abstracts, 2010 to 2024, 60 topics. Run [`trends_nsf-20261007T004501Z-9b0bd66-77ca16df`](results/trends_nsf/run.json), commit `9b0bd66`, device `mps`.
+
+Topic stability (adjusted Rand index):
+
+| Topics | Seed stability (mean ARI) | Silhouette | Smallest topic (share) |
+|---:|---:|---:|---:|
+| 20 | 0.742 | 0.146 | 0.0318 |
+| 40 | 0.676 | 0.145 | 0.0128 |
+| 60 | 0.659 | 0.142 | 0.0044 |
+| 80 | 0.634 | 0.131 | 0.0040 |
+| 120 | 0.594 | 0.130 | 0.0037 |
+
+At 60 topics: subsample stability 0.618; agreement between topic models fitted at consecutive cut-off years 0.648 to 0.718. Full-period trend tests at 5% false discovery rate: 14 rising, 22 falling, 24 without a monotone trend.
+
+Backtest, mean over cut-off years:
+
+| Predictor | Horizon (years) | Cut-offs | Spearman | Precision, top 10% | MAE (log growth) |
+|---|---:|---:|---:|---:|---:|
+| last growth | 1 | 8 | -0.353 | 0.042 | 0.2192 |
+| linear trend | 1 | 8 | -0.216 | 0.000 | 0.1460 |
+| persistence | 1 | 8 | n/a | n/a | 0.1287 |
+| ridge | 1 | 6 | 0.373 | 0.278 | 0.1234 |
+| last growth | 2 | 8 | -0.331 | 0.083 | 0.3460 |
+| linear trend | 2 | 8 | -0.111 | 0.042 | 0.1792 |
+| persistence | 2 | 8 | n/a | n/a | 0.1460 |
+| ridge | 2 | 5 | 0.343 | 0.300 | 0.1482 |
+
+Ridge needs earlier cut-offs with known outcomes for training, so it is scored on fewer cut-offs and its row is not directly comparable with the others. The paired comparison below uses only the topic and cut-off pairs both predictors share.
+
+Paired comparison of absolute forecast errors (topic by cut-off):
+
+| Horizon | Predictor | Baseline | Pairs | MAE difference | p (Holm) |
+|---:|---|---|---:|---:|---:|
+| 1 | linear trend | persistence | 480 | +0.0173 | <0.001 |
+| 1 | linear trend | last growth | 480 | -0.0732 | <0.001 |
+| 1 | ridge | persistence | 360 | -0.0127 | 0.008 |
+| 1 | ridge | last growth | 360 | -0.1128 | <0.001 |
+| 1 | ridge | linear trend | 360 | -0.0301 | <0.001 |
+| 2 | linear trend | persistence | 480 | +0.0331 | <0.001 |
+| 2 | linear trend | last growth | 480 | -0.1668 | <0.001 |
+| 2 | ridge | persistence | 300 | -0.0116 | 0.036 |
+| 2 | ridge | last growth | 300 | -0.2387 | <0.001 |
+| 2 | ridge | linear trend | 300 | -0.0476 | <0.001 |
+
+Sensitivity to the number of topics (Spearman, mean over cut-offs):
+
+| Topics | Horizon | last growth | linear trend | ridge |
+|---:|---:|---:|---:|---:|
+| 60 | 1 | -0.353 | -0.216 | 0.373 |
+| 60 | 2 | -0.331 | -0.111 | 0.343 |
+| 30 | 1 | -0.323 | -0.222 | 0.293 |
+| 30 | 2 | -0.257 | -0.130 | 0.317 |
+| 120 | 1 | -0.381 | -0.233 | 0.428 |
+| 120 | 2 | -0.337 | -0.176 | 0.384 |
+
+Strongest full-period trends:
+
+| Direction | Topic terms | Share, first year | Share, last year | q |
+|---|---|---:|---:|---:|
+| rising | learning, machine, machine learning, data, deep, ai, algorithms, deep learning | 0.42% | 3.91% | <0.001 |
+| rising | cybersecurity, security, cyber, students, education, research, project, program | 0.60% | 1.49% | <0.001 |
+| rising | stem, teachers, teacher, teaching, education, noyce, learning, science | 1.14% | 2.32% | <0.001 |
+| rising | disaster, risk, data, covid, covid 19, 19, social, health | 0.68% | 2.03% | <0.001 |
+| falling | policy, economic, decision, firms, how, research, project, information | 1.87% | 1.07% | <0.001 |
+| falling | earthquake, seismic, earthquakes, fault, slip, subduction, plate, deformation | 2.04% | 0.92% | <0.001 |
+| falling | optical, light, laser, photonic, imaging, devices, high, materials | 2.09% | 1.20% | <0.001 |
+| falling | archaeological, human, social, from, research, cultural, ancient, project | 1.76% | 0.92% | <0.001 |
+
+![Topic trends](results/trends_nsf/topic_trends.png)
+
+![Backtest](results/trends_nsf/backtest.png)
 
 ### Not yet run
 
@@ -391,6 +570,10 @@ Each `results/<experiment>/` directory contains:
 - `run.json`: configuration and its hash, seed, Git commit and any uncommitted paths,
   package versions, device, dataset manifests, model identifiers and revisions, and
   SHA-256 of the result files.
+
+Two kinds of result file quote benchmark text and are therefore not committed, although
+`run.json` lists their checksums: `answers.jsonl` (generated answers with the retrieved
+passages) and `subqueries.csv` (decomposed queries). Running the experiment recreates them.
 
 Seeds are fixed in the configs. Retrieval, fusion, metrics and statistics are
 deterministic given the embeddings. Neural encoders can differ in the last digits
