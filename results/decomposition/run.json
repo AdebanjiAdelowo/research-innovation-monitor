@@ -1,0 +1,171 @@
+{
+  "artifacts": {
+    "per_query_test.csv": "ea4e1656a75894b99f959779a25cda3acde110fc2aacf7a43e275f717275c900",
+    "subqueries.csv": "7b01644d56fd042843095152b7b40c064e2dbd12418dce823dfd09f48cf5fd24",
+    "summary.json": "a27bd8a3793961fa211a44cdd0a1abc065b68346ddf4e10de3f1edbcceefb043"
+  },
+  "config": {
+    "datasets": [
+      {
+        "b": 0.75,
+        "group_by": null,
+        "k1": 1.2,
+        "max_queries": null,
+        "name": "dorismae"
+      },
+      {
+        "b": 0.5,
+        "group_by": "specificity",
+        "k1": 1.6,
+        "max_queries": null,
+        "name": "litsearch"
+      }
+    ],
+    "depth": 100,
+    "device": "auto",
+    "encoder": {
+      "batch_size": 64,
+      "dim": 256,
+      "doc_prefix": "",
+      "dtype": "float32",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "name": "bge-small",
+      "normalize": true,
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+    },
+    "experiment": "decomposition",
+    "ks": [
+      5,
+      10,
+      20,
+      100
+    ],
+    "llm_decomposers": [
+      {
+        "kind": "ollama",
+        "name": "llama3.2-3b",
+        "options": {
+          "model": "llama3.2"
+        }
+      }
+    ],
+    "n_bootstrap": 10000,
+    "n_permutations": 10000,
+    "output_dir": "results",
+    "primary_metric": "ndcg@10",
+    "rrf_k": 60,
+    "seed": 13
+  },
+  "config_sha256": "348f736389b1d90e96cf351da26a1e830eed6595a743184528298dd5157e2a01",
+  "datasets": [
+    {
+      "files": {
+        "corpus.parquet": "606c3bfb1b47eb06b456e2771e09a94f4dd9f4f630a28785dd4e3f0476401b55",
+        "qrels.parquet": "53157027952db6536730490c9c7218f4305566e48f90dec4a51fbc129aff93fa",
+        "queries.parquet": "7624de58d3fd9747a85caeaa72496f738d02f24aa2fe1b0497bb23a8be84912f"
+      },
+      "license": "CC BY-NC 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "n_documents": 8482,
+      "n_qrels": 10479,
+      "n_queries": 100,
+      "name": "dorismae",
+      "notes": "Corpus restricted to the union of the candidate pools; ranking is evaluated within each query's pool. Aspect relevance labels are model-generated (validated against humans by the dataset authors). Non-commercial licence: evaluation only, never redistributed.",
+      "redistributable": false,
+      "retrieved_at": "2026-10-07T00:12:06Z",
+      "revision": "Zenodo record 8299749, sha256 50e328db762c0e1077f80d4b658f8a9ad58b6fc00e0310a5647605c9523d93bc",
+      "source": "DORIS-MAE v1",
+      "source_url": "https://doi.org/10.5281/zenodo.8299749"
+    },
+    {
+      "files": {
+        "corpus.parquet": "54ea071887ac644fd7755d227447e563ff729b641154db86111455856ba2a0a9",
+        "qrels.parquet": "1605e16806affc4316d5ede46bdac74238a59e91a2a8dcb5d75d168aa2e9693c",
+        "queries.parquet": "09411fc417e281ede2bedb8278d6edaed7314226daa24f1f4b95cf91544c46a7"
+      },
+      "license": "MIT (code repository); the dataset card states no licence",
+      "license_url": "https://github.com/princeton-nlp/LitSearch/blob/main/LICENSE",
+      "n_documents": 64183,
+      "n_qrels": 639,
+      "n_queries": 597,
+      "name": "litsearch",
+      "notes": "Corpus text is title and abstract from the corpus_clean configuration. Query IDs are derived from the question text. Treated as not redistributable because the dataset card carries no explicit licence.",
+      "redistributable": false,
+      "retrieved_at": "2026-10-06T23:21:19Z",
+      "revision": "9573fb284a1026c998df47024b888a163f0f0e25",
+      "source": "LitSearch",
+      "source_url": "https://huggingface.co/datasets/princeton-nlp/LitSearch"
+    }
+  ],
+  "environment": {
+    "hardware": {
+      "cpu_count": 11,
+      "device": "mps",
+      "machine": "arm64",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "processor": "arm"
+    },
+    "packages": {
+      "huggingface_hub": "1.33.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.1.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.14.1",
+      "transformers": "5.19.0"
+    },
+    "python": "3.12.2"
+  },
+  "experiment": "decomposition",
+  "finished_at": "2026-10-07T00:51:33Z",
+  "git": {
+    "commit": "c5b978ba6752248456b3d0980b2313536972a9d6",
+    "dirty": false,
+    "source": "git"
+  },
+  "models": [
+    {
+      "batch_size": 64,
+      "device": "mps",
+      "dim": 384,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "n_parameters": 33360000,
+      "normalize": true,
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "kind": "sentence",
+      "max_parts": 6,
+      "name": "sentence",
+      "role": "decomposer"
+    },
+    {
+      "kind": "llm",
+      "max_parts": 4,
+      "name": "llm:llama3.2-3b",
+      "provider": {
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "kind": "ollama",
+        "model": "llama3.2",
+        "temperature": 0.0
+      },
+      "role": "decomposer"
+    }
+  ],
+  "notes": [],
+  "run_id": "decomposition-20261007T001313Z-c5b978b-348f7363",
+  "seed": 13,
+  "started_at": "2026-10-07T00:13:13Z"
+}
