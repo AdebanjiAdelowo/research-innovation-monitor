@@ -216,8 +216,8 @@ def rag_section() -> list[str]:
         f"Generation on {s['n_questions']} SciFact test claims, judge `{s['judge'].get('model_id', s['judge']['kind'])}` "
         f"at threshold {s['judge']['threshold']}. Run {run_ref('rag_scifact_local')}.",
         "",
-        "| Generator | Evidence | Abstained | Citation recall | Citation precision | Unsupported sentences | Uncited sentences | Cited documents judged relevant |",
-        "|---|---|---:|---:|---:|---:|---:|---:|",
+        "| Generator | Evidence | Pure abstention | Abstention with claims | Answers with claims | Citation recall | Citation precision | Unsupported sentences | Uncited sentences | Cited documents judged relevant |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for generator, conditions in s["generators"].items():
         for condition in ("available", "withheld"):
@@ -231,14 +231,16 @@ def rag_section() -> list[str]:
                 return f"{f(item['mean'])} [{f(item['ci'][0])}, {f(item['ci'][1])}]"
 
             out.append(
-                f"| {generator} | {condition} | {f(row['abstention_rate']['mean'])} | "
+                f"| {generator} | {condition} | {f(row['pure_abstention_rate']['mean'])} | "
+                f"{f(row['abstention_with_claims_rate'])} | {a['n']} | "
                 f"{cell('citation_recall')} | {cell('citation_precision')} | "
                 f"{cell('unsupported_sentence_rate')} | {cell('uncited_sentence_share')} | "
                 f"{cell('cited_docs_gold_share')} |"
             )
     out += [
         "",
-        "Citation metrics are over answered questions only and are conditional on the judge above. "
+        "A pure abstention makes no claim. An abstention with claims contains the abstention phrase and at least one other sentence; "
+        "those sentences are scored like any others. Citation metrics are over answers with at least one claim and are conditional on the judge above. "
         "With evidence withheld no cited document can be one the benchmark judges relevant, so that column is zero by construction.",
         "",
     ]

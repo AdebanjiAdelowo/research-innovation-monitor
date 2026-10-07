@@ -83,7 +83,7 @@ def _rag(args: argparse.Namespace) -> None:
         for condition, row in conditions.items():
             a = row["answered"]
             print(
-                f"{name} [{condition}]: abstain={row['abstention_rate']['mean']:.3f} "
+                f"{name} [{condition}]: pure_abstain={row['pure_abstention_rate']['mean']:.3f} "
                 f"cit_recall={a['citation_recall']['mean']} "
                 f"cit_precision={a['citation_precision']['mean']}"
             )

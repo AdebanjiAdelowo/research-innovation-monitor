@@ -9,7 +9,9 @@ Each test question is answered twice by every generator:
 
 Per answer the following are measured, all without a language-model judge:
 
-* abstention;
+* abstention: the answer contains the abstention phrase. A *pure* abstention makes
+  no claim; an abstention *with claims* declines and asserts something anyway, and
+  those claims are scored like any others;
 * sentences without a citation and citation markers that match no passage;
 * ALCE citation recall and precision under an entailment judge;
 * whether the cited documents are ones the benchmark judges relevant.
@@ -154,6 +156,7 @@ def run_rag_experiment(
                         "condition": condition,
                         "query_id": qid,
                         "abstained": analysis.abstained,
+                        "pure_abstention": analysis.pure_abstention,
                         "gold_in_context": bool(gold & context_docs),
                         "n_sentences": analysis.n_sentences,
                         "uncited_share": (
@@ -186,10 +189,15 @@ def run_rag_experiment(
     frame = pd.DataFrame(rows)
     results = {}
     for (generator, condition), part in frame.groupby(["generator", "condition"]):
-        answered = part[~part["abstained"]]
+        # Every answer that makes at least one claim, whether or not it also abstains.
+        answered = part[part["n_sentences"] > 0]
         results.setdefault(generator, {})[condition] = {
             "n_questions": len(part),
             "abstention_rate": _mean_ci(part["abstained"].astype(float).tolist(), cfg),
+            "pure_abstention_rate": _mean_ci(part["pure_abstention"].astype(float).tolist(), cfg),
+            "abstention_with_claims_rate": float(
+                (part["abstained"] & ~part["pure_abstention"]).mean()
+            ),
             "gold_in_context_rate": float(part["gold_in_context"].mean()),
             "answered": {
                 "n": len(answered),

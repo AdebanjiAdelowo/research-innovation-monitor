@@ -47,6 +47,11 @@ class AnswerAnalysis:
         return len(self.sentences)
 
     @property
+    def pure_abstention(self) -> bool:
+        """The answer declines and makes no claim."""
+        return self.abstained and not self.sentences
+
+    @property
     def n_uncited(self) -> int:
         return sum(1 for s in self.sentences if not s.citations)
 
@@ -80,11 +85,18 @@ def is_abstention(text: str) -> bool:
 
 
 def analyze_answer(text: str, n_passages: int) -> AnswerAnalysis:
-    """Split an answer into sentences and resolve each sentence's citations."""
-    if is_abstention(text):
-        return AnswerAnalysis(abstained=True)
+    """Split an answer into sentences and resolve each sentence's citations.
+
+    A sentence containing the abstention phrase marks the answer as an abstention and
+    is not a claim. Any other sentence is a claim and is kept for scoring, so an
+    answer that declines and then asserts something anyway does not escape scrutiny.
+    """
+    abstained = False
     sentences = []
     for raw in _sentences_keeping_markers(text):
+        if is_abstention(raw):
+            abstained = True
+            continue
         valid, invalid = [], []
         for number in parse_markers(raw):
             bucket = valid if 1 <= number <= n_passages else invalid
@@ -93,7 +105,7 @@ def analyze_answer(text: str, n_passages: int) -> AnswerAnalysis:
         stripped = strip_markers(raw)
         if stripped:
             sentences.append(CitedSentence(stripped, raw, valid, invalid))
-    return AnswerAnalysis(abstained=False, sentences=sentences)
+    return AnswerAnalysis(abstained=abstained, sentences=sentences)
 
 
 def _sentences_keeping_markers(text: str) -> list[str]:

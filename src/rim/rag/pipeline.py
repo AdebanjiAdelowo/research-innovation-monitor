@@ -58,6 +58,7 @@ class RagAnswer:
             "question": self.question,
             "answer": self.text,
             "abstained": self.analysis.abstained,
+            "pure_abstention": self.analysis.pure_abstention,
             "sentences": [
                 {
                     "text": s.text,

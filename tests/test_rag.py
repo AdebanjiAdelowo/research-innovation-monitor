@@ -55,7 +55,13 @@ def test_bulleted_answers_and_abstention():
     )
     assert [s.citations for s in analysis.sentences] == [[2], [3, 1]]
     abstained = analyze_answer(f"{ABSTAIN.lower()}.", 3)
-    assert abstained.abstained and abstained.n_sentences == 0
+    assert abstained.abstained and abstained.pure_abstention and abstained.n_sentences == 0
+    # Declining and then asserting something anyway: the claim is still scored.
+    hedged = analyze_answer(
+        "There is insufficient evidence for this [1]. Still, fusion helps [3].", 3
+    )
+    assert hedged.abstained and not hedged.pure_abstention
+    assert [(s.text, s.citations) for s in hedged.sentences] == [("Still, fusion helps.", [3])]
 
 
 # ----------------------------------------------------------------- attribution
