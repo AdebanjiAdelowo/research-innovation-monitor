@@ -391,6 +391,11 @@ def run_retrieval_experiment(
         best_dense: pipeline(enc_stage, search_stage),
         best_hybrid: pipeline("bm25", enc_stage, search_stage, "fusion"),
     }
+    for enc_cfg in cfg.encoders:
+        pipelines.setdefault(
+            f"dense:{enc_cfg.name}",
+            pipeline(f"encode:{enc_cfg.name}", f"dense_search:{enc_cfg.name}"),
+        )
     for stage in stage_samples:
         if stage.startswith("rerank:"):
             pipelines[f"{best_hybrid}+{stage}"] = pipeline(
