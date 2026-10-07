@@ -1,0 +1,30 @@
+# RQ5 on arXiv abstracts and RQ6 against NSF awards. Needs the arXiv metadata
+# snapshot (rim prepare-arxiv) and the NSF awards (rim prepare-nsf 2010 2024).
+# Same encoder, k and cut-offs as configs/trends/nsf.yaml.
+experiment: trends_arxiv
+seed: 13
+device: auto
+corpus:
+  name: arxiv
+  first_year: 2010
+  last_year: 2024
+  min_words: 40
+secondary:
+  name: nsf_awards
+  first_year: 2010
+  last_year: 2024
+  min_words: 40
+encoder:
+  name: minilm-l6
+  model_id: sentence-transformers/all-MiniLM-L6-v2
+  revision: c9745ed1d9f207416be6d2e6f8de32d1f16199bf
+  max_seq_length: 256
+  batch_size: 256
+  dtype: float16
+k: 60
+k_sensitivity: [30, 120]
+k_scan: [20, 40, 60, 80, 120]
+cutoffs: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+horizons: [1, 2]
+window: 5
+max_lag: 3

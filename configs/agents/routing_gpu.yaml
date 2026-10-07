@@ -1,0 +1,18 @@
+# Tool routing: rule baseline, embedding classifier and a local language model.
+experiment: routing_gpu
+seed: 13
+device: auto
+per_label_set: 15
+encoder:
+  name: minilm-l6
+  model_id: sentence-transformers/all-MiniLM-L6-v2
+  revision: c9745ed1d9f207416be6d2e6f8de32d1f16199bf
+  max_seq_length: 128
+llm_routers:
+  - name: qwen2.5-7b
+    kind: transformers
+    options:
+      model_id: Qwen/Qwen2.5-7B-Instruct
+      revision: a09a35458c702b33eeacc393d103063234e8bc28
+      device: cuda
+      dtype: float16

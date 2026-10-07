@@ -96,3 +96,34 @@ def test_manifest_round_trip(tmp_path):
     )
     manifest.write(tmp_path / "m.json")
     assert DatasetManifest.read(tmp_path / "m.json") == manifest
+
+
+def test_every_committed_config_validates():
+    from pathlib import Path
+
+    from rim.experiments.chunking import ChunkingConfig
+    from rim.experiments.decomposition import DecompositionConfig
+    from rim.experiments.judge_validation import JudgeValidationConfig
+    from rim.experiments.rag import RagExperimentConfig
+    from rim.experiments.routing import RoutingExperimentConfig
+    from rim.experiments.trends import TrendExperimentConfig
+
+    def model_for(path: Path):
+        if path.name.startswith("chunking"):
+            return ChunkingConfig
+        if path.parent.name == "retrieval":
+            return RetrievalExperimentConfig
+        if path.name.startswith("routing"):
+            return RoutingExperimentConfig
+        if path.name.startswith("decomposition"):
+            return DecompositionConfig
+        if path.name.startswith("judge"):
+            return JudgeValidationConfig
+        return RagExperimentConfig if path.parent.name == "rag" else TrendExperimentConfig
+
+    configs = sorted((Path(__file__).parents[1] / "configs").rglob("*.yaml"))
+    assert len(configs) >= 19
+    names = [load_config(path, model_for(path)).experiment for path in configs]
+    assert len(set(names)) == len(names), (
+        "experiment names must be unique: they name result directories"
+    )

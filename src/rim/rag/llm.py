@@ -156,9 +156,14 @@ class TransformersProvider:
 
         self.model_id, self.revision, self.device, self.dtype = model_id, revision, device, dtype
         self.tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
+        # On CUDA the weights are spread over all visible GPUs, so a 7B model in
+        # half precision fits on two 16 GB cards.
+        placement = {"device_map": "auto"} if device == "cuda" else {}
         self.model = AutoModelForCausalLM.from_pretrained(
-            model_id, revision=revision, torch_dtype=getattr(torch, dtype)
-        ).to(device)
+            model_id, revision=revision, torch_dtype=getattr(torch, dtype), **placement
+        )
+        if not placement:
+            self.model.to(device)
         self.model.eval()
 
     def generate(self, prompt, system="", max_tokens=400, seed=0) -> LLMResponse:
@@ -169,7 +174,7 @@ class TransformersProvider:
         ]
         inputs = self.tokenizer.apply_chat_template(
             messages, add_generation_prompt=True, return_tensors="pt", return_dict=True
-        ).to(self.device)
+        ).to(self.model.device)
         start = time.perf_counter()
         with torch.no_grad():
             output = self.model.generate(**inputs, max_new_tokens=max_tokens, do_sample=False)

@@ -104,6 +104,27 @@ def _trends(args: argparse.Namespace) -> None:
     print(f"\nrun {summary['run_id']}")
 
 
+def _chunking(args: argparse.Namespace) -> None:
+    from rim.config import load_config
+    from rim.experiments.chunking import ChunkingConfig, run_chunking_experiment
+
+    summary = run_chunking_experiment(load_config(args.config, ChunkingConfig))
+    metric = summary["primary_metric"]
+    for name, row in summary["conditions"].items():
+        print(f"{name}: {metric}={row['test'][metric]:.4f} units={row['n_indexed_units']}")
+    print(f"\nrun {summary['run_id']}")
+
+
+def _prepare_arxiv(args: argparse.Namespace) -> None:
+    from rim.config import data_dir
+    from rim.data.loaders import arxiv
+
+    papers, _ = arxiv.prepare(
+        args.snapshot, data_dir(), first_year=args.first_year, last_year=args.last_year
+    )
+    print(f"arxiv: {len(papers)} papers")
+
+
 def _env(_: argparse.Namespace) -> None:
     from rim.provenance import environment_info, git_info
 
@@ -152,6 +173,16 @@ def main(argv: list[str] | None = None) -> None:
     trends = sub.add_parser("trends", help="run the trend experiment (RQ5, RQ6)")
     trends.add_argument("config")
     trends.set_defaults(func=_trends)
+
+    chunking = sub.add_parser("chunking", help="run the chunk-size ablation")
+    chunking.add_argument("config")
+    chunking.set_defaults(func=_chunking)
+
+    arxiv = sub.add_parser("prepare-arxiv", help="filter the arXiv metadata snapshot")
+    arxiv.add_argument("snapshot")
+    arxiv.add_argument("--first-year", type=int, default=2010)
+    arxiv.add_argument("--last-year", type=int, default=2024)
+    arxiv.set_defaults(func=_prepare_arxiv)
 
     env = sub.add_parser("env", help="print the provenance of this environment")
     env.set_defaults(func=_env)

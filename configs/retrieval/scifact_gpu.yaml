@@ -1,0 +1,52 @@
+# RQ1 and RQ2 on scifact: BM25, dense, hybrid fusion and cross-encoder reranking.
+# Adds larger encoders and a larger reranker. Intended for a CUDA GPU (Kaggle T4).
+experiment: retrieval_scifact_gpu
+seed: 13
+device: auto
+dataset:
+  name: scifact
+bm25:
+  k1_grid: [0.6, 0.9, 1.2, 1.6, 2.0]
+  b_grid: [0.3, 0.5, 0.75, 0.9]
+encoders:
+  - name: minilm-l6
+    model_id: sentence-transformers/all-MiniLM-L6-v2
+    revision: c9745ed1d9f207416be6d2e6f8de32d1f16199bf
+    max_seq_length: 256
+  - name: bge-small
+    model_id: BAAI/bge-small-en-v1.5
+    revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a
+    query_prefix: "Represent this sentence for searching relevant passages: "
+    max_seq_length: 512
+  - name: bge-base
+    model_id: BAAI/bge-base-en-v1.5
+    revision: a5beb1e3e68b9ab74eb54cfd186867f64f240e1a
+    query_prefix: "Represent this sentence for searching relevant passages: "
+    max_seq_length: 512
+    batch_size: 128
+  - name: specter
+    model_id: sentence-transformers/allenai-specter
+    revision: 2c68eeca61259b2dd70c3f2628219f925df7031a
+    max_seq_length: 512
+    batch_size: 128
+fusion:
+  rrf_k_grid: [10, 20, 60, 100]
+  depth: 100
+rerankers:
+  - name: minilm-l6-ce
+    model_id: cross-encoder/ms-marco-MiniLM-L6-v2
+    revision: 233902d25c440f23af6f7d6e94d2946bac0bee0a
+    max_length: 512
+    depths: [10, 20, 50, 100]
+    max_dev_queries: 150
+  - name: bge-reranker-v2-m3
+    model_id: BAAI/bge-reranker-v2-m3
+    revision: 953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e
+    max_length: 512
+    batch_size: 64
+    depths: [10, 20, 50, 100]
+    max_dev_queries: 150
+evaluation:
+  ks: [1, 5, 10, 20, 100]
+  primary_metric: ndcg@10
+top_k: 100

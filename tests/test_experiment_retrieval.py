@@ -94,3 +94,41 @@ def test_group_metrics(tmp_path, toy_dataset):
     summary = run(tmp_path, toy_dataset, dataset={"name": "toy", "qrels_group": "domain"})
     assert set(summary["groups"]) == {"IN", "OUT"}
     assert summary["groups"]["IN"]["n_queries"] >= 1
+
+
+def test_chunking_experiment_scores_documents_by_best_chunk(tmp_path, toy_dataset):
+    from rim.experiments.chunking import (
+        ChunkingConfig,
+        best_chunk_per_document,
+        run_chunking_experiment,
+    )
+
+    hits = [("a#c0002", 0.9), ("b#c0000", 0.8), ("a#c0000", 0.7), ("c#c0001", 0.1)]
+    assert best_chunk_per_document(hits, 2) == [("a", 0.9), ("b", 0.8)]
+
+    filler = " ".join(["Unrelated filler sentence about nothing in particular."] * 12)
+    toy_dataset.corpus = toy_dataset.corpus.assign(
+        full_text=[f"{filler} {text} {filler}" for text in toy_dataset.corpus["text"]]
+    )
+    cfg = ChunkingConfig.model_validate(
+        {
+            "experiment": "chunk_toy",
+            "device": "cpu",
+            "dataset": "toy",
+            "chunk_words": [20, 60],
+            "encoder": {"name": "hash", "kind": "hashing", "dim": 256},
+            "ks": [5, 10],
+            "n_bootstrap": 200,
+            "n_permutations": 200,
+        }
+    )
+    summary = run_chunking_experiment(cfg, toy_dataset, tmp_path, tmp_path / "cache")
+    conditions = summary["conditions"]
+    assert set(conditions) == {"abstract", "chunks_20", "chunks_60"}
+    assert (
+        conditions["chunks_20"]["n_indexed_units"] > conditions["chunks_60"]["n_indexed_units"] > 12
+    )
+    assert conditions["abstract"]["n_indexed_units"] == 12
+    # The relevant sentence sits inside one chunk, so chunk retrieval still finds the documents.
+    assert conditions["chunks_20"]["test"]["recall@10"] >= 0.8
+    assert len(summary["comparisons"]) == 2

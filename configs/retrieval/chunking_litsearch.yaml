@@ -1,0 +1,18 @@
+# Chunk-size ablation on LitSearch full text (about 64k papers; a GPU is advisable).
+# BM25 parameters are those selected on dev in results/retrieval_litsearch.
+experiment: chunking_litsearch
+seed: 13
+device: auto
+dataset: litsearch_fulltext
+chunk_words: [128, 256, 512]
+overlap_fraction: 0.2
+encoder:
+  name: bge-small
+  model_id: BAAI/bge-small-en-v1.5
+  revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a
+  query_prefix: "Represent this sentence for searching relevant passages: "
+  max_seq_length: 512
+  batch_size: 256
+  dtype: float16
+k1: 1.6
+b: 0.5

@@ -1,0 +1,15 @@
+# Agreement of candidate entailment judges with human SciFact evidence labels.
+# The smallest judge that is competitive on these labels is used in the RAG experiment.
+experiment: judge_validation_gpu
+seed: 13
+device: auto
+judges:
+  - name: nli-deberta-v3-xsmall
+    model_id: cross-encoder/nli-deberta-v3-xsmall
+    revision: a150876415327c80daeff35ca6f68f5ed8cf5c24
+  - name: deberta-v3-base-mnli-fever-anli
+    model_id: MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
+    revision: 6f5cf0a2b59cabb106aca4c287eed12e357e90eb
+  - name: deberta-v3-large-mnli-fever-anli-ling-wanli
+    model_id: MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli
+    revision: b3546ea6b0346eb6f8d5d68b13c7dc6d0376b3d7
