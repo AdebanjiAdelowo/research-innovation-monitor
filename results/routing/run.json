@@ -1,0 +1,113 @@
+{
+  "artifacts": {
+    "per_task_test.csv": "acb92845536e1907a3475ad2a6c9390511b1dfbcb3d98b346399791220e50eb5",
+    "summary.json": "d0e3ceaa74a1beebce8d842200788082b0423f5e545aab5b741ff0d99940737c"
+  },
+  "config": {
+    "device": "auto",
+    "encoder": {
+      "batch_size": 64,
+      "dim": 256,
+      "doc_prefix": "",
+      "dtype": "float32",
+      "kind": "sentence-transformers",
+      "max_seq_length": 128,
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "name": "minilm-l6",
+      "normalize": true,
+      "query_prefix": "",
+      "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf"
+    },
+    "experiment": "routing",
+    "llm_routers": [
+      {
+        "kind": "ollama",
+        "name": "llama3.2-3b",
+        "options": {
+          "model": "llama3.2"
+        }
+      }
+    ],
+    "n_bootstrap": 10000,
+    "n_permutations": 10000,
+    "output_dir": "results",
+    "per_label_set": 15,
+    "seed": 13,
+    "use_paraphrases": true
+  },
+  "config_sha256": "a01e5003ad2d6d0306850e48484c8251e56392e436d0ea921eb18ac84cd35c50",
+  "datasets": [],
+  "environment": {
+    "hardware": {
+      "cpu_count": 11,
+      "device": "mps",
+      "machine": "arm64",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "processor": "arm"
+    },
+    "packages": {
+      "huggingface_hub": "1.33.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.1.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.14.1",
+      "transformers": "5.19.0"
+    },
+    "python": "3.12.2"
+  },
+  "experiment": "routing",
+  "finished_at": "2026-10-07T00:10:50Z",
+  "git": {
+    "commit": "331b9c3443ac79a13256eefbd0677bde1cdc5da9",
+    "dirty": true,
+    "source": "git"
+  },
+  "models": [
+    {
+      "default": "literature",
+      "kind": "rules",
+      "name": "rules",
+      "role": "router"
+    },
+    {
+      "encoder": {
+        "batch_size": 64,
+        "device": "mps",
+        "dim": 384,
+        "doc_prefix": "",
+        "kind": "sentence-transformers",
+        "max_seq_length": 128,
+        "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "n_parameters": 22713216,
+        "normalize": true,
+        "query_prefix": "",
+        "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+        "storage_dtype": "float32"
+      },
+      "kind": "embedding",
+      "name": "embedding",
+      "role": "router",
+      "threshold": 0.5
+    },
+    {
+      "default": "literature",
+      "kind": "llm",
+      "name": "llm:llama3.2-3b",
+      "provider": {
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "kind": "ollama",
+        "model": "llama3.2",
+        "temperature": 0.0
+      },
+      "role": "router"
+    }
+  ],
+  "notes": [],
+  "run_id": "routing-20261007T000821Z-331b9c3-a01e5003",
+  "seed": 13,
+  "started_at": "2026-10-07T00:08:21Z"
+}
