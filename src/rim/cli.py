@@ -60,6 +60,36 @@ def _decomposition(args: argparse.Namespace) -> None:
     print(f"\nrun {summary['run_id']}")
 
 
+def _judge(args: argparse.Namespace) -> None:
+    from rim.config import load_config
+    from rim.experiments.judge_validation import JudgeValidationConfig, run_judge_validation
+
+    summary = run_judge_validation(load_config(args.config, JudgeValidationConfig))
+    for name, row in summary["judges"].items():
+        d = row["dev"]
+        print(
+            f"{name}: threshold={d['threshold']} balanced_acc={d['balanced_accuracy']:.3f} "
+            f"precision={d['precision']:.3f} recall={d['recall']:.3f} auroc={row['dev_auroc']:.3f}"
+        )
+    print(f"\nrun {summary['run_id']}")
+
+
+def _rag(args: argparse.Namespace) -> None:
+    from rim.config import load_config
+    from rim.experiments.rag import RagExperimentConfig, run_rag_experiment
+
+    summary = run_rag_experiment(load_config(args.config, RagExperimentConfig))
+    for name, conditions in summary["generators"].items():
+        for condition, row in conditions.items():
+            a = row["answered"]
+            print(
+                f"{name} [{condition}]: abstain={row['abstention_rate']['mean']:.3f} "
+                f"cit_recall={a['citation_recall']['mean']} "
+                f"cit_precision={a['citation_precision']['mean']}"
+            )
+    print(f"\nrun {summary['run_id']}")
+
+
 def _env(_: argparse.Namespace) -> None:
     from rim.provenance import environment_info, git_info
 
@@ -96,6 +126,14 @@ def main(argv: list[str] | None = None) -> None:
     decomposition = sub.add_parser("decomposition", help="run the query-decomposition experiment")
     decomposition.add_argument("config")
     decomposition.set_defaults(func=_decomposition)
+
+    judge = sub.add_parser("judge-validation", help="validate entailment judges on human labels")
+    judge.add_argument("config")
+    judge.set_defaults(func=_judge)
+
+    rag = sub.add_parser("rag", help="run the grounded-generation experiment (RQ4)")
+    rag.add_argument("config")
+    rag.set_defaults(func=_rag)
 
     env = sub.add_parser("env", help="print the provenance of this environment")
     env.set_defaults(func=_env)

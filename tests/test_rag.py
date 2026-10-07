@@ -148,3 +148,96 @@ def test_extractive_provider_cites_its_source_and_abstains(searcher):
 def test_lexical_judge_is_bounded():
     probs = LexicalJudge().entailment(["a cat sat", "nothing"], ["cat sat", ""])
     np.testing.assert_allclose(probs, [1.0, 0.0])
+
+
+def test_rag_experiment_withholds_gold_and_reports_both_conditions(tmp_path, toy_dataset):
+    import json
+
+    import pandas as pd
+
+    from rim.experiments.rag import RagExperimentConfig, run_rag_experiment
+
+    cfg = RagExperimentConfig.model_validate(
+        {
+            "experiment": "rag_toy",
+            "device": "cpu",
+            "n_questions": 3,
+            "encoder": {"name": "hash", "kind": "hashing", "dim": 512},
+            "providers": [
+                {"name": "extractive", "kind": "extractive", "options": {"max_sentences": 1}}
+            ],
+            "judge": {"kind": "lexical", "threshold": 0.9},
+            "max_passages": 3,
+            "n_bootstrap": 200,
+        }
+    )
+    summary = run_rag_experiment(cfg, toy_dataset, tmp_path, tmp_path / "cache")
+    per_answer = pd.read_csv(tmp_path / "rag_toy" / "per_answer.csv")
+    assert len(per_answer) == 6
+    withheld = per_answer[per_answer["condition"] == "withheld"]
+    assert not withheld["gold_in_context"].any()
+    assert per_answer[per_answer["condition"] == "available"]["gold_in_context"].all()
+
+    result = summary["generators"]["extractive"]
+    assert result["withheld"]["gold_in_context_rate"] == 0.0
+    answered = result["available"]["answered"]
+    # The extractive generator copies sentences, so every answered sentence is supported.
+    assert (
+        answered["citation_recall"]["mean"] == 1.0 and answered["citation_precision"]["mean"] == 1.0
+    )
+    low, high = result["available"]["abstention_rate"]["ci"]
+    assert 0.0 <= low <= high <= 1.0
+
+    answers = [
+        json.loads(line)
+        for line in (tmp_path / "rag_toy" / "answers.jsonl").read_text().splitlines()
+    ]
+    gold_q4 = {"toy:d07", "toy:d08"}
+    for answer in answers:
+        if answer["query_id"] == "toy:q4" and answer["condition"] == "withheld":
+            assert not gold_q4 & {p["doc_id"] for p in answer["passages"]}
+        for sentence in answer["sentences"]:
+            assert set(sentence["cited_doc_ids"]) <= {p["doc_id"] for p in answer["passages"]}
+
+
+def test_scifact_pairs_and_judge_validation():
+    import pandas as pd
+
+    from rim.data.loaders.scifact_claims import build_pairs
+    from rim.experiments.judge_validation import classification_scores, validate_judge
+
+    corpus = {
+        1: {"title": "T1", "abstract": ["cats sleep often.", "dogs bark."]},
+        2: {"title": "T2", "abstract": ["fish swim."]},
+        3: {"title": "T3", "abstract": ["birds fly south."]},
+    }
+    claims = [
+        {
+            "id": 10,
+            "claim": "cats sleep often",
+            "cited_doc_ids": [1, 2],
+            "evidence": {"1": [{"sentences": [0], "label": "SUPPORT"}]},
+        },
+        {
+            "id": 11,
+            "claim": "birds never fly",
+            "cited_doc_ids": [3, 99],
+            "evidence": {"3": [{"sentences": [0], "label": "CONTRADICT"}]},
+        },
+    ]
+    pairs = build_pairs(claims, corpus)
+    assert list(pairs["label"]) == ["SUPPORT", "NOINFO", "CONTRADICT"]
+    assert list(pairs["entailed"]) == [True, False, False]
+    assert pairs.loc[0, "premise"] == "T1\ncats sleep often. dogs bark."
+
+    probs = np.array([0.9, 0.2, 0.6, 0.4])
+    truth = np.array([True, False, False, True])
+    scores = classification_scores(probs, truth, 0.5)
+    assert scores["accuracy"] == 0.5 and scores["precision"] == 0.5 and scores["recall"] == 0.5
+    assert scores["false_positive_rate"] == 0.5
+
+    result, dev_probs = validate_judge(LexicalJudge(), pairs, pairs, (0.5, 0.99), n_bootstrap=100)
+    # The lexical judge cannot see negation: the contradicted claim shares most terms.
+    assert result["dev_share_judged_entailed_by_label"]["SUPPORT"] == 1.0
+    assert result["selected_threshold"] in (0.5, 0.99) and len(dev_probs) == 3
+    assert isinstance(pd.Series(result["n_dev_by_label"]).sum().item(), int)

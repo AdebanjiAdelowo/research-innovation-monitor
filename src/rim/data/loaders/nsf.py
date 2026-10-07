@@ -88,27 +88,36 @@ def fetch_month(year: int, month: int, client, pause: float = 0.2, retries: int 
         time.sleep(pause)
 
 
-def prepare(
-    root: str | Path, first_year: int, last_year: int, log=print
-) -> tuple[pd.DataFrame, DatasetManifest]:
+def _ensure_month(year: int, month: int, raw_dir: Path, log) -> Path:
     import httpx
+
+    path = raw_dir / f"{year}-{month:02d}.jsonl"
+    if not path.exists():
+        with httpx.Client() as client:
+            rows = fetch_month(year, month, client)
+        tmp = path.with_suffix(f".{year}{month:02d}.tmp")
+        tmp.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+        tmp.rename(path)
+        log(f"nsf {year}-{month:02d}: {len(rows)} awards")
+    return path
+
+
+def prepare(
+    root: str | Path, first_year: int, last_year: int, log=print, workers: int = 4
+) -> tuple[pd.DataFrame, DatasetManifest]:
+    from concurrent.futures import ThreadPoolExecutor
 
     root = Path(root)
     raw_dir = root / "raw" / "nsf_awards"
     raw_dir.mkdir(parents=True, exist_ok=True)
-    frames = []
-    with httpx.Client() as client:
-        for year in range(first_year, last_year + 1):
-            for month in range(1, 13):
-                path = raw_dir / f"{year}-{month:02d}.jsonl"
-                if not path.exists():
-                    rows = fetch_month(year, month, client)
-                    tmp = path.with_suffix(".tmp")
-                    tmp.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
-                    tmp.rename(path)
-                    log(f"nsf {year}-{month:02d}: {len(rows)} awards")
-                if path.stat().st_size:
-                    frames.append(pd.read_json(path, lines=True, dtype={"doc_id": str}))
+    months = [(y, m) for y in range(first_year, last_year + 1) for m in range(1, 13)]
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        paths = list(pool.map(lambda ym: _ensure_month(*ym, raw_dir, log), months))
+    frames = [
+        pd.read_json(path, lines=True, dtype={"doc_id": str})
+        for path in paths
+        if path.stat().st_size
+    ]
     awards = pd.concat(frames, ignore_index=True).drop_duplicates("doc_id", ignore_index=True)
     awards["year"] = awards["year"].astype("Int64")
     out = root / "processed" / "nsf_awards"
