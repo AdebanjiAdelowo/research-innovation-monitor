@@ -258,3 +258,61 @@ def test_build_dapfam_keeps_domain_labels_and_metadata():
     assert list(ds.qrels["domain"]) == ["IN", "OUT"]
     assert ds.corpus.loc[0, "year"] == 2001 and pd.isna(ds.corpus.loc[1, "year"])
     assert ds.corpus.loc[0, "ipc3"] == ["F04"]
+
+
+def test_build_dorismae_aggregates_aspect_scores_hierarchically():
+    from rim.data.loaders.dorismae import build_dorismae, query_relevance
+
+    # Aspect 1 has sub-aspects 10 and 11 (mean 1.5); aspect 2 is a leaf (0). Mean = 0.75.
+    assert query_relevance({"1": ["10", "11"], "2": []}, {"10": 2, "11": 1, "2": 0, "1": 0}) == 0.75
+    assert query_relevance({"1": []}, {}) == 0.0
+
+    raw = {
+        "aspect_id2aspect": {"1": "uses deep learning", "10": "a", "11": "b", "2": "has a dataset"},
+        "Corpus": [
+            {
+                "abstract_id": 0,
+                "title": "A_first_paper",
+                "original_abstract": "line one\nline two",
+                "primary_category": "cs.LG",
+            },
+            {
+                "abstract_id": 1,
+                "title": "Second",
+                "original_abstract": "text",
+                "primary_category": "cs.CL",
+            },
+            {
+                "abstract_id": 2,
+                "title": "Not in any pool",
+                "original_abstract": "x",
+                "primary_category": "cs.CL",
+            },
+        ],
+        "Query": [
+            {
+                "query_text": "I need  a model.",
+                "candidate_pool": [0, 1],
+                "aspects": {"1": ["10", "11"], "2": []},
+                "query_type": "ML",
+            }
+        ],
+        "Annotation": [
+            {"aspect_id": "10", "abstract_id": 0, "score": 2},
+            {"aspect_id": "11", "abstract_id": 0, "score": 1},
+            {"aspect_id": "2", "abstract_id": 0, "score": 0},
+            {"aspect_id": "2", "abstract_id": 1, "score": 0},
+        ],
+    }
+    corpus, queries, qrels = build_dorismae(raw)
+    ds = RetrievalDataset("dorismae", corpus, queries, qrels)
+    assert list(ds.corpus["doc_id"]) == ["dorismae:0", "dorismae:1"]
+    assert (
+        ds.corpus.loc[0, "title"] == "A first paper"
+        and ds.corpus.loc[0, "text"] == "line one line two"
+    )
+    assert ds.queries.loc[0, "candidate_pool"] == ["dorismae:0", "dorismae:1"]
+    assert ds.queries.loc[0, "aspects"] == ["uses deep learning", "has a dataset"]
+    assert ds.qrels.to_dict("records") == [
+        {"query_id": "dorismae:q000", "doc_id": "dorismae:0", "relevance": 0.75}
+    ]

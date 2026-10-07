@@ -1,0 +1,24 @@
+# RQ3: does query decomposition help multi-aspect queries, and does it harm simple ones?
+# BM25 parameters are those selected on dev in the retrieval experiments (LitSearch)
+# or the defaults (DORIS-MAE). Nothing is tuned in this experiment.
+experiment: decomposition
+seed: 13
+device: auto
+datasets:
+  - name: dorismae
+  - name: litsearch
+    k1: 1.6
+    b: 0.5
+    group_by: specificity
+encoder:
+  name: bge-small
+  model_id: BAAI/bge-small-en-v1.5
+  revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a
+  query_prefix: "Represent this sentence for searching relevant passages: "
+  max_seq_length: 512
+llm_decomposers:
+  - name: llama3.2-3b
+    kind: ollama
+    options: {model: "llama3.2"}
+rrf_k: 60
+depth: 100

@@ -48,6 +48,18 @@ def _routing(args: argparse.Namespace) -> None:
     print(f"\nrun {summary['run_id']}")
 
 
+def _decomposition(args: argparse.Namespace) -> None:
+    from rim.config import load_config
+    from rim.experiments.decomposition import DecompositionConfig, run_decomposition_experiment
+
+    summary = run_decomposition_experiment(load_config(args.config, DecompositionConfig))
+    for name, data in summary["datasets"].items():
+        metric = data["primary_metric"]
+        for condition, row in data["conditions"].items():
+            print(f"{name} {condition}: {metric}={row['test'][metric]:.4f}")
+    print(f"\nrun {summary['run_id']}")
+
+
 def _env(_: argparse.Namespace) -> None:
     from rim.provenance import environment_info, git_info
 
@@ -80,6 +92,10 @@ def main(argv: list[str] | None = None) -> None:
     routing = sub.add_parser("routing", help="run the tool-routing experiment")
     routing.add_argument("config")
     routing.set_defaults(func=_routing)
+
+    decomposition = sub.add_parser("decomposition", help="run the query-decomposition experiment")
+    decomposition.add_argument("config")
+    decomposition.set_defaults(func=_decomposition)
 
     env = sub.add_parser("env", help="print the provenance of this environment")
     env.set_defaults(func=_env)

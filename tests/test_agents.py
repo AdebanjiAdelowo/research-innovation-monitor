@@ -200,3 +200,42 @@ def test_routing_experiment_end_to_end(tmp_path):
         assert low <= row["test"]["exact_match"] <= high
     assert (tmp_path / "routing_toy" / "run.json").exists()
     assert (tmp_path / "routing_toy" / "per_task_test.csv").read_text().count("\n") == 97
+
+
+def test_decomposition_experiment_uses_identical_pipeline_and_candidate_pools(
+    tmp_path, toy_dataset
+):
+    from rim.experiments.decomposition import DecompositionConfig, run_decomposition_experiment
+
+    pool = list(toy_dataset.corpus["doc_id"])[:9]
+    toy_dataset.queries = toy_dataset.queries.assign(
+        candidate_pool=[pool] * len(toy_dataset.queries),
+        aspects=[["partial differential equations", "operator learning"]]
+        * len(toy_dataset.queries),
+    )
+    cfg = DecompositionConfig.model_validate(
+        {
+            "experiment": "decomp_toy",
+            "device": "cpu",
+            "datasets": [{"name": "toy"}],
+            "encoder": {"name": "hash", "kind": "hashing", "dim": 256},
+            "ks": [5, 10],
+            "n_bootstrap": 200,
+            "n_permutations": 200,
+        }
+    )
+    summary = run_decomposition_experiment(cfg, {"toy": toy_dataset}, tmp_path, tmp_path / "cache")
+    data = summary["datasets"]["toy"]
+    assert data["ranking_scope"] == "candidate pool" and data["n_queries"] == 3
+    assert set(data["conditions"]) == {"none", "sentence", "oracle_aspects"}
+    # Single-sentence queries are not decomposed, so the sentence condition equals the baseline.
+    assert data["conditions"]["sentence"]["share_decomposed"] == 0.0
+    assert data["conditions"]["sentence"]["test"] == data["conditions"]["none"]["test"]
+    assert data["conditions"]["oracle_aspects"]["mean_subqueries"] == 2.0
+    import pandas as pd
+
+    per_query = pd.read_csv(tmp_path / "decomp_toy" / "per_query_test.csv")
+    assert set(per_query["condition"]) == set(data["conditions"])
+    # toy:d12, relevant to q5, lies outside the pool and can never be retrieved.
+    q5 = per_query[(per_query["query_id"] == "toy:q5") & (per_query["condition"] == "none")]
+    assert q5["recall@10"].iloc[0] <= 0.5
