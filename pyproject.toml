@@ -56,3 +56,4 @@ ignore = ["RUF001", "RUF002", "RUF003"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["E501"]
+"src/rim/agents/tasks.py" = ["E501"]
