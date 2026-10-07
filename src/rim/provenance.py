@@ -69,8 +69,10 @@ def git_info(repo_root: str | Path | None = None) -> dict[str, Any]:
 
     commit = run("rev-parse", "HEAD")
     if commit:
-        status = run("status", "--porcelain")
-        return {"commit": commit, "dirty": bool(status), "source": "git"}
+        status = run("status", "--porcelain") or ""
+        # Paths with uncommitted changes, so a reader can judge whether they matter.
+        paths = sorted(line[3:] for line in status.splitlines() if line.strip())
+        return {"commit": commit, "dirty": bool(paths), "dirty_paths": paths, "source": "git"}
     declared = os.environ.get("RIM_GIT_COMMIT", "").strip()
     if declared:
         return {"commit": declared, "dirty": None, "source": "declared"}
