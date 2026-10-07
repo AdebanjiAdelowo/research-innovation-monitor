@@ -71,7 +71,7 @@ def plot_topic_trends(
                 edgecolor=SURFACE,
                 linewidth=1.2,
             )
-            terms = ", ".join(str(row.get("terms", "")).split(", ")[:3])
+            terms = ", ".join(str(row.get("terms", "")).split(", ")[:2])
             ax.set_title(f"{label}: {terms}", fontsize=8, color=INK, loc="left", wrap=True)
             ax.set_ylim(bottom=0)
             if c == 0:

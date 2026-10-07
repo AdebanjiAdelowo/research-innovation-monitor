@@ -1,0 +1,149 @@
+{
+  "artifacts": {
+    "backtest.png": "00a1e89bb3ea46ffef3bc685724ec32d681d217c84a4efd3efb3bdb2578aa1fb",
+    "backtest_scores.csv": "555feebaa23f415f6db00aa67159bd7d8c69fa1a8fe3734227a58289f0895f6d",
+    "forecasts.csv": "684c50ad592c798b9684dae7c0686e85be09d0fb8ece3d97610d3bba192e5d01",
+    "k_scan.csv": "673179b1cfeee7077f8317455bae0a52661d082e42287fee5123bcf4d11648a2",
+    "summary.json": "7f86c4c489111458648611722e464f080dd706f55d31826c2c96a66945000f36",
+    "topic_trends.csv": "07eeaf481d42a685011be2edaa8d6bf2d09374328c42fe054bdc92080faec89a",
+    "topic_trends.png": "f4d5e54c94fcf767b864a44d95766d09e1aae6e1f78ddd9a9d03a46268bffbd8",
+    "topic_year_counts.csv": "e10788cf72351238320ac1380048bc627fb195d659b276e84c6ba5e916c21839"
+  },
+  "config": {
+    "corpus": {
+      "first_year": 2010,
+      "last_year": 2024,
+      "min_words": 40,
+      "name": "nsf_awards",
+      "where": {}
+    },
+    "cutoffs": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "device": "auto",
+    "encoder": {
+      "batch_size": 128,
+      "dim": 256,
+      "doc_prefix": "",
+      "dtype": "float16",
+      "kind": "sentence-transformers",
+      "max_seq_length": 256,
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "name": "minilm-l6",
+      "normalize": true,
+      "query_prefix": "",
+      "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf"
+    },
+    "experiment": "trends_nsf",
+    "horizons": [
+      1,
+      2
+    ],
+    "k": 60,
+    "k_scan": [
+      20,
+      40,
+      60,
+      80,
+      120
+    ],
+    "k_sensitivity": [
+      30,
+      120
+    ],
+    "max_lag": 3,
+    "n_permutations": 10000,
+    "output_dir": "results",
+    "pca_dim": 50,
+    "scan_sample": 30000,
+    "secondary": null,
+    "seed": 13,
+    "window": 5
+  },
+  "config_sha256": "77ca16df377ba7c594c2bdb4e8dccc4233547a514323275db631a508d4efed88",
+  "datasets": [
+    {
+      "files": {
+        "corpus.parquet": "dc4f71e28062520d916c85b5f2fa8f8608a9d73176f318e3643acead952a5bc3"
+      },
+      "license": "Public domain (U.S. Government work)",
+      "license_url": "https://www.nsf.gov/policies/copyright",
+      "n_documents": 175409,
+      "n_qrels": 0,
+      "n_queries": 0,
+      "name": "nsf_awards",
+      "notes": "The API serves the current state of each award, so abstracts and amounts can change between retrievals. Investigator and officer contact fields are not stored.",
+      "redistributable": true,
+      "retrieved_at": "2026-10-07T00:40:48Z",
+      "revision": "award dates 2010-01-01 to 2024-12-31, retrieved 2026-10-07T00:40:48Z",
+      "source": "NSF Awards API",
+      "source_url": "https://api.nsf.gov/services/v1/awards.json"
+    }
+  ],
+  "environment": {
+    "hardware": {
+      "cpu_count": 11,
+      "device": "mps",
+      "machine": "arm64",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "processor": "arm"
+    },
+    "packages": {
+      "huggingface_hub": "1.33.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.1.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.14.1",
+      "transformers": "5.19.0"
+    },
+    "python": "3.12.2"
+  },
+  "experiment": "trends_nsf",
+  "finished_at": "2026-10-07T00:59:06Z",
+  "git": {
+    "commit": "9b0bd660f2c2eed2a37f136e9a8b595e22ed459a",
+    "dirty": false,
+    "dirty_paths": [],
+    "source": "git"
+  },
+  "models": [
+    {
+      "batch_size": 128,
+      "corpus_embedding": {
+        "cache_hit": false,
+        "cache_key": "5df2075dc2e693d3d2cceb77",
+        "dim": 384,
+        "encode_seconds": 614.7359554159993,
+        "n_vectors": 173768,
+        "storage_mb": 133.45
+      },
+      "device": "mps",
+      "dim": 384,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 256,
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_parameters": 22713216,
+      "normalize": true,
+      "query_prefix": "",
+      "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+      "role": "encoder",
+      "storage_dtype": "float16"
+    }
+  ],
+  "notes": [],
+  "run_id": "trends_nsf-20261007T004501Z-9b0bd66-77ca16df",
+  "seed": 13,
+  "started_at": "2026-10-07T00:45:01Z"
+}

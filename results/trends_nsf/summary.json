@@ -1,0 +1,463 @@
+{
+  "experiment": "trends_nsf",
+  "run_id": "trends_nsf-20261007T004501Z-9b0bd66-77ca16df",
+  "corpus": "nsf_awards",
+  "n_documents": 173768,
+  "years": [
+    2010,
+    2024
+  ],
+  "documents_per_year": {
+    "2010": 12277,
+    "2011": 11094,
+    "2012": 11806,
+    "2013": 11238,
+    "2014": 11327,
+    "2015": 12354,
+    "2016": 12189,
+    "2017": 11717,
+    "2018": 11989,
+    "2019": 11888,
+    "2020": 12253,
+    "2021": 11328,
+    "2022": 10550,
+    "2023": 11054,
+    "2024": 10704
+  },
+  "k": 60,
+  "k_scan": [
+    {
+      "k": 20,
+      "ari_mean": 0.7421145216236185,
+      "ari_min": 0.7045634911279608,
+      "ami_mean": 0.8163828248795357,
+      "n_pairs": 3,
+      "silhouette": 0.14626406133174896,
+      "smallest_topic_share": 0.031766666666666665
+    },
+    {
+      "k": 40,
+      "ari_mean": 0.6756787836772382,
+      "ari_min": 0.6225779220642103,
+      "ami_mean": 0.7973575261520599,
+      "n_pairs": 3,
+      "silhouette": 0.14492277801036835,
+      "smallest_topic_share": 0.012766666666666667
+    },
+    {
+      "k": 60,
+      "ari_mean": 0.6590102997560886,
+      "ari_min": 0.6115111632566,
+      "ami_mean": 0.8086423427762313,
+      "n_pairs": 3,
+      "silhouette": 0.14241521060466766,
+      "smallest_topic_share": 0.0044
+    },
+    {
+      "k": 80,
+      "ari_mean": 0.6339992481012026,
+      "ari_min": 0.6088907951444925,
+      "ami_mean": 0.8016318788912932,
+      "n_pairs": 3,
+      "silhouette": 0.1314227283000946,
+      "smallest_topic_share": 0.004033333333333333
+    },
+    {
+      "k": 120,
+      "ari_mean": 0.594253250541688,
+      "ari_min": 0.5799316777051954,
+      "ami_mean": 0.792980869303688,
+      "n_pairs": 3,
+      "silhouette": 0.12994536757469177,
+      "smallest_topic_share": 0.0037333333333333333
+    }
+  ],
+  "subsample_stability_at_k": {
+    "ari_mean": 0.6182988045210952,
+    "ari_min": 0.5775271981936317,
+    "ami_mean": 0.7838005660658052,
+    "n_pairs": 10
+  },
+  "trend_counts": {
+    "none": 24,
+    "falling": 22,
+    "rising": 14
+  },
+  "top_rising": [
+    {
+      "topic": 31,
+      "terms": "learning, machine, machine learning, data, deep, ai, algorithms, deep learning",
+      "share_first": 0.004154109310092042,
+      "share_last": 0.03914424514200299,
+      "q_value": 1.5909472515586923e-05
+    },
+    {
+      "topic": 45,
+      "terms": "cybersecurity, security, cyber, students, education, research, project, program",
+      "share_first": 0.006027531155819826,
+      "share_last": 0.014947683109118086,
+      "q_value": 0.0005645449381303332
+    },
+    {
+      "topic": 34,
+      "terms": "stem, teachers, teacher, teaching, education, noyce, learning, science",
+      "share_first": 0.011403437321821292,
+      "share_last": 0.023168908819133034,
+      "q_value": 0.0005645449381303332
+    },
+    {
+      "topic": 20,
+      "terms": "disaster, risk, data, covid, covid 19, 19, social, health",
+      "share_first": 0.00676060926936548,
+      "share_last": 0.020272795216741406,
+      "q_value": 0.0005645449381303332
+    },
+    {
+      "topic": 17,
+      "terms": "health, technology, patient, human, patients, user, project, care",
+      "share_first": 0.010018734218457278,
+      "share_last": 0.01989910313901345,
+      "q_value": 0.0007810097438589119
+    }
+  ],
+  "top_falling": [
+    {
+      "topic": 50,
+      "terms": "policy, economic, decision, firms, how, research, project, information",
+      "share_first": 0.018652765333550543,
+      "share_last": 0.010650224215246636,
+      "q_value": 0.0005645449381303332
+    },
+    {
+      "topic": 2,
+      "terms": "earthquake, seismic, earthquakes, fault, slip, subduction, plate, deformation",
+      "share_first": 0.020363280931823734,
+      "share_last": 0.009248878923766817,
+      "q_value": 0.0005645449381303332
+    },
+    {
+      "topic": 18,
+      "terms": "optical, light, laser, photonic, imaging, devices, high, materials",
+      "share_first": 0.020851999674187504,
+      "share_last": 0.01195814648729447,
+      "q_value": 0.0005645449381303332
+    },
+    {
+      "topic": 42,
+      "terms": "archaeological, human, social, from, research, cultural, ancient, project",
+      "share_first": 0.017593874725095708,
+      "share_last": 0.009248878923766817,
+      "q_value": 0.0005645449381303332
+    },
+    {
+      "topic": 55,
+      "terms": "mantle, earth, magma, rocks, volcanic, crust, subduction, from",
+      "share_first": 0.02443593711818848,
+      "share_last": 0.01195814648729447,
+      "q_value": 0.0007559167715229145
+    }
+  ],
+  "backtest": {
+    "60": [
+      {
+        "predictor": "last_growth",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": -0.3529599985923988,
+        "precision_top10pct": 0.041666666666666664,
+        "mae": 0.21921912457500364
+      },
+      {
+        "predictor": "last_growth",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": -0.3311901978211737,
+        "precision_top10pct": 0.08333333333333333,
+        "mae": 0.3459794286438157
+      },
+      {
+        "predictor": "linear_trend",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": -0.21581720095390705,
+        "precision_top10pct": 0.0,
+        "mae": 0.1460026648812435
+      },
+      {
+        "predictor": "linear_trend",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": -0.11124427736503785,
+        "precision_top10pct": 0.041666666666666664,
+        "mae": 0.179156576815843
+      },
+      {
+        "predictor": "persistence",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": NaN,
+        "precision_top10pct": NaN,
+        "mae": 0.128745026412146
+      },
+      {
+        "predictor": "persistence",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": NaN,
+        "precision_top10pct": NaN,
+        "mae": 0.14601134367037416
+      },
+      {
+        "predictor": "ridge",
+        "horizon": 1,
+        "n_cutoffs": 6,
+        "spearman": 0.37273422818893603,
+        "precision_top10pct": 0.2777777777777778,
+        "mae": 0.12339313165051147
+      },
+      {
+        "predictor": "ridge",
+        "horizon": 2,
+        "n_cutoffs": 5,
+        "spearman": 0.34276358178587263,
+        "precision_top10pct": 0.3,
+        "mae": 0.14821755624187719
+      }
+    ],
+    "30": [
+      {
+        "predictor": "last_growth",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": -0.32341490545050056,
+        "precision_top10pct": 0.041666666666666664,
+        "mae": 0.15121318686358592
+      },
+      {
+        "predictor": "last_growth",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": -0.2568965517241379,
+        "precision_top10pct": 0.041666666666666664,
+        "mae": 0.2458748543165799
+      },
+      {
+        "predictor": "linear_trend",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": -0.221523915461624,
+        "precision_top10pct": 0.08333333333333333,
+        "mae": 0.10471857101892548
+      },
+      {
+        "predictor": "linear_trend",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": -0.12975528364849834,
+        "precision_top10pct": 0.041666666666666664,
+        "mae": 0.13604571253943948
+      },
+      {
+        "predictor": "persistence",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": NaN,
+        "precision_top10pct": NaN,
+        "mae": 0.09396480615758981
+      },
+      {
+        "predictor": "persistence",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": NaN,
+        "precision_top10pct": NaN,
+        "mae": 0.10968210246084695
+      },
+      {
+        "predictor": "ridge",
+        "horizon": 1,
+        "n_cutoffs": 6,
+        "spearman": 0.2925472747497219,
+        "precision_top10pct": 0.0,
+        "mae": 0.09194773968535434
+      },
+      {
+        "predictor": "ridge",
+        "horizon": 2,
+        "n_cutoffs": 5,
+        "spearman": 0.31728587319243606,
+        "precision_top10pct": 0.13333333333333333,
+        "mae": 0.11644048205299602
+      }
+    ],
+    "120": [
+      {
+        "predictor": "last_growth",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": -0.38093579334141436,
+        "precision_top10pct": 0.010416666666666666,
+        "mae": 0.28629964688891185
+      },
+      {
+        "predictor": "last_growth",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": -0.33672985348774076,
+        "precision_top10pct": 0.07291666666666666,
+        "mae": 0.4498436051672827
+      },
+      {
+        "predictor": "linear_trend",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": -0.23347215537546373,
+        "precision_top10pct": 0.020833333333333332,
+        "mae": 0.19251752702973113
+      },
+      {
+        "predictor": "linear_trend",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": -0.1760928454800939,
+        "precision_top10pct": 0.06249999999999999,
+        "mae": 0.23681115013687257
+      },
+      {
+        "predictor": "persistence",
+        "horizon": 1,
+        "n_cutoffs": 8,
+        "spearman": NaN,
+        "precision_top10pct": NaN,
+        "mae": 0.1706661544024206
+      },
+      {
+        "predictor": "persistence",
+        "horizon": 2,
+        "n_cutoffs": 8,
+        "spearman": NaN,
+        "precision_top10pct": NaN,
+        "mae": 0.18918193265038147
+      },
+      {
+        "predictor": "ridge",
+        "horizon": 1,
+        "n_cutoffs": 6,
+        "spearman": 0.42823922906666095,
+        "precision_top10pct": 0.2916666666666667,
+        "mae": 0.15924515624364535
+      },
+      {
+        "predictor": "ridge",
+        "horizon": 2,
+        "n_cutoffs": 5,
+        "spearman": 0.38365515952605245,
+        "precision_top10pct": 0.2833333333333333,
+        "mae": 0.1863683418839046
+      }
+    ]
+  },
+  "backtest_error_comparisons": [
+    {
+      "horizon": 1,
+      "predictor": "linear_trend",
+      "baseline": "persistence",
+      "n": 480,
+      "mae_difference": 0.017257638469097503,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    },
+    {
+      "horizon": 1,
+      "predictor": "linear_trend",
+      "baseline": "last_growth",
+      "n": 480,
+      "mae_difference": -0.07321645969376014,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    },
+    {
+      "horizon": 1,
+      "predictor": "ridge",
+      "baseline": "persistence",
+      "n": 360,
+      "mae_difference": -0.01267221543493087,
+      "p_value": 0.004199580041995801,
+      "p_holm": 0.008399160083991601
+    },
+    {
+      "horizon": 1,
+      "predictor": "ridge",
+      "baseline": "last_growth",
+      "n": 360,
+      "mae_difference": -0.1128036785879613,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    },
+    {
+      "horizon": 1,
+      "predictor": "ridge",
+      "baseline": "linear_trend",
+      "n": 360,
+      "mae_difference": -0.030136319953712007,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    },
+    {
+      "horizon": 2,
+      "predictor": "linear_trend",
+      "baseline": "persistence",
+      "n": 480,
+      "mae_difference": 0.03314523314546883,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    },
+    {
+      "horizon": 2,
+      "predictor": "linear_trend",
+      "baseline": "last_growth",
+      "n": 480,
+      "mae_difference": -0.16682285182797268,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    },
+    {
+      "horizon": 2,
+      "predictor": "ridge",
+      "baseline": "persistence",
+      "n": 300,
+      "mae_difference": -0.011615362661802575,
+      "p_value": 0.0362963703629637,
+      "p_holm": 0.0362963703629637
+    },
+    {
+      "horizon": 2,
+      "predictor": "ridge",
+      "baseline": "last_growth",
+      "n": 300,
+      "mae_difference": -0.23871294521565833,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    },
+    {
+      "horizon": 2,
+      "predictor": "ridge",
+      "baseline": "linear_trend",
+      "n": 300,
+      "mae_difference": -0.04761367315566484,
+      "p_value": 9.999000099990002e-05,
+      "p_holm": 0.000999900009999
+    }
+  ],
+  "consecutive_cutoff_ari": [
+    0.6502279244482599,
+    0.6543777377344979,
+    0.6983690550249622,
+    0.6779172100399402,
+    0.6482001296400294,
+    0.7179173447157947,
+    0.7182399816125066
+  ],
+  "lead_lag": null,
+  "device": "mps"
+}
