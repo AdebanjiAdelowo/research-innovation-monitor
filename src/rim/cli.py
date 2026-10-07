@@ -59,6 +59,7 @@ def main(argv: list[str] | None = None) -> None:
 
     force_ipv4_if_requested()
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s: %(message)s")
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     parser = argparse.ArgumentParser(prog="rim", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
 

@@ -185,13 +185,14 @@ def test_routing_experiment_end_to_end(tmp_path):
             "experiment": "routing_toy",
             "device": "cpu",
             "per_label_set": 6,
+            "use_paraphrases": False,
             "encoder": {"name": "hash", "kind": "hashing", "dim": 256},
             "n_bootstrap": 200,
             "n_permutations": 200,
         }
     )
     summary = run_routing_experiment(cfg, tmp_path)
-    assert summary["n_tasks"] == {"dev": 48, "test": 48}
+    assert summary["n_tasks"] == {"dev": 48, "test": 48, "paraphrase": 0}
     assert set(summary["routers"]) == {"rules", "embedding"}
     assert "dev" in summary["routers"]["rules"]
     for row in summary["routers"].values():

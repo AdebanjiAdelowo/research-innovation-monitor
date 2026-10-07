@@ -12,8 +12,10 @@ it behaves on requests from real users.
 
 from __future__ import annotations
 
+import json
 import random
 from dataclasses import dataclass
+from pathlib import Path
 
 TOOLS = ("literature", "patents", "grants", "trends")
 
@@ -171,3 +173,20 @@ def build_tasks(per_label_set: int = 15, seed: int = 0) -> list[RoutingTask]:
                     )
                 )
     return tasks
+
+
+PARAPHRASE_FILE = Path(__file__).parent / "data" / "paraphrased_test.jsonl"
+
+
+def load_paraphrased_tasks(path: str | Path = PARAPHRASE_FILE) -> tuple[list[RoutingTask], dict]:
+    """Model-written paraphrases of the test requests, with the generator's metadata."""
+    tasks, meta = [], {}
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        row = json.loads(line)
+        if "_meta" in row:
+            meta = row["_meta"]
+        else:
+            tasks.append(
+                RoutingTask(row["task_id"], "paraphrase", row["request"], frozenset(row["tools"]))
+            )
+    return tasks, meta

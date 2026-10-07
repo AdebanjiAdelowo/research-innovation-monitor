@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 
 from rim.agents.router import EmbeddingRouter, LLMRouter, RuleRouter, routing_metrics
-from rim.agents.tasks import build_tasks
+from rim.agents.tasks import PARAPHRASE_FILE, build_tasks, load_paraphrased_tasks
 from rim.config import EncoderConfig, StrictModel
 from rim.evaluation.stats import bootstrap_ci, holm, paired_randomization_test
 from rim.experiments.common import ProviderConfig, finish_run, start_run
@@ -30,6 +30,8 @@ class RoutingExperimentConfig(StrictModel):
     device: str = "auto"
     output_dir: str = "results"
     per_label_set: int = 15
+    # Also score routers on model-written paraphrases of the test requests, if present.
+    use_paraphrases: bool = True
     encoder: EncoderConfig
     llm_routers: tuple[ProviderConfig, ...] = ()
     n_bootstrap: int = 10_000
@@ -43,6 +45,10 @@ def run_routing_experiment(
     tasks = build_tasks(cfg.per_label_set, cfg.seed)
     dev = [t for t in tasks if t.split == "dev"]
     test = [t for t in tasks if t.split == "test"]
+
+    paraphrased, paraphrase_meta = [], {}
+    if cfg.use_paraphrases and PARAPHRASE_FILE.exists():
+        paraphrased, paraphrase_meta = load_paraphrased_tasks()
 
     encoder = build_encoder(cfg.encoder, device)
     routers = {"rules": RuleRouter(), "embedding": EmbeddingRouter(encoder).fit(dev)}
@@ -80,10 +86,32 @@ def run_routing_experiment(
             results[name]["dev"] = routing_metrics(
                 [router.route(t.request) for t in dev], [t.tools for t in dev]
             )
+        if paraphrased:
+            para_predictions = [router.route(t.request) for t in paraphrased]
+            para_expected = [t.tools for t in paraphrased]
+            para_exact = np.array(
+                [p == e for p, e in zip(para_predictions, para_expected, strict=True)], float
+            )
+            low, high = bootstrap_ci(para_exact, cfg.n_bootstrap, seed=cfg.seed)
+            results[name]["paraphrase"] = routing_metrics(para_predictions, para_expected)
+            results[name]["paraphrase_exact_match_ci"] = [low, high]
+            rows.extend(
+                {
+                    "router": name,
+                    "split": "paraphrase",
+                    "task_id": t.task_id,
+                    "request": t.request,
+                    "expected": "+".join(sorted(t.tools)),
+                    "predicted": "+".join(sorted(p)),
+                    "exact": p == t.tools,
+                }
+                for t, p in zip(paraphrased, para_predictions, strict=True)
+            )
         record.models.append({"role": "router", "name": name, **router.describe()})
         rows.extend(
             {
                 "router": name,
+                "split": "test",
                 "task_id": t.task_id,
                 "request": t.request,
                 "expected": "+".join(sorted(t.tools)),
@@ -111,7 +139,8 @@ def run_routing_experiment(
     summary = {
         "experiment": cfg.experiment,
         "run_id": record.run_id,
-        "n_tasks": {"dev": len(dev), "test": len(test)},
+        "n_tasks": {"dev": len(dev), "test": len(test), "paraphrase": len(paraphrased)},
+        "paraphrase_generator": paraphrase_meta,
         "routers": results,
         "comparisons": comparisons,
         "device": device,
