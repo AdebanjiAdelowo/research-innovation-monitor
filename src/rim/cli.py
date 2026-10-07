@@ -34,6 +34,20 @@ def _retrieval(args: argparse.Namespace) -> None:
     print(f"\nrun {summary['run_id']}")
 
 
+def _routing(args: argparse.Namespace) -> None:
+    from rim.config import load_config
+    from rim.experiments.routing import RoutingExperimentConfig, run_routing_experiment
+
+    summary = run_routing_experiment(load_config(args.config, RoutingExperimentConfig))
+    for name, row in summary["routers"].items():
+        m = row["test"]
+        print(
+            f"{name}: exact={m['exact_match']:.3f} f1={m['f1']:.3f} "
+            f"unnecessary={m['unnecessary_calls_per_request']:.3f}"
+        )
+    print(f"\nrun {summary['run_id']}")
+
+
 def _env(_: argparse.Namespace) -> None:
     from rim.provenance import environment_info, git_info
 
@@ -61,6 +75,10 @@ def main(argv: list[str] | None = None) -> None:
     retrieval = sub.add_parser("retrieval", help="run a retrieval experiment (RQ1, RQ2)")
     retrieval.add_argument("config")
     retrieval.set_defaults(func=_retrieval)
+
+    routing = sub.add_parser("routing", help="run the tool-routing experiment")
+    routing.add_argument("config")
+    routing.set_defaults(func=_routing)
 
     env = sub.add_parser("env", help="print the provenance of this environment")
     env.set_defaults(func=_env)

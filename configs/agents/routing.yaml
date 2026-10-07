@@ -1,0 +1,14 @@
+# Tool routing: rule baseline, embedding classifier and a local language model.
+experiment: routing
+seed: 13
+device: auto
+per_label_set: 15
+encoder:
+  name: minilm-l6
+  model_id: sentence-transformers/all-MiniLM-L6-v2
+  revision: c9745ed1d9f207416be6d2e6f8de32d1f16199bf
+  max_seq_length: 128
+llm_routers:
+  - name: llama3.2-3b
+    kind: ollama
+    options: {model: "llama3.2"}

@@ -175,3 +175,27 @@ def test_orchestrator_survives_tool_failure_and_reports_it(tools):
     assert report.tools_called == ["patents"]
     assert report.to_dict()["errors"] == {"patents": "RuntimeError: index unavailable"}
     assert report.text == ABSTAIN and not report.completed
+
+
+def test_routing_experiment_end_to_end(tmp_path):
+    from rim.experiments.routing import RoutingExperimentConfig, run_routing_experiment
+
+    cfg = RoutingExperimentConfig.model_validate(
+        {
+            "experiment": "routing_toy",
+            "device": "cpu",
+            "per_label_set": 6,
+            "encoder": {"name": "hash", "kind": "hashing", "dim": 256},
+            "n_bootstrap": 200,
+            "n_permutations": 200,
+        }
+    )
+    summary = run_routing_experiment(cfg, tmp_path)
+    assert summary["n_tasks"] == {"dev": 48, "test": 48}
+    assert set(summary["routers"]) == {"rules", "embedding"}
+    assert "dev" in summary["routers"]["rules"]
+    for row in summary["routers"].values():
+        low, high = row["exact_match_ci"]
+        assert low <= row["test"]["exact_match"] <= high
+    assert (tmp_path / "routing_toy" / "run.json").exists()
+    assert (tmp_path / "routing_toy" / "per_task_test.csv").read_text().count("\n") == 97
