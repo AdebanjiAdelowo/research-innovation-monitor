@@ -21,3 +21,16 @@ jobs:
         run: ruff check .
       - name: Test
         run: pytest -m "not ml and not network"
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t rim-api .
+      - name: Start and query the API
+        run: |
+          docker run -d --name rim -p 8000:8000 rim-api
+          for i in $(seq 1 30); do curl -fs localhost:8000/health && break || sleep 2; done
+          curl -fs -X POST localhost:8000/search -H 'content-type: application/json' \
+            -d '{"query": "reciprocal rank fusion", "top_k": 3}' | grep -q '"toy:d05"'
