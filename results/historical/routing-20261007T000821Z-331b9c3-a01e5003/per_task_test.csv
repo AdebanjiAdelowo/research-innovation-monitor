@@ -1,0 +1,721 @@
+router,split,task_id,request,expected,predicted,exact
+rules,paraphrase,test-literature-00,Provide recommendations for scholarly publications that assess the efficacy and potential of various carbon capture materials.,literature,literature,True
+rules,paraphrase,test-literature-01,What recent studies or papers have been published on the topic of sparse matrix factorization?,literature,literature,True
+rules,paraphrase,test-literature-02,What studies have been conducted on the application of diffusion models in generating realistic images?,literature,literature,True
+rules,paraphrase,test-literature-03,"Can you provide a list of the most influential and widely cited research papers on carbon capture materials, including their authors, publication dates, and relevant findings?",literature,literature,True
+rules,paraphrase,test-literature-04,What studies have been conducted on the process of fine-tuning large language models?,literature,literature,True
+rules,paraphrase,test-literature-05,Provide a list of scholarly articles that assess the capabilities and applications of photoacoustic imaging.,literature,literature,True
+rules,paraphrase,test-literature-06,"Can you provide a list of the most influential and widely cited research papers on sparse matrix factorization, including any notable breakthroughs or contributions to the field?",literature,literature,True
+rules,paraphrase,test-literature-07,Provide recommendations for scholarly articles that assess the accuracy and effectiveness of methods used in predicting protein structures.,literature,literature,True
+rules,paraphrase,test-literature-08,What studies have been conducted and reported on by researchers regarding the perception capabilities of autonomous vehicles?,literature,literature,True
+rules,paraphrase,test-literature-09,Provide recommendations for research papers or studies that assess the effectiveness and limitations of data assimilation techniques in improving weather forecasting accuracy.,literature,literature,True
+rules,paraphrase,test-literature-10,What studies have been conducted and reported by researchers on the topic of topology optimisation?,literature,literature,True
+rules,paraphrase,test-literature-11,Provide recommendations for research papers that assess the effectiveness of fine-tuning large language models.,literature,literature,True
+rules,paraphrase,test-literature-12,Can you provide me with a list of the most influential and relevant research papers on fine-tuning large language models?,literature,literature,True
+rules,paraphrase,test-literature-13,Provide recommendations for scholarly publications or research studies that assess the performance and potential of lithium-sulfur batteries.,literature,literature,True
+rules,paraphrase,test-literature-14,Provide recommendations for research papers that assess the effectiveness of diffusion models in generating realistic images.,literature,literature,True
+rules,paraphrase,test-patents-00,Provide a list of notable inventions related to topology optimization that have been disclosed in patent documents.,patents,patents,True
+rules,paraphrase,test-patents-01,Has there been any prior intellectual property filing related to fine-tuning large language models?,patents,patents,True
+rules,paraphrase,test-patents-02,Has anyone patented or filed for intellectual property rights related to protein structure prediction?,patents,patents,True
+rules,paraphrase,test-patents-03,Has anyone patented or filed for intellectual property rights related to sparse matrix factorization?,patents,patents,True
+rules,paraphrase,test-patents-04,"Provide a comprehensive list of patents related to carbon capture materials, including their descriptions and inventors.",patents,patents,True
+rules,paraphrase,test-patents-05,Provide a list of patents and patent applications that focus on the optimization and refinement of large language models.,patents,patents,True
+rules,paraphrase,test-patents-06,"Provide a comprehensive list of patents related to autonomous vehicle perception systems, including their descriptions and applications.",patents,patents,True
+rules,paraphrase,test-patents-07,Provide a comprehensive list of patented technologies related to photoacoustic imaging.,patents,patents,True
+rules,paraphrase,test-patents-08,Provide a comprehensive list of patents related to data assimilation techniques used in weather forecasting.,patents,patents,True
+rules,paraphrase,test-patents-09,Provide a list of technological advancements described in patent filings related to the development of computational methods for determining the three-dimensional arrangement of amino acid sequences in proteins.,patents,patents,True
+rules,paraphrase,test-patents-10,Provide a list of patents and patent applications focused on data assimilation techniques used in meteorological forecasting.,patents,patents,True
+rules,paraphrase,test-patents-11,Provide a list of patents and patent applications that focus on the mathematical technique of sparse matrix factorisation.,patents,patents,True
+rules,paraphrase,test-patents-12,Provide a list of patents and patent applications that focus on the development and technology of lithium-sulfur batteries.,patents,patents,True
+rules,paraphrase,test-patents-13,"Provide a comprehensive list of patents related to lithium-sulfur battery technology, including descriptions of their disclosed inventions.",patents,patents,True
+rules,paraphrase,test-patents-14,Has there been any prior filing of intellectual property related to photoacoustic imaging?,patents,patents,True
+rules,paraphrase,test-grants-00,What government grants or subsidies have been allocated to support the development and training of large language models through fine-tuning?,grants,grants,True
+rules,paraphrase,test-grants-01,What government grants or public expenditures have been allocated to support research in topology optimization?,grants,grants+literature,False
+rules,paraphrase,test-grants-02,Provide evidence of recognized scientific accolades and honors related to carbon capture materials.,grants,literature,False
+rules,paraphrase,test-grants-03,What research projects or initiatives are focused on developing and applying diffusion models for generating images?,grants,literature,False
+rules,paraphrase,test-grants-04,What research projects or initiatives are currently being supported by organizations or institutions that focus on the development of lithium-sulfur batteries?,grants,literature,False
+rules,paraphrase,test-grants-05,Provide evidence from reputable sources demonstrating the effectiveness of fine-tuning large language models.,grants,literature,False
+rules,paraphrase,test-grants-06,Provide evidence from reputable sources to validate the effectiveness of topology optimization in research settings.,grants,literature,False
+rules,paraphrase,test-grants-07,What government grants and institutional support have been allocated to research and development of diffusion models for image generation?,grants,grants+literature,False
+rules,paraphrase,test-grants-08,What research initiatives are currently being supported by funding agencies that focus on protein structure prediction?,grants,grants+literature,False
+rules,paraphrase,test-grants-09,What government grants and public expenditures have been allocated to support the development and research of photoacoustic imaging technology?,grants,grants+literature,False
+rules,paraphrase,test-grants-10,What government grants and public investments have been allocated to support research in protein structure prediction?,grants,grants+literature,False
+rules,paraphrase,test-grants-11,What research projects or initiatives are focused on developing or improving sparse matrix factorisation methods?,grants,literature,False
+rules,paraphrase,test-grants-12,Provide evidence from reputable sources to validate the effectiveness of data assimilation in improving weather forecasting accuracy.,grants,literature,False
+rules,paraphrase,test-grants-13,What research projects or initiatives are focused on optimizing large language models through fine-tuning?,grants,literature,False
+rules,paraphrase,test-grants-14,What government grants and subsidies have been allocated to support research and development in autonomous vehicle perception?,grants,grants+literature,False
+rules,paraphrase,test-trends-00,Provide a numerical analysis of the rate of improvement in protein structure prediction accuracy between 2013 and 2023.,trends,literature,False
+rules,paraphrase,test-trends-01,Has the interest in sparse matrix factorization shown an upward trend over the years?,trends,trends,True
+rules,paraphrase,test-trends-02,Provide a historical overview of the development and growth of photoacoustic imaging technology over the past few decades.,trends,trends,True
+rules,paraphrase,test-trends-03,Has interest in the development and application of autonomous vehicle perception systems grown over the past few years?,trends,trends,True
+rules,paraphrase,test-trends-04,What is the average annual percentage increase in the adoption and usage of topology optimisation techniques over the past ten years?,trends,trends,True
+rules,paraphrase,test-trends-05,Provide a numerical analysis of the rate of improvement in lithium-sulfur battery technology from 2013 to 2022.,trends,literature,False
+rules,paraphrase,test-trends-06,Provide a numerical analysis of the rate of improvement in sparse matrix factorisation algorithms over the past 10 years.,trends,literature,False
+rules,paraphrase,test-trends-07,Has the interest in photoacoustic imaging shown a trend of growth or stability over the years?,trends,trends,True
+rules,paraphrase,test-trends-08,Provide a statistical analysis of the progress made in large language model fine-tuning since 2013.,trends,literature,False
+rules,paraphrase,test-trends-09,Provide a numerical analysis of the rate of increase in photoacoustic imaging technology and its applications over the past 10 years.,trends,trends,True
+rules,paraphrase,test-trends-10,Has interest in diffusion models for image synthesis grown over time?,trends,trends,True
+rules,paraphrase,test-trends-11,Provide a graphical representation of the annual changes in the efficiency and effectiveness of data assimilation processes used in weather forecasting over the past few years.,trends,literature,False
+rules,paraphrase,test-trends-12,"Provide a graphical representation of the evolution of sparse matrix factorization techniques over the past few years, highlighting key milestones, advancements, and trends in the field.",trends,trends,True
+rules,paraphrase,test-trends-13,Provide a graphical representation of the annual performance and development of lithium-sulfur batteries over the past few years.,trends,literature,False
+rules,paraphrase,test-trends-14,Analyze the rate of improvement in image synthesis capabilities of diffusion models from 2013 to 2023.,trends,literature,False
+rules,paraphrase,test-literature+patents-00,Can you provide me with the relevant research papers and intellectual property related to diffusion models for image synthesis?,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-01,How do scientific articles and patent filings provide distinct insights into topology optimisation?,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-02,Investigate the origins and development of lithium-sulfur battery technology by analyzing academic research papers and intellectual property filings.,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-03,How do scientific articles and patent filings collectively describe the capabilities and applications of diffusion models for image synthesis?,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-04,Can you provide a detailed comparison of the information and insights presented in scientific articles versus patent filings regarding large language model fine-tuning?,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-05,How do scientific articles and patent filings provide distinct insights into the concepts and applications of sparse matrix factorisation?,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-06,"Can you provide more information on what specific aspects of carbon capture materials are being discussed in scientific articles and patent filings, and what kind of data or insights are you looking for regarding their comparison?",literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-07,Can you provide a list of specific carbon capture materials mentioned in published studies and then track their development and disclosure in patent documents?,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-08,Provide me with the relevant research papers and intellectual property related to the process of fine-tuning large language models.,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-09,Can you provide a detailed comparison of the technical information and research findings presented in scientific articles and patent filings related to autonomous vehicle perception?,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-10,Analyze the evolution of autonomous vehicle perception capabilities by tracing relevant research findings from academic publications to patent filings.,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-11,Provide access to relevant research documents and intellectual property related to the development of autonomous vehicle perception systems.,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-12,Analyze the application of data assimilation techniques in weather forecasting as reported in academic literature and patent filings.,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-13,Provide me with the relevant publications and intellectual property related to protein structure prediction.,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+patents-14,Analyze the evolution of photoacoustic imaging technology by tracing its development in academic research papers and patent filings.,literature+patents,literature+patents,True
+rules,paraphrase,test-literature+trends-00,"What are the primary academic publications that describe data assimilation in the context of weather forecasting, and is there a growing interest in this field of study?",literature+trends,literature+trends,True
+rules,paraphrase,test-literature+trends-01,"What is the current status of photoacoustic imaging as a field, and what are some recommended starting points for exploring its key concepts and research?",literature+trends,literature,False
+rules,paraphrase,test-literature+trends-02,Provide an overview of the evolution of topology optimization techniques and highlight significant research contributions throughout the years.,literature+trends,literature,False
+rules,paraphrase,test-literature+trends-03,"Provide a historical overview of lithium-sulfur battery development, highlighting key milestones and notable research papers.",literature+trends,literature,False
+rules,paraphrase,test-literature+trends-04,"What are the key academic publications that discuss topology optimization, and is there a growing interest in this field of study?",literature+trends,literature+trends,True
+rules,paraphrase,test-literature+trends-05,"Is data assimilation in weather forecasting a rapidly developing field, and which foundational papers or recent studies should I start with?",literature+trends,literature,False
+rules,paraphrase,test-literature+trends-06,"What publications and research studies provide a comprehensive understanding of carbon capture materials, and is there a growing trend of interest in this area of study?",literature+trends,literature+trends,True
+rules,paraphrase,test-literature+trends-07,"What is the current state of large language model fine-tuning, and what are the most essential sources to get started with this field?",literature+trends,literature,False
+rules,paraphrase,test-literature+trends-08,"Is autonomous vehicle perception a rapidly developing field, and what are some foundational papers or research articles that I should start with?",literature+trends,literature,False
+rules,paraphrase,test-literature+trends-09,"Provide a historical overview of advancements in carbon capture materials, highlighting key research findings and milestones.",literature+trends,literature,False
+rules,paraphrase,test-literature+trends-10,"Is lithium-sulfur batteries a rapidly developing field, and which introductory publications or research papers should I start with?",literature+trends,literature,False
+rules,paraphrase,test-literature+trends-11,"What are the primary scholarly sources that describe photoacoustic imaging, and is there a growing interest in this field of study?",literature+trends,literature+trends,True
+rules,paraphrase,test-literature+trends-12,"What research papers and studies have introduced and explored the concept of diffusion models for generating images, and is there a growing interest in this area of study?",literature+trends,literature+trends,True
+rules,paraphrase,test-literature+trends-13,"What are the current trends and key publications in the field of protein structure prediction, and which foundational papers should I start with?",literature+trends,literature+trends,True
+rules,paraphrase,test-literature+trends-14,"Provide a historical overview of the development of photoacoustic imaging, highlighting key milestones and notable research contributions.",literature+trends,literature,False
+rules,paraphrase,test-grants+trends-00,Provide a comparison of the annual increase in research funding for large language model fine-tuning alongside the corresponding growth in publications or advancements in this field.,grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-01,Analyze the temporal progression of photoacoustic imaging and provide a detailed breakdown of the financial support received from public sources.,grants+trends,literature,False
+rules,paraphrase,test-grants+trends-02,"Has interest in sparse matrix factorisation increased, and which prestigious research awards provide support for this area of study?",grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-03,Analyze the temporal progression of diffusion models' performance in generating images and identify the sources of public financial support for these research endeavors.,grants+trends,literature,False
+rules,paraphrase,test-grants+trends-04,Provide a comparative analysis of the annual increase in research funding for diffusion models in image synthesis alongside the corresponding growth in publications and advancements in this field.,grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-05,Provide a graphical representation of the annual increase in research funding allocated to sparse matrix factorization alongside the corresponding growth in publications or research output in this field.,grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-06,Analyze the temporal progression of sparse matrix factorization and provide a breakdown of the publicly available financial support that has contributed to its development.,grants+trends,literature,False
+rules,paraphrase,test-grants+trends-07,Analyze the temporal progression of lithium-sulfur battery performance and compile a comprehensive list of publicly available funding sources supporting its development.,grants+trends,grants,False
+rules,paraphrase,test-grants+trends-08,"Has interest in fine-tuning large language models increased, and which research awards are currently supporting this area of study?",grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-09,"Has interest in data assimilation for weather forecasting grown, and which research awards fund this area of study?",grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-10,"Has interest in protein structure prediction shown an uptick, and which prestigious research awards are backing this field of study?",grants+trends,grants+literature,False
+rules,paraphrase,test-grants+trends-11,"Has interest in topology optimisation increased, and which prestigious research awards provide financial support for this field of study?",grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-12,"Has interest in diffusion models for image synthesis grown, and which prestigious research awards sponsor this area of study?",grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-13,Provide a graphical representation of the annual increase in autonomous vehicle perception research funding alongside the corresponding growth in the field's perception capabilities.,grants+trends,grants+literature+trends,False
+rules,paraphrase,test-grants+trends-14,Provide a graphical representation of the annual increase in funding for carbon capture materials alongside the corresponding growth in research and development in this field.,grants+trends,grants+literature+trends,False
+rules,paraphrase,test-literature+patents+grants+trends-00,"Provide a comprehensive summary of the development and progress of large language model fine-tuning, including academic research, intellectual property disclosures, government support, and annual performance metrics.",grants+literature+patents+trends,literature+patents,False
+rules,paraphrase,test-literature+patents+grants+trends-01,"Provide a comprehensive analysis of the current state of carbon capture materials, including a review of relevant academic research, patent landscape, public funding initiatives, and a detailed breakdown of the yearly trajectory of the industry.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,paraphrase,test-literature+patents+grants+trends-02,"Provide an overview of the evolution and expansion of photoacoustic imaging research, tracking its presence in academic publications, patents, and sponsored initiatives, and presenting metrics on its increasing visibility and scope.",grants+literature+patents+trends,literature+patents+trends,False
+rules,paraphrase,test-literature+patents+grants+trends-03,"Analyze the evolution of data assimilation techniques in weather forecasting across academic publications, patents, and research grants, and provide metrics on its increasing adoption.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,paraphrase,test-literature+patents+grants+trends-04,"Analyze the performance and progress of a large language model over multiple articles, intellectual property, and funded projects, and provide metrics on its growth and development.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,paraphrase,test-literature+patents+grants+trends-05,"Provide an overview of the development and advancements in autonomous vehicle perception, tracing its evolution across academic research, patented innovations, and sponsored initiatives, and present a statistical analysis of its progress over time.",grants+literature+patents+trends,literature+patents+trends,False
+rules,paraphrase,test-literature+patents+grants+trends-06,"Provide an overview of large language model fine-tuning from a comprehensive perspective, encompassing its scientific foundations, notable inventions, research accolades, and current trends in interest and adoption.",grants+literature+patents+trends,literature+patents+trends,False
+rules,paraphrase,test-literature+patents+grants+trends-07,"Track the development and advancements of carbon capture technologies across academic research, patents, and sponsored initiatives, and provide metrics on its progress.",grants+literature+patents+trends,literature+patents,False
+rules,paraphrase,test-literature+patents+grants+trends-08,"Can you provide a comprehensive analysis of the historical development and current state of photoacoustic imaging, including a breakdown of relevant academic research, patent activity, government funding, and year-over-year trends?",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,paraphrase,test-literature+patents+grants+trends-09,"Provide a comprehensive overview of protein structure prediction, encompassing its scientific foundations, technological advancements, notable research achievements, and current trends in interest and recognition.",grants+literature+patents+trends,literature+trends,False
+rules,paraphrase,test-literature+patents+grants+trends-10,"Track the evolution of protein structure prediction methodologies and technologies across academic publications, patent filings, and research grants, and measure their cumulative progress.",grants+literature+patents+trends,grants+literature+patents,False
+rules,paraphrase,test-literature+patents+grants+trends-11,"Can you provide a comprehensive analysis of the historical development and funding of sparse matrix factorization, including academic research publications, patent applications, government grants, and annual funding trends?",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,paraphrase,test-literature+patents+grants+trends-12,"Provide an overview of sparse matrix factorization from a comprehensive perspective, including its applications in scientific research, notable inventions and innovations, notable research awards, and current trends in interest and adoption.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,paraphrase,test-literature+patents+grants+trends-13,"Provide a comprehensive overview of photoacoustic imaging, encompassing its scientific foundations, technological advancements, notable research achievements, and current trends in interest and adoption.",grants+literature+patents+trends,literature+trends,False
+rules,paraphrase,test-literature+patents+grants+trends-14,"Analyze the evolution and expansion of diffusion models in image synthesis across academic publications, patents, and research grants, and provide metrics on its increasing presence.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature-00,Point me to articles that evaluate carbon capture materials.,literature,literature,True
+rules,test,test-literature-01,What have researchers published about sparse matrix factorisation?,literature,literature,True
+rules,test,test-literature-02,What have researchers published about diffusion models for image synthesis?,literature,literature,True
+rules,test,test-literature-03,I need the key academic studies on carbon capture materials.,literature,literature,True
+rules,test,test-literature-04,What have researchers published about large language model fine-tuning?,literature,literature,True
+rules,test,test-literature-05,Point me to articles that evaluate photoacoustic imaging.,literature,literature,True
+rules,test,test-literature-06,I need the key academic studies on sparse matrix factorisation.,literature,literature,True
+rules,test,test-literature-07,Point me to articles that evaluate protein structure prediction.,literature,literature,True
+rules,test,test-literature-08,What have researchers published about autonomous vehicle perception?,literature,literature,True
+rules,test,test-literature-09,Point me to articles that evaluate data assimilation for weather forecasting.,literature,literature,True
+rules,test,test-literature-10,What have researchers published about topology optimisation?,literature,literature,True
+rules,test,test-literature-11,Point me to articles that evaluate large language model fine-tuning.,literature,literature,True
+rules,test,test-literature-12,I need the key academic studies on large language model fine-tuning.,literature,literature,True
+rules,test,test-literature-13,Point me to articles that evaluate lithium-sulfur batteries.,literature,literature,True
+rules,test,test-literature-14,Point me to articles that evaluate diffusion models for image synthesis.,literature,literature,True
+rules,test,test-patents-00,List inventions disclosed in patent documents about topology optimisation.,patents,patents,True
+rules,test,test-patents-01,Has anyone filed intellectual property on large language model fine-tuning?,patents,patents,True
+rules,test,test-patents-02,Has anyone filed intellectual property on protein structure prediction?,patents,patents,True
+rules,test,test-patents-03,Has anyone filed intellectual property on sparse matrix factorisation?,patents,patents,True
+rules,test,test-patents-04,List inventions disclosed in patent documents about carbon capture materials.,patents,patents,True
+rules,test,test-patents-05,Search granted patents and applications related to large language model fine-tuning.,patents,patents,True
+rules,test,test-patents-06,List inventions disclosed in patent documents about autonomous vehicle perception.,patents,patents,True
+rules,test,test-patents-07,List inventions disclosed in patent documents about photoacoustic imaging.,patents,patents,True
+rules,test,test-patents-08,List inventions disclosed in patent documents about data assimilation for weather forecasting.,patents,patents,True
+rules,test,test-patents-09,List inventions disclosed in patent documents about protein structure prediction.,patents,patents,True
+rules,test,test-patents-10,Search granted patents and applications related to data assimilation for weather forecasting.,patents,patents,True
+rules,test,test-patents-11,Search granted patents and applications related to sparse matrix factorisation.,patents,patents,True
+rules,test,test-patents-12,Search granted patents and applications related to lithium-sulfur batteries.,patents,patents,True
+rules,test,test-patents-13,List inventions disclosed in patent documents about lithium-sulfur batteries.,patents,patents,True
+rules,test,test-patents-14,Has anyone filed intellectual property on photoacoustic imaging?,patents,patents,True
+rules,test,test-grants-00,What public funding has gone to large language model fine-tuning?,grants,grants,True
+rules,test,test-grants-01,What public funding has gone to topology optimisation?,grants,grants,True
+rules,test,test-grants-02,Show research awards supporting carbon capture materials.,grants,grants,True
+rules,test,test-grants-03,Which funded proposals address diffusion models for image synthesis?,grants,grants,True
+rules,test,test-grants-04,Which funded proposals address lithium-sulfur batteries?,grants,grants,True
+rules,test,test-grants-05,Show research awards supporting large language model fine-tuning.,grants,grants,True
+rules,test,test-grants-06,Show research awards supporting topology optimisation.,grants,grants,True
+rules,test,test-grants-07,What public funding has gone to diffusion models for image synthesis?,grants,grants,True
+rules,test,test-grants-08,Which funded proposals address protein structure prediction?,grants,grants,True
+rules,test,test-grants-09,What public funding has gone to photoacoustic imaging?,grants,grants,True
+rules,test,test-grants-10,What public funding has gone to protein structure prediction?,grants,grants,True
+rules,test,test-grants-11,Which funded proposals address sparse matrix factorisation?,grants,grants,True
+rules,test,test-grants-12,Show research awards supporting data assimilation for weather forecasting.,grants,grants,True
+rules,test,test-grants-13,Which funded proposals address large language model fine-tuning?,grants,grants,True
+rules,test,test-grants-14,What public funding has gone to autonomous vehicle perception?,grants,grants,True
+rules,test,test-trends-00,Quantify the growth rate of protein structure prediction over the last decade.,trends,trends,True
+rules,test,test-trends-01,Has interest in sparse matrix factorisation increased over time?,trends,trends,True
+rules,test,test-trends-02,Show the yearly trajectory of photoacoustic imaging.,trends,trends,True
+rules,test,test-trends-03,Has interest in autonomous vehicle perception increased over time?,trends,trends,True
+rules,test,test-trends-04,Quantify the growth rate of topology optimisation over the last decade.,trends,trends,True
+rules,test,test-trends-05,Quantify the growth rate of lithium-sulfur batteries over the last decade.,trends,trends,True
+rules,test,test-trends-06,Quantify the growth rate of sparse matrix factorisation over the last decade.,trends,trends,True
+rules,test,test-trends-07,Has interest in photoacoustic imaging increased over time?,trends,trends,True
+rules,test,test-trends-08,Quantify the growth rate of large language model fine-tuning over the last decade.,trends,trends,True
+rules,test,test-trends-09,Quantify the growth rate of photoacoustic imaging over the last decade.,trends,trends,True
+rules,test,test-trends-10,Has interest in diffusion models for image synthesis increased over time?,trends,trends,True
+rules,test,test-trends-11,Show the yearly trajectory of data assimilation for weather forecasting.,trends,trends,True
+rules,test,test-trends-12,Show the yearly trajectory of sparse matrix factorisation.,trends,trends,True
+rules,test,test-trends-13,Show the yearly trajectory of lithium-sulfur batteries.,trends,trends,True
+rules,test,test-trends-14,Quantify the growth rate of diffusion models for image synthesis over the last decade.,trends,trends,True
+rules,test,test-literature+patents-00,Give me the papers and the intellectual property on diffusion models for image synthesis.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-01,What do scientific articles and patent filings each say about topology optimisation?,literature+patents,literature+patents,True
+rules,test,test-literature+patents-02,Trace lithium-sulfur batteries from published studies to patent documents.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-03,What do scientific articles and patent filings each say about diffusion models for image synthesis?,literature+patents,literature+patents,True
+rules,test,test-literature+patents-04,What do scientific articles and patent filings each say about large language model fine-tuning?,literature+patents,literature+patents,True
+rules,test,test-literature+patents-05,What do scientific articles and patent filings each say about sparse matrix factorisation?,literature+patents,literature+patents,True
+rules,test,test-literature+patents-06,What do scientific articles and patent filings each say about carbon capture materials?,literature+patents,literature+patents,True
+rules,test,test-literature+patents-07,Trace carbon capture materials from published studies to patent documents.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-08,Give me the papers and the intellectual property on large language model fine-tuning.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-09,What do scientific articles and patent filings each say about autonomous vehicle perception?,literature+patents,literature+patents,True
+rules,test,test-literature+patents-10,Trace autonomous vehicle perception from published studies to patent documents.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-11,Give me the papers and the intellectual property on autonomous vehicle perception.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-12,Trace data assimilation for weather forecasting from published studies to patent documents.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-13,Give me the papers and the intellectual property on protein structure prediction.,literature+patents,literature+patents,True
+rules,test,test-literature+patents-14,Trace photoacoustic imaging from published studies to patent documents.,literature+patents,literature+patents,True
+rules,test,test-literature+trends-00,"Which academic works define data assimilation for weather forecasting, and is interest in it increasing?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-01,"Is photoacoustic imaging an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-02,Show the growth of topology optimisation over the years together with representative studies.,literature+trends,literature+trends,True
+rules,test,test-literature+trends-03,Show the growth of lithium-sulfur batteries over the years together with representative studies.,literature+trends,literature+trends,True
+rules,test,test-literature+trends-04,"Which academic works define topology optimisation, and is interest in it increasing?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-05,"Is data assimilation for weather forecasting an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-06,"Which academic works define carbon capture materials, and is interest in it increasing?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-07,"Is large language model fine-tuning an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-08,"Is autonomous vehicle perception an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-09,Show the growth of carbon capture materials over the years together with representative studies.,literature+trends,literature+trends,True
+rules,test,test-literature+trends-10,"Is lithium-sulfur batteries an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-11,"Which academic works define photoacoustic imaging, and is interest in it increasing?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-12,"Which academic works define diffusion models for image synthesis, and is interest in it increasing?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-13,"Is protein structure prediction an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+rules,test,test-literature+trends-14,Show the growth of photoacoustic imaging over the years together with representative studies.,literature+trends,literature+trends,True
+rules,test,test-grants+trends-00,Show the yearly growth of large language model fine-tuning next to the funded proposals in that area.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-01,Quantify the trajectory of photoacoustic imaging over time and list the public funding behind it.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-02,"Has interest in sparse matrix factorisation increased, and which research awards support it?",grants+trends,grants+trends,True
+rules,test,test-grants+trends-03,Quantify the trajectory of diffusion models for image synthesis over time and list the public funding behind it.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-04,Show the yearly growth of diffusion models for image synthesis next to the funded proposals in that area.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-05,Show the yearly growth of sparse matrix factorisation next to the funded proposals in that area.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-06,Quantify the trajectory of sparse matrix factorisation over time and list the public funding behind it.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-07,Quantify the trajectory of lithium-sulfur batteries over time and list the public funding behind it.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-08,"Has interest in large language model fine-tuning increased, and which research awards support it?",grants+trends,grants+trends,True
+rules,test,test-grants+trends-09,"Has interest in data assimilation for weather forecasting increased, and which research awards support it?",grants+trends,grants+trends,True
+rules,test,test-grants+trends-10,"Has interest in protein structure prediction increased, and which research awards support it?",grants+trends,grants+trends,True
+rules,test,test-grants+trends-11,"Has interest in topology optimisation increased, and which research awards support it?",grants+trends,grants+trends,True
+rules,test,test-grants+trends-12,"Has interest in diffusion models for image synthesis increased, and which research awards support it?",grants+trends,grants+trends,True
+rules,test,test-grants+trends-13,Show the yearly growth of autonomous vehicle perception next to the funded proposals in that area.,grants+trends,grants+trends,True
+rules,test,test-grants+trends-14,Show the yearly growth of carbon capture materials next to the funded proposals in that area.,grants+trends,grants+trends,True
+rules,test,test-literature+patents+grants+trends-00,"I need a complete overview of large language model fine-tuning: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-01,"I need a complete overview of carbon capture materials: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-02,"Monitor photoacoustic imaging across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-03,"Monitor data assimilation for weather forecasting across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-04,"Monitor large language model fine-tuning across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-05,"Monitor autonomous vehicle perception across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-06,"Brief me on large language model fine-tuning from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-07,"Monitor carbon capture materials across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-08,"I need a complete overview of photoacoustic imaging: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-09,"Brief me on protein structure prediction from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-10,"Monitor protein structure prediction across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-11,"I need a complete overview of sparse matrix factorisation: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-12,"Brief me on sparse matrix factorisation from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-13,"Brief me on photoacoustic imaging from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+rules,test,test-literature+patents+grants+trends-14,"Monitor diffusion models for image synthesis across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+embedding,paraphrase,test-literature-00,Provide recommendations for scholarly publications that assess the efficacy and potential of various carbon capture materials.,literature,literature,True
+embedding,paraphrase,test-literature-01,What recent studies or papers have been published on the topic of sparse matrix factorization?,literature,literature,True
+embedding,paraphrase,test-literature-02,What studies have been conducted on the application of diffusion models in generating realistic images?,literature,literature,True
+embedding,paraphrase,test-literature-03,"Can you provide a list of the most influential and widely cited research papers on carbon capture materials, including their authors, publication dates, and relevant findings?",literature,literature+trends,False
+embedding,paraphrase,test-literature-04,What studies have been conducted on the process of fine-tuning large language models?,literature,literature,True
+embedding,paraphrase,test-literature-05,Provide a list of scholarly articles that assess the capabilities and applications of photoacoustic imaging.,literature,literature,True
+embedding,paraphrase,test-literature-06,"Can you provide a list of the most influential and widely cited research papers on sparse matrix factorization, including any notable breakthroughs or contributions to the field?",literature,literature+trends,False
+embedding,paraphrase,test-literature-07,Provide recommendations for scholarly articles that assess the accuracy and effectiveness of methods used in predicting protein structures.,literature,literature+trends,False
+embedding,paraphrase,test-literature-08,What studies have been conducted and reported on by researchers regarding the perception capabilities of autonomous vehicles?,literature,literature,True
+embedding,paraphrase,test-literature-09,Provide recommendations for research papers or studies that assess the effectiveness and limitations of data assimilation techniques in improving weather forecasting accuracy.,literature,literature,True
+embedding,paraphrase,test-literature-10,What studies have been conducted and reported by researchers on the topic of topology optimisation?,literature,literature,True
+embedding,paraphrase,test-literature-11,Provide recommendations for research papers that assess the effectiveness of fine-tuning large language models.,literature,literature+trends,False
+embedding,paraphrase,test-literature-12,Can you provide me with a list of the most influential and relevant research papers on fine-tuning large language models?,literature,literature+trends,False
+embedding,paraphrase,test-literature-13,Provide recommendations for scholarly publications or research studies that assess the performance and potential of lithium-sulfur batteries.,literature,literature+trends,False
+embedding,paraphrase,test-literature-14,Provide recommendations for research papers that assess the effectiveness of diffusion models in generating realistic images.,literature,literature,True
+embedding,paraphrase,test-patents-00,Provide a list of notable inventions related to topology optimization that have been disclosed in patent documents.,patents,literature+patents,False
+embedding,paraphrase,test-patents-01,Has there been any prior intellectual property filing related to fine-tuning large language models?,patents,patents,True
+embedding,paraphrase,test-patents-02,Has anyone patented or filed for intellectual property rights related to protein structure prediction?,patents,patents,True
+embedding,paraphrase,test-patents-03,Has anyone patented or filed for intellectual property rights related to sparse matrix factorization?,patents,patents,True
+embedding,paraphrase,test-patents-04,"Provide a comprehensive list of patents related to carbon capture materials, including their descriptions and inventors.",patents,literature+patents,False
+embedding,paraphrase,test-patents-05,Provide a list of patents and patent applications that focus on the optimization and refinement of large language models.,patents,literature+patents,False
+embedding,paraphrase,test-patents-06,"Provide a comprehensive list of patents related to autonomous vehicle perception systems, including their descriptions and applications.",patents,literature+patents,False
+embedding,paraphrase,test-patents-07,Provide a comprehensive list of patented technologies related to photoacoustic imaging.,patents,patents,True
+embedding,paraphrase,test-patents-08,Provide a comprehensive list of patents related to data assimilation techniques used in weather forecasting.,patents,literature+patents,False
+embedding,paraphrase,test-patents-09,Provide a list of technological advancements described in patent filings related to the development of computational methods for determining the three-dimensional arrangement of amino acid sequences in proteins.,patents,literature+patents,False
+embedding,paraphrase,test-patents-10,Provide a list of patents and patent applications focused on data assimilation techniques used in meteorological forecasting.,patents,literature+patents,False
+embedding,paraphrase,test-patents-11,Provide a list of patents and patent applications that focus on the mathematical technique of sparse matrix factorisation.,patents,literature+patents,False
+embedding,paraphrase,test-patents-12,Provide a list of patents and patent applications that focus on the development and technology of lithium-sulfur batteries.,patents,literature+patents,False
+embedding,paraphrase,test-patents-13,"Provide a comprehensive list of patents related to lithium-sulfur battery technology, including descriptions of their disclosed inventions.",patents,literature+patents,False
+embedding,paraphrase,test-patents-14,Has there been any prior filing of intellectual property related to photoacoustic imaging?,patents,patents,True
+embedding,paraphrase,test-grants-00,What government grants or subsidies have been allocated to support the development and training of large language models through fine-tuning?,grants,grants,True
+embedding,paraphrase,test-grants-01,What government grants or public expenditures have been allocated to support research in topology optimization?,grants,grants,True
+embedding,paraphrase,test-grants-02,Provide evidence of recognized scientific accolades and honors related to carbon capture materials.,grants,grants,True
+embedding,paraphrase,test-grants-03,What research projects or initiatives are focused on developing and applying diffusion models for generating images?,grants,grants+trends,False
+embedding,paraphrase,test-grants-04,What research projects or initiatives are currently being supported by organizations or institutions that focus on the development of lithium-sulfur batteries?,grants,grants+trends,False
+embedding,paraphrase,test-grants-05,Provide evidence from reputable sources demonstrating the effectiveness of fine-tuning large language models.,grants,literature+trends,False
+embedding,paraphrase,test-grants-06,Provide evidence from reputable sources to validate the effectiveness of topology optimization in research settings.,grants,literature,False
+embedding,paraphrase,test-grants-07,What government grants and institutional support have been allocated to research and development of diffusion models for image generation?,grants,grants,True
+embedding,paraphrase,test-grants-08,What research initiatives are currently being supported by funding agencies that focus on protein structure prediction?,grants,grants+trends,False
+embedding,paraphrase,test-grants-09,What government grants and public expenditures have been allocated to support the development and research of photoacoustic imaging technology?,grants,grants,True
+embedding,paraphrase,test-grants-10,What government grants and public investments have been allocated to support research in protein structure prediction?,grants,grants,True
+embedding,paraphrase,test-grants-11,What research projects or initiatives are focused on developing or improving sparse matrix factorisation methods?,grants,grants+trends,False
+embedding,paraphrase,test-grants-12,Provide evidence from reputable sources to validate the effectiveness of data assimilation in improving weather forecasting accuracy.,grants,literature,False
+embedding,paraphrase,test-grants-13,What research projects or initiatives are focused on optimizing large language models through fine-tuning?,grants,trends,False
+embedding,paraphrase,test-grants-14,What government grants and subsidies have been allocated to support research and development in autonomous vehicle perception?,grants,grants,True
+embedding,paraphrase,test-trends-00,Provide a numerical analysis of the rate of improvement in protein structure prediction accuracy between 2013 and 2023.,trends,literature+trends,False
+embedding,paraphrase,test-trends-01,Has the interest in sparse matrix factorization shown an upward trend over the years?,trends,trends,True
+embedding,paraphrase,test-trends-02,Provide a historical overview of the development and growth of photoacoustic imaging technology over the past few decades.,trends,trends,True
+embedding,paraphrase,test-trends-03,Has interest in the development and application of autonomous vehicle perception systems grown over the past few years?,trends,trends,True
+embedding,paraphrase,test-trends-04,What is the average annual percentage increase in the adoption and usage of topology optimisation techniques over the past ten years?,trends,trends,True
+embedding,paraphrase,test-trends-05,Provide a numerical analysis of the rate of improvement in lithium-sulfur battery technology from 2013 to 2022.,trends,literature+trends,False
+embedding,paraphrase,test-trends-06,Provide a numerical analysis of the rate of improvement in sparse matrix factorisation algorithms over the past 10 years.,trends,trends,True
+embedding,paraphrase,test-trends-07,Has the interest in photoacoustic imaging shown a trend of growth or stability over the years?,trends,trends,True
+embedding,paraphrase,test-trends-08,Provide a statistical analysis of the progress made in large language model fine-tuning since 2013.,trends,literature+trends,False
+embedding,paraphrase,test-trends-09,Provide a numerical analysis of the rate of increase in photoacoustic imaging technology and its applications over the past 10 years.,trends,trends,True
+embedding,paraphrase,test-trends-10,Has interest in diffusion models for image synthesis grown over time?,trends,literature+trends,False
+embedding,paraphrase,test-trends-11,Provide a graphical representation of the annual changes in the efficiency and effectiveness of data assimilation processes used in weather forecasting over the past few years.,trends,literature+trends,False
+embedding,paraphrase,test-trends-12,"Provide a graphical representation of the evolution of sparse matrix factorization techniques over the past few years, highlighting key milestones, advancements, and trends in the field.",trends,trends,True
+embedding,paraphrase,test-trends-13,Provide a graphical representation of the annual performance and development of lithium-sulfur batteries over the past few years.,trends,literature+trends,False
+embedding,paraphrase,test-trends-14,Analyze the rate of improvement in image synthesis capabilities of diffusion models from 2013 to 2023.,trends,literature+trends,False
+embedding,paraphrase,test-literature+patents-00,Can you provide me with the relevant research papers and intellectual property related to diffusion models for image synthesis?,literature+patents,literature+patents,True
+embedding,paraphrase,test-literature+patents-01,How do scientific articles and patent filings provide distinct insights into topology optimisation?,literature+patents,literature+patents,True
+embedding,paraphrase,test-literature+patents-02,Investigate the origins and development of lithium-sulfur battery technology by analyzing academic research papers and intellectual property filings.,literature+patents,literature+patents+trends,False
+embedding,paraphrase,test-literature+patents-03,How do scientific articles and patent filings collectively describe the capabilities and applications of diffusion models for image synthesis?,literature+patents,literature+patents,True
+embedding,paraphrase,test-literature+patents-04,Can you provide a detailed comparison of the information and insights presented in scientific articles versus patent filings regarding large language model fine-tuning?,literature+patents,literature,False
+embedding,paraphrase,test-literature+patents-05,How do scientific articles and patent filings provide distinct insights into the concepts and applications of sparse matrix factorisation?,literature+patents,literature,False
+embedding,paraphrase,test-literature+patents-06,"Can you provide more information on what specific aspects of carbon capture materials are being discussed in scientific articles and patent filings, and what kind of data or insights are you looking for regarding their comparison?",literature+patents,literature,False
+embedding,paraphrase,test-literature+patents-07,Can you provide a list of specific carbon capture materials mentioned in published studies and then track their development and disclosure in patent documents?,literature+patents,literature+patents,True
+embedding,paraphrase,test-literature+patents-08,Provide me with the relevant research papers and intellectual property related to the process of fine-tuning large language models.,literature+patents,literature,False
+embedding,paraphrase,test-literature+patents-09,Can you provide a detailed comparison of the technical information and research findings presented in scientific articles and patent filings related to autonomous vehicle perception?,literature+patents,literature+patents,True
+embedding,paraphrase,test-literature+patents-10,Analyze the evolution of autonomous vehicle perception capabilities by tracing relevant research findings from academic publications to patent filings.,literature+patents,patents+trends,False
+embedding,paraphrase,test-literature+patents-11,Provide access to relevant research documents and intellectual property related to the development of autonomous vehicle perception systems.,literature+patents,literature+patents,True
+embedding,paraphrase,test-literature+patents-12,Analyze the application of data assimilation techniques in weather forecasting as reported in academic literature and patent filings.,literature+patents,literature,False
+embedding,paraphrase,test-literature+patents-13,Provide me with the relevant publications and intellectual property related to protein structure prediction.,literature+patents,literature+patents,True
+embedding,paraphrase,test-literature+patents-14,Analyze the evolution of photoacoustic imaging technology by tracing its development in academic research papers and patent filings.,literature+patents,literature+patents+trends,False
+embedding,paraphrase,test-literature+trends-00,"What are the primary academic publications that describe data assimilation in the context of weather forecasting, and is there a growing interest in this field of study?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-01,"What is the current status of photoacoustic imaging as a field, and what are some recommended starting points for exploring its key concepts and research?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-02,Provide an overview of the evolution of topology optimization techniques and highlight significant research contributions throughout the years.,literature+trends,literature,False
+embedding,paraphrase,test-literature+trends-03,"Provide a historical overview of lithium-sulfur battery development, highlighting key milestones and notable research papers.",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-04,"What are the key academic publications that discuss topology optimization, and is there a growing interest in this field of study?",literature+trends,literature,False
+embedding,paraphrase,test-literature+trends-05,"Is data assimilation in weather forecasting a rapidly developing field, and which foundational papers or recent studies should I start with?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-06,"What publications and research studies provide a comprehensive understanding of carbon capture materials, and is there a growing trend of interest in this area of study?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-07,"What is the current state of large language model fine-tuning, and what are the most essential sources to get started with this field?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-08,"Is autonomous vehicle perception a rapidly developing field, and what are some foundational papers or research articles that I should start with?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-09,"Provide a historical overview of advancements in carbon capture materials, highlighting key research findings and milestones.",literature+trends,trends,False
+embedding,paraphrase,test-literature+trends-10,"Is lithium-sulfur batteries a rapidly developing field, and which introductory publications or research papers should I start with?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-11,"What are the primary scholarly sources that describe photoacoustic imaging, and is there a growing interest in this field of study?",literature+trends,literature,False
+embedding,paraphrase,test-literature+trends-12,"What research papers and studies have introduced and explored the concept of diffusion models for generating images, and is there a growing interest in this area of study?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-13,"What are the current trends and key publications in the field of protein structure prediction, and which foundational papers should I start with?",literature+trends,literature+trends,True
+embedding,paraphrase,test-literature+trends-14,"Provide a historical overview of the development of photoacoustic imaging, highlighting key milestones and notable research contributions.",literature+trends,trends,False
+embedding,paraphrase,test-grants+trends-00,Provide a comparison of the annual increase in research funding for large language model fine-tuning alongside the corresponding growth in publications or advancements in this field.,grants+trends,grants+literature+trends,False
+embedding,paraphrase,test-grants+trends-01,Analyze the temporal progression of photoacoustic imaging and provide a detailed breakdown of the financial support received from public sources.,grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-02,"Has interest in sparse matrix factorisation increased, and which prestigious research awards provide support for this area of study?",grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-03,Analyze the temporal progression of diffusion models' performance in generating images and identify the sources of public financial support for these research endeavors.,grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-04,Provide a comparative analysis of the annual increase in research funding for diffusion models in image synthesis alongside the corresponding growth in publications and advancements in this field.,grants+trends,literature+trends,False
+embedding,paraphrase,test-grants+trends-05,Provide a graphical representation of the annual increase in research funding allocated to sparse matrix factorization alongside the corresponding growth in publications or research output in this field.,grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-06,Analyze the temporal progression of sparse matrix factorization and provide a breakdown of the publicly available financial support that has contributed to its development.,grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-07,Analyze the temporal progression of lithium-sulfur battery performance and compile a comprehensive list of publicly available funding sources supporting its development.,grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-08,"Has interest in fine-tuning large language models increased, and which research awards are currently supporting this area of study?",grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-09,"Has interest in data assimilation for weather forecasting grown, and which research awards fund this area of study?",grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-10,"Has interest in protein structure prediction shown an uptick, and which prestigious research awards are backing this field of study?",grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-11,"Has interest in topology optimisation increased, and which prestigious research awards provide financial support for this field of study?",grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-12,"Has interest in diffusion models for image synthesis grown, and which prestigious research awards sponsor this area of study?",grants+trends,grants,False
+embedding,paraphrase,test-grants+trends-13,Provide a graphical representation of the annual increase in autonomous vehicle perception research funding alongside the corresponding growth in the field's perception capabilities.,grants+trends,grants+trends,True
+embedding,paraphrase,test-grants+trends-14,Provide a graphical representation of the annual increase in funding for carbon capture materials alongside the corresponding growth in research and development in this field.,grants+trends,grants+trends,True
+embedding,paraphrase,test-literature+patents+grants+trends-00,"Provide a comprehensive summary of the development and progress of large language model fine-tuning, including academic research, intellectual property disclosures, government support, and annual performance metrics.",grants+literature+patents+trends,literature+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-01,"Provide a comprehensive analysis of the current state of carbon capture materials, including a review of relevant academic research, patent landscape, public funding initiatives, and a detailed breakdown of the yearly trajectory of the industry.",grants+literature+patents+trends,trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-02,"Provide an overview of the evolution and expansion of photoacoustic imaging research, tracking its presence in academic publications, patents, and sponsored initiatives, and presenting metrics on its increasing visibility and scope.",grants+literature+patents+trends,trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-03,"Analyze the evolution of data assimilation techniques in weather forecasting across academic publications, patents, and research grants, and provide metrics on its increasing adoption.",grants+literature+patents+trends,literature+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-04,"Analyze the performance and progress of a large language model over multiple articles, intellectual property, and funded projects, and provide metrics on its growth and development.",grants+literature+patents+trends,grants+literature+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-05,"Provide an overview of the development and advancements in autonomous vehicle perception, tracing its evolution across academic research, patented innovations, and sponsored initiatives, and present a statistical analysis of its progress over time.",grants+literature+patents+trends,trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-06,"Provide an overview of large language model fine-tuning from a comprehensive perspective, encompassing its scientific foundations, notable inventions, research accolades, and current trends in interest and adoption.",grants+literature+patents+trends,literature+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-07,"Track the development and advancements of carbon capture technologies across academic research, patents, and sponsored initiatives, and provide metrics on its progress.",grants+literature+patents+trends,grants+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-08,"Can you provide a comprehensive analysis of the historical development and current state of photoacoustic imaging, including a breakdown of relevant academic research, patent activity, government funding, and year-over-year trends?",grants+literature+patents+trends,literature+patents+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-09,"Provide a comprehensive overview of protein structure prediction, encompassing its scientific foundations, technological advancements, notable research achievements, and current trends in interest and recognition.",grants+literature+patents+trends,literature+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-10,"Track the evolution of protein structure prediction methodologies and technologies across academic publications, patent filings, and research grants, and measure their cumulative progress.",grants+literature+patents+trends,grants+literature+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-11,"Can you provide a comprehensive analysis of the historical development and funding of sparse matrix factorization, including academic research publications, patent applications, government grants, and annual funding trends?",grants+literature+patents+trends,grants+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-12,"Provide an overview of sparse matrix factorization from a comprehensive perspective, including its applications in scientific research, notable inventions and innovations, notable research awards, and current trends in interest and adoption.",grants+literature+patents+trends,grants+trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-13,"Provide a comprehensive overview of photoacoustic imaging, encompassing its scientific foundations, technological advancements, notable research achievements, and current trends in interest and adoption.",grants+literature+patents+trends,trends,False
+embedding,paraphrase,test-literature+patents+grants+trends-14,"Analyze the evolution and expansion of diffusion models in image synthesis across academic publications, patents, and research grants, and provide metrics on its increasing presence.",grants+literature+patents+trends,literature+patents+trends,False
+embedding,test,test-literature-00,Point me to articles that evaluate carbon capture materials.,literature,literature,True
+embedding,test,test-literature-01,What have researchers published about sparse matrix factorisation?,literature,literature,True
+embedding,test,test-literature-02,What have researchers published about diffusion models for image synthesis?,literature,literature,True
+embedding,test,test-literature-03,I need the key academic studies on carbon capture materials.,literature,literature,True
+embedding,test,test-literature-04,What have researchers published about large language model fine-tuning?,literature,literature+trends,False
+embedding,test,test-literature-05,Point me to articles that evaluate photoacoustic imaging.,literature,literature,True
+embedding,test,test-literature-06,I need the key academic studies on sparse matrix factorisation.,literature,literature,True
+embedding,test,test-literature-07,Point me to articles that evaluate protein structure prediction.,literature,literature+trends,False
+embedding,test,test-literature-08,What have researchers published about autonomous vehicle perception?,literature,literature,True
+embedding,test,test-literature-09,Point me to articles that evaluate data assimilation for weather forecasting.,literature,literature+trends,False
+embedding,test,test-literature-10,What have researchers published about topology optimisation?,literature,literature,True
+embedding,test,test-literature-11,Point me to articles that evaluate large language model fine-tuning.,literature,literature+trends,False
+embedding,test,test-literature-12,I need the key academic studies on large language model fine-tuning.,literature,literature+trends,False
+embedding,test,test-literature-13,Point me to articles that evaluate lithium-sulfur batteries.,literature,literature,True
+embedding,test,test-literature-14,Point me to articles that evaluate diffusion models for image synthesis.,literature,literature,True
+embedding,test,test-patents-00,List inventions disclosed in patent documents about topology optimisation.,patents,literature+patents,False
+embedding,test,test-patents-01,Has anyone filed intellectual property on large language model fine-tuning?,patents,patents,True
+embedding,test,test-patents-02,Has anyone filed intellectual property on protein structure prediction?,patents,patents,True
+embedding,test,test-patents-03,Has anyone filed intellectual property on sparse matrix factorisation?,patents,patents,True
+embedding,test,test-patents-04,List inventions disclosed in patent documents about carbon capture materials.,patents,literature+patents,False
+embedding,test,test-patents-05,Search granted patents and applications related to large language model fine-tuning.,patents,literature,False
+embedding,test,test-patents-06,List inventions disclosed in patent documents about autonomous vehicle perception.,patents,literature+patents,False
+embedding,test,test-patents-07,List inventions disclosed in patent documents about photoacoustic imaging.,patents,literature+patents,False
+embedding,test,test-patents-08,List inventions disclosed in patent documents about data assimilation for weather forecasting.,patents,literature+patents,False
+embedding,test,test-patents-09,List inventions disclosed in patent documents about protein structure prediction.,patents,literature+patents,False
+embedding,test,test-patents-10,Search granted patents and applications related to data assimilation for weather forecasting.,patents,literature+patents,False
+embedding,test,test-patents-11,Search granted patents and applications related to sparse matrix factorisation.,patents,patents,True
+embedding,test,test-patents-12,Search granted patents and applications related to lithium-sulfur batteries.,patents,patents,True
+embedding,test,test-patents-13,List inventions disclosed in patent documents about lithium-sulfur batteries.,patents,literature+patents,False
+embedding,test,test-patents-14,Has anyone filed intellectual property on photoacoustic imaging?,patents,patents,True
+embedding,test,test-grants-00,What public funding has gone to large language model fine-tuning?,grants,grants+trends,False
+embedding,test,test-grants-01,What public funding has gone to topology optimisation?,grants,grants+trends,False
+embedding,test,test-grants-02,Show research awards supporting carbon capture materials.,grants,grants,True
+embedding,test,test-grants-03,Which funded proposals address diffusion models for image synthesis?,grants,trends,False
+embedding,test,test-grants-04,Which funded proposals address lithium-sulfur batteries?,grants,grants+trends,False
+embedding,test,test-grants-05,Show research awards supporting large language model fine-tuning.,grants,grants+trends,False
+embedding,test,test-grants-06,Show research awards supporting topology optimisation.,grants,grants,True
+embedding,test,test-grants-07,What public funding has gone to diffusion models for image synthesis?,grants,grants+trends,False
+embedding,test,test-grants-08,Which funded proposals address protein structure prediction?,grants,grants+trends,False
+embedding,test,test-grants-09,What public funding has gone to photoacoustic imaging?,grants,grants+trends,False
+embedding,test,test-grants-10,What public funding has gone to protein structure prediction?,grants,grants+trends,False
+embedding,test,test-grants-11,Which funded proposals address sparse matrix factorisation?,grants,grants,True
+embedding,test,test-grants-12,Show research awards supporting data assimilation for weather forecasting.,grants,grants+trends,False
+embedding,test,test-grants-13,Which funded proposals address large language model fine-tuning?,grants,grants+trends,False
+embedding,test,test-grants-14,What public funding has gone to autonomous vehicle perception?,grants,grants+trends,False
+embedding,test,test-trends-00,Quantify the growth rate of protein structure prediction over the last decade.,trends,literature+trends,False
+embedding,test,test-trends-01,Has interest in sparse matrix factorisation increased over time?,trends,trends,True
+embedding,test,test-trends-02,Show the yearly trajectory of photoacoustic imaging.,trends,trends,True
+embedding,test,test-trends-03,Has interest in autonomous vehicle perception increased over time?,trends,trends,True
+embedding,test,test-trends-04,Quantify the growth rate of topology optimisation over the last decade.,trends,literature+trends,False
+embedding,test,test-trends-05,Quantify the growth rate of lithium-sulfur batteries over the last decade.,trends,trends,True
+embedding,test,test-trends-06,Quantify the growth rate of sparse matrix factorisation over the last decade.,trends,trends,True
+embedding,test,test-trends-07,Has interest in photoacoustic imaging increased over time?,trends,trends,True
+embedding,test,test-trends-08,Quantify the growth rate of large language model fine-tuning over the last decade.,trends,literature+trends,False
+embedding,test,test-trends-09,Quantify the growth rate of photoacoustic imaging over the last decade.,trends,trends,True
+embedding,test,test-trends-10,Has interest in diffusion models for image synthesis increased over time?,trends,trends,True
+embedding,test,test-trends-11,Show the yearly trajectory of data assimilation for weather forecasting.,trends,literature+trends,False
+embedding,test,test-trends-12,Show the yearly trajectory of sparse matrix factorisation.,trends,grants+literature+trends,False
+embedding,test,test-trends-13,Show the yearly trajectory of lithium-sulfur batteries.,trends,literature+trends,False
+embedding,test,test-trends-14,Quantify the growth rate of diffusion models for image synthesis over the last decade.,trends,literature+trends,False
+embedding,test,test-literature+patents-00,Give me the papers and the intellectual property on diffusion models for image synthesis.,literature+patents,literature+patents,True
+embedding,test,test-literature+patents-01,What do scientific articles and patent filings each say about topology optimisation?,literature+patents,literature+patents,True
+embedding,test,test-literature+patents-02,Trace lithium-sulfur batteries from published studies to patent documents.,literature+patents,literature+patents,True
+embedding,test,test-literature+patents-03,What do scientific articles and patent filings each say about diffusion models for image synthesis?,literature+patents,literature+patents,True
+embedding,test,test-literature+patents-04,What do scientific articles and patent filings each say about large language model fine-tuning?,literature+patents,literature,False
+embedding,test,test-literature+patents-05,What do scientific articles and patent filings each say about sparse matrix factorisation?,literature+patents,literature,False
+embedding,test,test-literature+patents-06,What do scientific articles and patent filings each say about carbon capture materials?,literature+patents,literature,False
+embedding,test,test-literature+patents-07,Trace carbon capture materials from published studies to patent documents.,literature+patents,patents,False
+embedding,test,test-literature+patents-08,Give me the papers and the intellectual property on large language model fine-tuning.,literature+patents,literature,False
+embedding,test,test-literature+patents-09,What do scientific articles and patent filings each say about autonomous vehicle perception?,literature+patents,literature+patents,True
+embedding,test,test-literature+patents-10,Trace autonomous vehicle perception from published studies to patent documents.,literature+patents,patents,False
+embedding,test,test-literature+patents-11,Give me the papers and the intellectual property on autonomous vehicle perception.,literature+patents,literature+patents,True
+embedding,test,test-literature+patents-12,Trace data assimilation for weather forecasting from published studies to patent documents.,literature+patents,literature,False
+embedding,test,test-literature+patents-13,Give me the papers and the intellectual property on protein structure prediction.,literature+patents,literature+patents,True
+embedding,test,test-literature+patents-14,Trace photoacoustic imaging from published studies to patent documents.,literature+patents,patents,False
+embedding,test,test-literature+trends-00,"Which academic works define data assimilation for weather forecasting, and is interest in it increasing?",literature+trends,literature+trends,True
+embedding,test,test-literature+trends-01,"Is photoacoustic imaging an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+embedding,test,test-literature+trends-02,Show the growth of topology optimisation over the years together with representative studies.,literature+trends,literature+trends,True
+embedding,test,test-literature+trends-03,Show the growth of lithium-sulfur batteries over the years together with representative studies.,literature+trends,trends,False
+embedding,test,test-literature+trends-04,"Which academic works define topology optimisation, and is interest in it increasing?",literature+trends,literature,False
+embedding,test,test-literature+trends-05,"Is data assimilation for weather forecasting an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+embedding,test,test-literature+trends-06,"Which academic works define carbon capture materials, and is interest in it increasing?",literature+trends,trends,False
+embedding,test,test-literature+trends-07,"Is large language model fine-tuning an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+embedding,test,test-literature+trends-08,"Is autonomous vehicle perception an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+embedding,test,test-literature+trends-09,Show the growth of carbon capture materials over the years together with representative studies.,literature+trends,trends,False
+embedding,test,test-literature+trends-10,"Is lithium-sulfur batteries an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+embedding,test,test-literature+trends-11,"Which academic works define photoacoustic imaging, and is interest in it increasing?",literature+trends,trends,False
+embedding,test,test-literature+trends-12,"Which academic works define diffusion models for image synthesis, and is interest in it increasing?",literature+trends,literature,False
+embedding,test,test-literature+trends-13,"Is protein structure prediction an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+embedding,test,test-literature+trends-14,Show the growth of photoacoustic imaging over the years together with representative studies.,literature+trends,trends,False
+embedding,test,test-grants+trends-00,Show the yearly growth of large language model fine-tuning next to the funded proposals in that area.,grants+trends,grants+trends,True
+embedding,test,test-grants+trends-01,Quantify the trajectory of photoacoustic imaging over time and list the public funding behind it.,grants+trends,grants+trends,True
+embedding,test,test-grants+trends-02,"Has interest in sparse matrix factorisation increased, and which research awards support it?",grants+trends,grants+trends,True
+embedding,test,test-grants+trends-03,Quantify the trajectory of diffusion models for image synthesis over time and list the public funding behind it.,grants+trends,grants+trends,True
+embedding,test,test-grants+trends-04,Show the yearly growth of diffusion models for image synthesis next to the funded proposals in that area.,grants+trends,trends,False
+embedding,test,test-grants+trends-05,Show the yearly growth of sparse matrix factorisation next to the funded proposals in that area.,grants+trends,grants+trends,True
+embedding,test,test-grants+trends-06,Quantify the trajectory of sparse matrix factorisation over time and list the public funding behind it.,grants+trends,grants+trends,True
+embedding,test,test-grants+trends-07,Quantify the trajectory of lithium-sulfur batteries over time and list the public funding behind it.,grants+trends,grants+trends,True
+embedding,test,test-grants+trends-08,"Has interest in large language model fine-tuning increased, and which research awards support it?",grants+trends,grants+trends,True
+embedding,test,test-grants+trends-09,"Has interest in data assimilation for weather forecasting increased, and which research awards support it?",grants+trends,trends,False
+embedding,test,test-grants+trends-10,"Has interest in protein structure prediction increased, and which research awards support it?",grants+trends,grants+trends,True
+embedding,test,test-grants+trends-11,"Has interest in topology optimisation increased, and which research awards support it?",grants+trends,grants+trends,True
+embedding,test,test-grants+trends-12,"Has interest in diffusion models for image synthesis increased, and which research awards support it?",grants+trends,trends,False
+embedding,test,test-grants+trends-13,Show the yearly growth of autonomous vehicle perception next to the funded proposals in that area.,grants+trends,grants+trends,True
+embedding,test,test-grants+trends-14,Show the yearly growth of carbon capture materials next to the funded proposals in that area.,grants+trends,grants+trends,True
+embedding,test,test-literature+patents+grants+trends-00,"I need a complete overview of large language model fine-tuning: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,literature+trends,False
+embedding,test,test-literature+patents+grants+trends-01,"I need a complete overview of carbon capture materials: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,literature+trends,False
+embedding,test,test-literature+patents+grants+trends-02,"Monitor photoacoustic imaging across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,trends,False
+embedding,test,test-literature+patents+grants+trends-03,"Monitor data assimilation for weather forecasting across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,literature+trends,False
+embedding,test,test-literature+patents+grants+trends-04,"Monitor large language model fine-tuning across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+trends,False
+embedding,test,test-literature+patents+grants+trends-05,"Monitor autonomous vehicle perception across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+trends,False
+embedding,test,test-literature+patents+grants+trends-06,"Brief me on large language model fine-tuning from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,literature+trends,False
+embedding,test,test-literature+patents+grants+trends-07,"Monitor carbon capture materials across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+trends,False
+embedding,test,test-literature+patents+grants+trends-08,"I need a complete overview of photoacoustic imaging: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,literature+patents+trends,False
+embedding,test,test-literature+patents+grants+trends-09,"Brief me on protein structure prediction from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+trends,False
+embedding,test,test-literature+patents+grants+trends-10,"Monitor protein structure prediction across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+trends,False
+embedding,test,test-literature+patents+grants+trends-11,"I need a complete overview of sparse matrix factorisation: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+trends,False
+embedding,test,test-literature+patents+grants+trends-12,"Brief me on sparse matrix factorisation from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+trends,False
+embedding,test,test-literature+patents+grants+trends-13,"Brief me on photoacoustic imaging from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,trends,False
+embedding,test,test-literature+patents+grants+trends-14,"Monitor diffusion models for image synthesis across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-00,Provide recommendations for scholarly publications that assess the efficacy and potential of various carbon capture materials.,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-01,What recent studies or papers have been published on the topic of sparse matrix factorization?,literature,literature,True
+llm:llama3.2-3b,paraphrase,test-literature-02,What studies have been conducted on the application of diffusion models in generating realistic images?,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-03,"Can you provide a list of the most influential and widely cited research papers on carbon capture materials, including their authors, publication dates, and relevant findings?",literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-04,What studies have been conducted on the process of fine-tuning large language models?,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-05,Provide a list of scholarly articles that assess the capabilities and applications of photoacoustic imaging.,literature,literature,True
+llm:llama3.2-3b,paraphrase,test-literature-06,"Can you provide a list of the most influential and widely cited research papers on sparse matrix factorization, including any notable breakthroughs or contributions to the field?",literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-07,Provide recommendations for scholarly articles that assess the accuracy and effectiveness of methods used in predicting protein structures.,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-08,What studies have been conducted and reported on by researchers regarding the perception capabilities of autonomous vehicles?,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-09,Provide recommendations for research papers or studies that assess the effectiveness and limitations of data assimilation techniques in improving weather forecasting accuracy.,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-10,What studies have been conducted and reported by researchers on the topic of topology optimisation?,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-11,Provide recommendations for research papers that assess the effectiveness of fine-tuning large language models.,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-12,Can you provide me with a list of the most influential and relevant research papers on fine-tuning large language models?,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-13,Provide recommendations for scholarly publications or research studies that assess the performance and potential of lithium-sulfur batteries.,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature-14,Provide recommendations for research papers that assess the effectiveness of diffusion models in generating realistic images.,literature,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-patents-00,Provide a list of notable inventions related to topology optimization that have been disclosed in patent documents.,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-01,Has there been any prior intellectual property filing related to fine-tuning large language models?,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-02,Has anyone patented or filed for intellectual property rights related to protein structure prediction?,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-03,Has anyone patented or filed for intellectual property rights related to sparse matrix factorization?,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-04,"Provide a comprehensive list of patents related to carbon capture materials, including their descriptions and inventors.",patents,literature+patents,False
+llm:llama3.2-3b,paraphrase,test-patents-05,Provide a list of patents and patent applications that focus on the optimization and refinement of large language models.,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-06,"Provide a comprehensive list of patents related to autonomous vehicle perception systems, including their descriptions and applications.",patents,literature+patents,False
+llm:llama3.2-3b,paraphrase,test-patents-07,Provide a comprehensive list of patented technologies related to photoacoustic imaging.,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-08,Provide a comprehensive list of patents related to data assimilation techniques used in weather forecasting.,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-09,Provide a list of technological advancements described in patent filings related to the development of computational methods for determining the three-dimensional arrangement of amino acid sequences in proteins.,patents,literature+patents,False
+llm:llama3.2-3b,paraphrase,test-patents-10,Provide a list of patents and patent applications focused on data assimilation techniques used in meteorological forecasting.,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-11,Provide a list of patents and patent applications that focus on the mathematical technique of sparse matrix factorisation.,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-12,Provide a list of patents and patent applications that focus on the development and technology of lithium-sulfur batteries.,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-13,"Provide a comprehensive list of patents related to lithium-sulfur battery technology, including descriptions of their disclosed inventions.",patents,patents,True
+llm:llama3.2-3b,paraphrase,test-patents-14,Has there been any prior filing of intellectual property related to photoacoustic imaging?,patents,patents,True
+llm:llama3.2-3b,paraphrase,test-grants-00,What government grants or subsidies have been allocated to support the development and training of large language models through fine-tuning?,grants,grants+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-01,What government grants or public expenditures have been allocated to support research in topology optimization?,grants,grants+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-02,Provide evidence of recognized scientific accolades and honors related to carbon capture materials.,grants,grants+literature,False
+llm:llama3.2-3b,paraphrase,test-grants-03,What research projects or initiatives are focused on developing and applying diffusion models for generating images?,grants,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-04,What research projects or initiatives are currently being supported by organizations or institutions that focus on the development of lithium-sulfur batteries?,grants,grants+literature+patents,False
+llm:llama3.2-3b,paraphrase,test-grants-05,Provide evidence from reputable sources demonstrating the effectiveness of fine-tuning large language models.,grants,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-06,Provide evidence from reputable sources to validate the effectiveness of topology optimization in research settings.,grants,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-07,What government grants and institutional support have been allocated to research and development of diffusion models for image generation?,grants,grants+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-08,What research initiatives are currently being supported by funding agencies that focus on protein structure prediction?,grants,grants+literature,False
+llm:llama3.2-3b,paraphrase,test-grants-09,What government grants and public expenditures have been allocated to support the development and research of photoacoustic imaging technology?,grants,grants+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-10,What government grants and public investments have been allocated to support research in protein structure prediction?,grants,grants+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-11,What research projects or initiatives are focused on developing or improving sparse matrix factorisation methods?,grants,literature+patents,False
+llm:llama3.2-3b,paraphrase,test-grants-12,Provide evidence from reputable sources to validate the effectiveness of data assimilation in improving weather forecasting accuracy.,grants,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-13,What research projects or initiatives are focused on optimizing large language models through fine-tuning?,grants,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants-14,What government grants and subsidies have been allocated to support research and development in autonomous vehicle perception?,grants,grants+patents,False
+llm:llama3.2-3b,paraphrase,test-trends-00,Provide a numerical analysis of the rate of improvement in protein structure prediction accuracy between 2013 and 2023.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-01,Has the interest in sparse matrix factorization shown an upward trend over the years?,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-02,Provide a historical overview of the development and growth of photoacoustic imaging technology over the past few decades.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-03,Has interest in the development and application of autonomous vehicle perception systems grown over the past few years?,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-04,What is the average annual percentage increase in the adoption and usage of topology optimisation techniques over the past ten years?,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-05,Provide a numerical analysis of the rate of improvement in lithium-sulfur battery technology from 2013 to 2022.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-06,Provide a numerical analysis of the rate of improvement in sparse matrix factorisation algorithms over the past 10 years.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-07,Has the interest in photoacoustic imaging shown a trend of growth or stability over the years?,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-08,Provide a statistical analysis of the progress made in large language model fine-tuning since 2013.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-09,Provide a numerical analysis of the rate of increase in photoacoustic imaging technology and its applications over the past 10 years.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-10,Has interest in diffusion models for image synthesis grown over time?,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-11,Provide a graphical representation of the annual changes in the efficiency and effectiveness of data assimilation processes used in weather forecasting over the past few years.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-12,"Provide a graphical representation of the evolution of sparse matrix factorization techniques over the past few years, highlighting key milestones, advancements, and trends in the field.",trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-13,Provide a graphical representation of the annual performance and development of lithium-sulfur batteries over the past few years.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-trends-14,Analyze the rate of improvement in image synthesis capabilities of diffusion models from 2013 to 2023.,trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature+patents-00,Can you provide me with the relevant research papers and intellectual property related to diffusion models for image synthesis?,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-01,How do scientific articles and patent filings provide distinct insights into topology optimisation?,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-02,Investigate the origins and development of lithium-sulfur battery technology by analyzing academic research papers and intellectual property filings.,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-03,How do scientific articles and patent filings collectively describe the capabilities and applications of diffusion models for image synthesis?,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-04,Can you provide a detailed comparison of the information and insights presented in scientific articles versus patent filings regarding large language model fine-tuning?,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-05,How do scientific articles and patent filings provide distinct insights into the concepts and applications of sparse matrix factorisation?,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-06,"Can you provide more information on what specific aspects of carbon capture materials are being discussed in scientific articles and patent filings, and what kind of data or insights are you looking for regarding their comparison?",literature+patents,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature+patents-07,Can you provide a list of specific carbon capture materials mentioned in published studies and then track their development and disclosure in patent documents?,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-08,Provide me with the relevant research papers and intellectual property related to the process of fine-tuning large language models.,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-09,Can you provide a detailed comparison of the technical information and research findings presented in scientific articles and patent filings related to autonomous vehicle perception?,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-10,Analyze the evolution of autonomous vehicle perception capabilities by tracing relevant research findings from academic publications to patent filings.,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-11,Provide access to relevant research documents and intellectual property related to the development of autonomous vehicle perception systems.,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-12,Analyze the application of data assimilation techniques in weather forecasting as reported in academic literature and patent filings.,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-13,Provide me with the relevant publications and intellectual property related to protein structure prediction.,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+patents-14,Analyze the evolution of photoacoustic imaging technology by tracing its development in academic research papers and patent filings.,literature+patents,literature+patents,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-00,"What are the primary academic publications that describe data assimilation in the context of weather forecasting, and is there a growing interest in this field of study?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-01,"What is the current status of photoacoustic imaging as a field, and what are some recommended starting points for exploring its key concepts and research?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-02,Provide an overview of the evolution of topology optimization techniques and highlight significant research contributions throughout the years.,literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-03,"Provide a historical overview of lithium-sulfur battery development, highlighting key milestones and notable research papers.",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-04,"What are the key academic publications that discuss topology optimization, and is there a growing interest in this field of study?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-05,"Is data assimilation in weather forecasting a rapidly developing field, and which foundational papers or recent studies should I start with?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-06,"What publications and research studies provide a comprehensive understanding of carbon capture materials, and is there a growing trend of interest in this area of study?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-07,"What is the current state of large language model fine-tuning, and what are the most essential sources to get started with this field?",literature+trends,grants+literature+patents+trends,False
+llm:llama3.2-3b,paraphrase,test-literature+trends-08,"Is autonomous vehicle perception a rapidly developing field, and what are some foundational papers or research articles that I should start with?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-09,"Provide a historical overview of advancements in carbon capture materials, highlighting key research findings and milestones.",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-10,"Is lithium-sulfur batteries a rapidly developing field, and which introductory publications or research papers should I start with?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-11,"What are the primary scholarly sources that describe photoacoustic imaging, and is there a growing interest in this field of study?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-12,"What research papers and studies have introduced and explored the concept of diffusion models for generating images, and is there a growing interest in this area of study?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-13,"What are the current trends and key publications in the field of protein structure prediction, and which foundational papers should I start with?",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+trends-14,"Provide a historical overview of the development of photoacoustic imaging, highlighting key milestones and notable research contributions.",literature+trends,literature+trends,True
+llm:llama3.2-3b,paraphrase,test-grants+trends-00,Provide a comparison of the annual increase in research funding for large language model fine-tuning alongside the corresponding growth in publications or advancements in this field.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-01,Analyze the temporal progression of photoacoustic imaging and provide a detailed breakdown of the financial support received from public sources.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-02,"Has interest in sparse matrix factorisation increased, and which prestigious research awards provide support for this area of study?",grants+trends,grants+trends,True
+llm:llama3.2-3b,paraphrase,test-grants+trends-03,Analyze the temporal progression of diffusion models' performance in generating images and identify the sources of public financial support for these research endeavors.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-04,Provide a comparative analysis of the annual increase in research funding for diffusion models in image synthesis alongside the corresponding growth in publications and advancements in this field.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-05,Provide a graphical representation of the annual increase in research funding allocated to sparse matrix factorization alongside the corresponding growth in publications or research output in this field.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-06,Analyze the temporal progression of sparse matrix factorization and provide a breakdown of the publicly available financial support that has contributed to its development.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-07,Analyze the temporal progression of lithium-sulfur battery performance and compile a comprehensive list of publicly available funding sources supporting its development.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-08,"Has interest in fine-tuning large language models increased, and which research awards are currently supporting this area of study?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-09,"Has interest in data assimilation for weather forecasting grown, and which research awards fund this area of study?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-10,"Has interest in protein structure prediction shown an uptick, and which prestigious research awards are backing this field of study?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-11,"Has interest in topology optimisation increased, and which prestigious research awards provide financial support for this field of study?",grants+trends,grants+trends,True
+llm:llama3.2-3b,paraphrase,test-grants+trends-12,"Has interest in diffusion models for image synthesis grown, and which prestigious research awards sponsor this area of study?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-grants+trends-13,Provide a graphical representation of the annual increase in autonomous vehicle perception research funding alongside the corresponding growth in the field's perception capabilities.,grants+trends,grants+trends,True
+llm:llama3.2-3b,paraphrase,test-grants+trends-14,Provide a graphical representation of the annual increase in funding for carbon capture materials alongside the corresponding growth in research and development in this field.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-00,"Provide a comprehensive summary of the development and progress of large language model fine-tuning, including academic research, intellectual property disclosures, government support, and annual performance metrics.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-01,"Provide a comprehensive analysis of the current state of carbon capture materials, including a review of relevant academic research, patent landscape, public funding initiatives, and a detailed breakdown of the yearly trajectory of the industry.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-02,"Provide an overview of the evolution and expansion of photoacoustic imaging research, tracking its presence in academic publications, patents, and sponsored initiatives, and presenting metrics on its increasing visibility and scope.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-03,"Analyze the evolution of data assimilation techniques in weather forecasting across academic publications, patents, and research grants, and provide metrics on its increasing adoption.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-04,"Analyze the performance and progress of a large language model over multiple articles, intellectual property, and funded projects, and provide metrics on its growth and development.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-05,"Provide an overview of the development and advancements in autonomous vehicle perception, tracing its evolution across academic research, patented innovations, and sponsored initiatives, and present a statistical analysis of its progress over time.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-06,"Provide an overview of large language model fine-tuning from a comprehensive perspective, encompassing its scientific foundations, notable inventions, research accolades, and current trends in interest and adoption.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-07,"Track the development and advancements of carbon capture technologies across academic research, patents, and sponsored initiatives, and provide metrics on its progress.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-08,"Can you provide a comprehensive analysis of the historical development and current state of photoacoustic imaging, including a breakdown of relevant academic research, patent activity, government funding, and year-over-year trends?",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-09,"Provide a comprehensive overview of protein structure prediction, encompassing its scientific foundations, technological advancements, notable research achievements, and current trends in interest and recognition.",grants+literature+patents+trends,literature+trends,False
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-10,"Track the evolution of protein structure prediction methodologies and technologies across academic publications, patent filings, and research grants, and measure their cumulative progress.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-11,"Can you provide a comprehensive analysis of the historical development and funding of sparse matrix factorization, including academic research publications, patent applications, government grants, and annual funding trends?",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-12,"Provide an overview of sparse matrix factorization from a comprehensive perspective, including its applications in scientific research, notable inventions and innovations, notable research awards, and current trends in interest and adoption.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-13,"Provide a comprehensive overview of photoacoustic imaging, encompassing its scientific foundations, technological advancements, notable research achievements, and current trends in interest and adoption.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,paraphrase,test-literature+patents+grants+trends-14,"Analyze the evolution and expansion of diffusion models in image synthesis across academic publications, patents, and research grants, and provide metrics on its increasing presence.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature-00,Point me to articles that evaluate carbon capture materials.,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-01,What have researchers published about sparse matrix factorisation?,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-02,What have researchers published about diffusion models for image synthesis?,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-03,I need the key academic studies on carbon capture materials.,literature,literature+patents,False
+llm:llama3.2-3b,test,test-literature-04,What have researchers published about large language model fine-tuning?,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-05,Point me to articles that evaluate photoacoustic imaging.,literature,literature,True
+llm:llama3.2-3b,test,test-literature-06,I need the key academic studies on sparse matrix factorisation.,literature,literature,True
+llm:llama3.2-3b,test,test-literature-07,Point me to articles that evaluate protein structure prediction.,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-08,What have researchers published about autonomous vehicle perception?,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-09,Point me to articles that evaluate data assimilation for weather forecasting.,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-10,What have researchers published about topology optimisation?,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-11,Point me to articles that evaluate large language model fine-tuning.,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-12,I need the key academic studies on large language model fine-tuning.,literature,literature+trends,False
+llm:llama3.2-3b,test,test-literature-13,Point me to articles that evaluate lithium-sulfur batteries.,literature,literature,True
+llm:llama3.2-3b,test,test-literature-14,Point me to articles that evaluate diffusion models for image synthesis.,literature,literature,True
+llm:llama3.2-3b,test,test-patents-00,List inventions disclosed in patent documents about topology optimisation.,patents,literature+patents,False
+llm:llama3.2-3b,test,test-patents-01,Has anyone filed intellectual property on large language model fine-tuning?,patents,grants+patents,False
+llm:llama3.2-3b,test,test-patents-02,Has anyone filed intellectual property on protein structure prediction?,patents,grants+patents,False
+llm:llama3.2-3b,test,test-patents-03,Has anyone filed intellectual property on sparse matrix factorisation?,patents,grants+patents,False
+llm:llama3.2-3b,test,test-patents-04,List inventions disclosed in patent documents about carbon capture materials.,patents,patents+trends,False
+llm:llama3.2-3b,test,test-patents-05,Search granted patents and applications related to large language model fine-tuning.,patents,patents,True
+llm:llama3.2-3b,test,test-patents-06,List inventions disclosed in patent documents about autonomous vehicle perception.,patents,patents+trends,False
+llm:llama3.2-3b,test,test-patents-07,List inventions disclosed in patent documents about photoacoustic imaging.,patents,patents,True
+llm:llama3.2-3b,test,test-patents-08,List inventions disclosed in patent documents about data assimilation for weather forecasting.,patents,literature+patents,False
+llm:llama3.2-3b,test,test-patents-09,List inventions disclosed in patent documents about protein structure prediction.,patents,literature+patents,False
+llm:llama3.2-3b,test,test-patents-10,Search granted patents and applications related to data assimilation for weather forecasting.,patents,patents,True
+llm:llama3.2-3b,test,test-patents-11,Search granted patents and applications related to sparse matrix factorisation.,patents,patents,True
+llm:llama3.2-3b,test,test-patents-12,Search granted patents and applications related to lithium-sulfur batteries.,patents,patents,True
+llm:llama3.2-3b,test,test-patents-13,List inventions disclosed in patent documents about lithium-sulfur batteries.,patents,patents+trends,False
+llm:llama3.2-3b,test,test-patents-14,Has anyone filed intellectual property on photoacoustic imaging?,patents,grants+patents,False
+llm:llama3.2-3b,test,test-grants-00,What public funding has gone to large language model fine-tuning?,grants,grants+trends,False
+llm:llama3.2-3b,test,test-grants-01,What public funding has gone to topology optimisation?,grants,grants+trends,False
+llm:llama3.2-3b,test,test-grants-02,Show research awards supporting carbon capture materials.,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-03,Which funded proposals address diffusion models for image synthesis?,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-04,Which funded proposals address lithium-sulfur batteries?,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-05,Show research awards supporting large language model fine-tuning.,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-06,Show research awards supporting topology optimisation.,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-07,What public funding has gone to diffusion models for image synthesis?,grants,grants+literature+patents,False
+llm:llama3.2-3b,test,test-grants-08,Which funded proposals address protein structure prediction?,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-09,What public funding has gone to photoacoustic imaging?,grants,grants+trends,False
+llm:llama3.2-3b,test,test-grants-10,What public funding has gone to protein structure prediction?,grants,grants+trends,False
+llm:llama3.2-3b,test,test-grants-11,Which funded proposals address sparse matrix factorisation?,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-12,Show research awards supporting data assimilation for weather forecasting.,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-13,Which funded proposals address large language model fine-tuning?,grants,grants+literature,False
+llm:llama3.2-3b,test,test-grants-14,What public funding has gone to autonomous vehicle perception?,grants,grants+trends,False
+llm:llama3.2-3b,test,test-trends-00,Quantify the growth rate of protein structure prediction over the last decade.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-01,Has interest in sparse matrix factorisation increased over time?,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-02,Show the yearly trajectory of photoacoustic imaging.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-03,Has interest in autonomous vehicle perception increased over time?,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-04,Quantify the growth rate of topology optimisation over the last decade.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-05,Quantify the growth rate of lithium-sulfur batteries over the last decade.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-06,Quantify the growth rate of sparse matrix factorisation over the last decade.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-07,Has interest in photoacoustic imaging increased over time?,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-08,Quantify the growth rate of large language model fine-tuning over the last decade.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-09,Quantify the growth rate of photoacoustic imaging over the last decade.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-10,Has interest in diffusion models for image synthesis increased over time?,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-11,Show the yearly trajectory of data assimilation for weather forecasting.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-12,Show the yearly trajectory of sparse matrix factorisation.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-13,Show the yearly trajectory of lithium-sulfur batteries.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-trends-14,Quantify the growth rate of diffusion models for image synthesis over the last decade.,trends,literature+trends,False
+llm:llama3.2-3b,test,test-literature+patents-00,Give me the papers and the intellectual property on diffusion models for image synthesis.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-01,What do scientific articles and patent filings each say about topology optimisation?,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-02,Trace lithium-sulfur batteries from published studies to patent documents.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-03,What do scientific articles and patent filings each say about diffusion models for image synthesis?,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-04,What do scientific articles and patent filings each say about large language model fine-tuning?,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-05,What do scientific articles and patent filings each say about sparse matrix factorisation?,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-06,What do scientific articles and patent filings each say about carbon capture materials?,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-07,Trace carbon capture materials from published studies to patent documents.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-08,Give me the papers and the intellectual property on large language model fine-tuning.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-09,What do scientific articles and patent filings each say about autonomous vehicle perception?,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-10,Trace autonomous vehicle perception from published studies to patent documents.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-11,Give me the papers and the intellectual property on autonomous vehicle perception.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-12,Trace data assimilation for weather forecasting from published studies to patent documents.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-13,Give me the papers and the intellectual property on protein structure prediction.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+patents-14,Trace photoacoustic imaging from published studies to patent documents.,literature+patents,literature+patents,True
+llm:llama3.2-3b,test,test-literature+trends-00,"Which academic works define data assimilation for weather forecasting, and is interest in it increasing?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-01,"Is photoacoustic imaging an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-02,Show the growth of topology optimisation over the years together with representative studies.,literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-03,Show the growth of lithium-sulfur batteries over the years together with representative studies.,literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-04,"Which academic works define topology optimisation, and is interest in it increasing?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-05,"Is data assimilation for weather forecasting an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-06,"Which academic works define carbon capture materials, and is interest in it increasing?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-07,"Is large language model fine-tuning an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-08,"Is autonomous vehicle perception an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-09,Show the growth of carbon capture materials over the years together with representative studies.,literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-10,"Is lithium-sulfur batteries an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-11,"Which academic works define photoacoustic imaging, and is interest in it increasing?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-12,"Which academic works define diffusion models for image synthesis, and is interest in it increasing?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-13,"Is protein structure prediction an emerging area, and which articles should I read first?",literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-literature+trends-14,Show the growth of photoacoustic imaging over the years together with representative studies.,literature+trends,literature+trends,True
+llm:llama3.2-3b,test,test-grants+trends-00,Show the yearly growth of large language model fine-tuning next to the funded proposals in that area.,grants+trends,grants+trends,True
+llm:llama3.2-3b,test,test-grants+trends-01,Quantify the trajectory of photoacoustic imaging over time and list the public funding behind it.,grants+trends,grants+trends,True
+llm:llama3.2-3b,test,test-grants+trends-02,"Has interest in sparse matrix factorisation increased, and which research awards support it?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-03,Quantify the trajectory of diffusion models for image synthesis over time and list the public funding behind it.,grants+trends,grants+trends,True
+llm:llama3.2-3b,test,test-grants+trends-04,Show the yearly growth of diffusion models for image synthesis next to the funded proposals in that area.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-05,Show the yearly growth of sparse matrix factorisation next to the funded proposals in that area.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-06,Quantify the trajectory of sparse matrix factorisation over time and list the public funding behind it.,grants+trends,grants+trends,True
+llm:llama3.2-3b,test,test-grants+trends-07,Quantify the trajectory of lithium-sulfur batteries over time and list the public funding behind it.,grants+trends,grants+trends,True
+llm:llama3.2-3b,test,test-grants+trends-08,"Has interest in large language model fine-tuning increased, and which research awards support it?",grants+trends,grants+literature,False
+llm:llama3.2-3b,test,test-grants+trends-09,"Has interest in data assimilation for weather forecasting increased, and which research awards support it?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-10,"Has interest in protein structure prediction increased, and which research awards support it?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-11,"Has interest in topology optimisation increased, and which research awards support it?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-12,"Has interest in diffusion models for image synthesis increased, and which research awards support it?",grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-13,Show the yearly growth of autonomous vehicle perception next to the funded proposals in that area.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-grants+trends-14,Show the yearly growth of carbon capture materials next to the funded proposals in that area.,grants+trends,grants+literature+trends,False
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-00,"I need a complete overview of large language model fine-tuning: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-01,"I need a complete overview of carbon capture materials: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-02,"Monitor photoacoustic imaging across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-03,"Monitor data assimilation for weather forecasting across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-04,"Monitor large language model fine-tuning across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-05,"Monitor autonomous vehicle perception across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-06,"Brief me on large language model fine-tuning from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-07,"Monitor carbon capture materials across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-08,"I need a complete overview of photoacoustic imaging: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-09,"Brief me on protein structure prediction from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-10,"Monitor protein structure prediction across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-11,"I need a complete overview of sparse matrix factorisation: academic studies, patent filings, public funding and yearly trajectory.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-12,"Brief me on sparse matrix factorisation from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-13,"Brief me on photoacoustic imaging from every angle: scientific work, inventions, research awards and whether interest is increasing.",grants+literature+patents+trends,grants+literature+patents+trends,True
+llm:llama3.2-3b,test,test-literature+patents+grants+trends-14,"Monitor diffusion models for image synthesis across articles, intellectual property and funded projects, and quantify its growth.",grants+literature+patents+trends,grants+literature+patents+trends,True

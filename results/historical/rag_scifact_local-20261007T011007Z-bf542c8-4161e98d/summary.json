@@ -1,0 +1,302 @@
+{
+  "experiment": "rag_scifact_local",
+  "run_id": "rag_scifact_local-20261007T011007Z-bf542c8-4161e98d",
+  "dataset": "scifact",
+  "n_questions": 100,
+  "judge": {
+    "threshold": 0.4,
+    "kind": "nli",
+    "model_id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "max_length": 512,
+    "entailment_index": 0,
+    "device": "mps"
+  },
+  "generators": {
+    "extractive": {
+      "available": {
+        "n_questions": 100,
+        "abstention_rate": {
+          "mean": 0.56,
+          "ci": [
+            0.46,
+            0.66
+          ],
+          "n": 100
+        },
+        "pure_abstention_rate": {
+          "mean": 0.56,
+          "ci": [
+            0.46,
+            0.66
+          ],
+          "n": 100
+        },
+        "abstention_with_claims_rate": 0.0,
+        "gold_in_context_rate": 0.74,
+        "answered": {
+          "n": 44,
+          "citation_recall": {
+            "mean": 0.8901515151515151,
+            "ci": [
+              0.8030303030303029,
+              0.962121212121212
+            ],
+            "n": 44
+          },
+          "citation_precision": {
+            "mean": 0.8901515151515151,
+            "ci": [
+              0.8030303030303029,
+              0.962121212121212
+            ],
+            "n": 44
+          },
+          "unsupported_sentence_rate": {
+            "mean": 0.10984848484848486,
+            "ci": [
+              0.03787878787878789,
+              0.196969696969697
+            ],
+            "n": 44
+          },
+          "uncited_sentence_share": {
+            "mean": 0.0,
+            "ci": [
+              0.0,
+              0.0
+            ],
+            "n": 44
+          },
+          "answers_with_invalid_marker": 0.0,
+          "cited_docs_gold_share": {
+            "mean": 0.5757575757575758,
+            "ci": [
+              0.4469696969696969,
+              0.7007575757575757
+            ],
+            "n": 44
+          },
+          "mean_sentences": 1.9772727272727273
+        },
+        "prompt_tokens_mean": 1040.21,
+        "completion_tokens_mean": 29.35,
+        "generation_ms_median": 2.4096664983517257,
+        "retrieval_ms_median": 9.700771002826514
+      },
+      "withheld": {
+        "n_questions": 100,
+        "abstention_rate": {
+          "mean": 0.74,
+          "ci": [
+            0.65,
+            0.82
+          ],
+          "n": 100
+        },
+        "pure_abstention_rate": {
+          "mean": 0.74,
+          "ci": [
+            0.65,
+            0.82
+          ],
+          "n": 100
+        },
+        "abstention_with_claims_rate": 0.0,
+        "gold_in_context_rate": 0.0,
+        "answered": {
+          "n": 26,
+          "citation_recall": {
+            "mean": 0.8076923076923077,
+            "ci": [
+              0.6858974358974359,
+              0.9166666666666666
+            ],
+            "n": 26
+          },
+          "citation_precision": {
+            "mean": 0.8076923076923077,
+            "ci": [
+              0.6858974358974359,
+              0.9166666666666666
+            ],
+            "n": 26
+          },
+          "unsupported_sentence_rate": {
+            "mean": 0.19230769230769232,
+            "ci": [
+              0.08333333333333334,
+              0.31410256410256415
+            ],
+            "n": 26
+          },
+          "uncited_sentence_share": {
+            "mean": 0.0,
+            "ci": [
+              0.0,
+              0.0
+            ],
+            "n": 26
+          },
+          "answers_with_invalid_marker": 0.0,
+          "cited_docs_gold_share": {
+            "mean": 0.0,
+            "ci": [
+              0.0,
+              0.0
+            ],
+            "n": 26
+          },
+          "mean_sentences": 2.0
+        },
+        "prompt_tokens_mean": 1053.5,
+        "completion_tokens_mean": 20.8,
+        "generation_ms_median": 1.3355624996620463,
+        "retrieval_ms_median": 9.680729001047439
+      }
+    },
+    "llama3.2-3b": {
+      "available": {
+        "n_questions": 100,
+        "abstention_rate": {
+          "mean": 0.29,
+          "ci": [
+            0.2,
+            0.38
+          ],
+          "n": 100
+        },
+        "pure_abstention_rate": {
+          "mean": 0.2,
+          "ci": [
+            0.13,
+            0.28
+          ],
+          "n": 100
+        },
+        "abstention_with_claims_rate": 0.09,
+        "gold_in_context_rate": 0.74,
+        "answered": {
+          "n": 80,
+          "citation_recall": {
+            "mean": 0.5245833333333333,
+            "ci": [
+              0.4414531250000001,
+              0.6100000000000001
+            ],
+            "n": 80
+          },
+          "citation_precision": {
+            "mean": 0.5515350877192983,
+            "ci": [
+              0.46491228070175444,
+              0.6388157894736842
+            ],
+            "n": 76
+          },
+          "unsupported_sentence_rate": {
+            "mean": 0.4754166666666667,
+            "ci": [
+              0.39,
+              0.558546875
+            ],
+            "n": 80
+          },
+          "uncited_sentence_share": {
+            "mean": 0.13479166666666667,
+            "ci": [
+              0.07645833333333332,
+              0.1983333333333333
+            ],
+            "n": 80
+          },
+          "answers_with_invalid_marker": 0.0,
+          "cited_docs_gold_share": {
+            "mean": 0.5789473684210527,
+            "ci": [
+              0.4890350877192982,
+              0.6710526315789473
+            ],
+            "n": 76
+          },
+          "mean_sentences": 1.9125
+        },
+        "prompt_tokens_mean": 1689.73,
+        "completion_tokens_mean": 62.35,
+        "generation_ms_median": 5230.118312500053,
+        "retrieval_ms_median": 61.318040498008486
+      },
+      "withheld": {
+        "n_questions": 100,
+        "abstention_rate": {
+          "mean": 0.58,
+          "ci": [
+            0.48,
+            0.68
+          ],
+          "n": 100
+        },
+        "pure_abstention_rate": {
+          "mean": 0.49,
+          "ci": [
+            0.39,
+            0.59
+          ],
+          "n": 100
+        },
+        "abstention_with_claims_rate": 0.09,
+        "gold_in_context_rate": 0.0,
+        "answered": {
+          "n": 51,
+          "citation_recall": {
+            "mean": 0.44771241830065356,
+            "ci": [
+              0.33660130718954245,
+              0.5620915032679739
+            ],
+            "n": 51
+          },
+          "citation_precision": {
+            "mean": 0.5292207792207793,
+            "ci": [
+              0.4031317640692641,
+              0.6493574134199133
+            ],
+            "n": 44
+          },
+          "unsupported_sentence_rate": {
+            "mean": 0.5522875816993464,
+            "ci": [
+              0.4379084967320262,
+              0.6633986928104576
+            ],
+            "n": 51
+          },
+          "uncited_sentence_share": {
+            "mean": 0.22385620915032678,
+            "ci": [
+              0.12745098039215685,
+              0.3284313725490196
+            ],
+            "n": 51
+          },
+          "answers_with_invalid_marker": 0.0,
+          "cited_docs_gold_share": {
+            "mean": 0.0,
+            "ci": [
+              0.0,
+              0.0
+            ],
+            "n": 44
+          },
+          "mean_sentences": 1.7254901960784315
+        },
+        "prompt_tokens_mean": 1708.98,
+        "completion_tokens_mean": 43.38,
+        "generation_ms_median": 4117.121708499326,
+        "retrieval_ms_median": 24.530041502657696
+      }
+    }
+  },
+  "device": "mps"
+}

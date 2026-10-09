@@ -1,0 +1,263 @@
+{
+  "artifacts": {
+    "per_query_test.csv": "0e7d97b416cf6c7ea777c27a0e0b233b7863183ce8232fb2bff8614958a028b2",
+    "summary.json": "d0ca215b8c20958b8acb9eea43ead0fe47bdb350d1ba5e19ff6277029abc296e"
+  },
+  "config": {
+    "bm25": {
+      "b": 0.75,
+      "b_grid": [
+        0.3,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "k1": 1.2,
+      "k1_grid": [
+        0.6,
+        0.9,
+        1.2,
+        1.6,
+        2.0
+      ],
+      "remove_stopwords": true,
+      "stem": true
+    },
+    "dataset": {
+      "dev_fraction": 0.3,
+      "fields": [
+        "title",
+        "text"
+      ],
+      "max_queries": null,
+      "name": "dapfam",
+      "qrels_group": "domain"
+    },
+    "device": "auto",
+    "encoders": [
+      {
+        "batch_size": 64,
+        "dim": 256,
+        "doc_prefix": "",
+        "dtype": "float32",
+        "kind": "sentence-transformers",
+        "max_seq_length": 256,
+        "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "name": "minilm-l6",
+        "normalize": true,
+        "query_prefix": "",
+        "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf"
+      },
+      {
+        "batch_size": 64,
+        "dim": 256,
+        "doc_prefix": "",
+        "dtype": "float32",
+        "kind": "sentence-transformers",
+        "max_seq_length": 512,
+        "model_id": "BAAI/bge-small-en-v1.5",
+        "name": "bge-small",
+        "normalize": true,
+        "query_prefix": "Represent this sentence for searching relevant passages: ",
+        "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+      }
+    ],
+    "evaluation": {
+      "confidence": 0.95,
+      "ks": [
+        1,
+        5,
+        10,
+        20,
+        100
+      ],
+      "n_bootstrap": 10000,
+      "n_latency_queries": 50,
+      "n_permutations": 10000,
+      "primary_metric": "ndcg@10"
+    },
+    "experiment": "retrieval_dapfam",
+    "fusion": {
+      "alpha_grid": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "depth": 100,
+      "normalization": "minmax",
+      "rrf_k": 60,
+      "rrf_k_grid": [
+        10,
+        20,
+        60,
+        100
+      ]
+    },
+    "hybrid_encoder": null,
+    "output_dir": "results",
+    "rerankers": [
+      {
+        "batch_size": 32,
+        "depths": [
+          10,
+          20,
+          50,
+          100
+        ],
+        "kind": "cross-encoder",
+        "max_dev_queries": 150,
+        "max_length": 512,
+        "model_id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "name": "minilm-l6-ce",
+        "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+      }
+    ],
+    "seed": 13,
+    "top_k": 100
+  },
+  "config_sha256": "3121204cece6acf34e8d17af43cdbb1f8e3e73ba3a55f0b46e7429d2a56eda42",
+  "datasets": [
+    {
+      "files": {
+        "corpus.parquet": "3103976c64640820b618f9a5a6d66675473e7ebb685fd8b6317ceb474c48faff",
+        "qrels.parquet": "6c5b522e279c161f42f9e8ba785a6160b7257b084685755bd77598e5b1cdb149",
+        "queries.parquet": "32621372784ccb28993f7a0396bcedc0e31afba5d5cf1c1ce1fe449092999cf5"
+      },
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "n_documents": 45336,
+      "n_qrels": 49869,
+      "n_queries": 1247,
+      "name": "dapfam",
+      "notes": "Title and abstract view of query and target families. Relevance is citation-based. Non-commercial licence: evaluation only, never redistributed.",
+      "redistributable": false,
+      "retrieved_at": "2026-10-06T23:21:32Z",
+      "revision": "a59a74ce31384165065af1823a83c6f94ccafd48",
+      "source": "DAPFAM",
+      "source_url": "https://huggingface.co/datasets/datalyes/DAPFAM_patent"
+    }
+  ],
+  "environment": {
+    "hardware": {
+      "cpu_count": 11,
+      "device": "mps",
+      "machine": "arm64",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "processor": "arm"
+    },
+    "packages": {
+      "huggingface_hub": "1.33.0",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.1.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.14.1",
+      "transformers": "5.19.0"
+    },
+    "python": "3.12.2"
+  },
+  "experiment": "retrieval_dapfam",
+  "finished_at": "2026-10-07T01:22:21Z",
+  "git": {
+    "commit": "bf542c89972b90995ba3a82d4a6f24b8e9c18e55",
+    "dirty": false,
+    "dirty_paths": [],
+    "source": "git"
+  },
+  "models": [
+    {
+      "b": 0.9,
+      "build_seconds": 2.678859708001255,
+      "idf": "lucene",
+      "k1": 0.9,
+      "n_documents": 45336,
+      "n_terms": 34834,
+      "role": "lexical",
+      "tokenizer": {
+        "pattern": "[a-z0-9]+",
+        "remove_stopwords": true,
+        "stem": true
+      }
+    },
+    {
+      "batch_size": 64,
+      "batched_query_encode_seconds": 5.4149183749977965,
+      "corpus_docs_per_second": null,
+      "corpus_embedding": {
+        "cache_hit": true,
+        "cache_key": "b33b32d7936783933446fd76",
+        "dim": 384,
+        "encode_seconds": null,
+        "n_vectors": 45336,
+        "storage_mb": 69.64
+      },
+      "device": "mps",
+      "dim": 384,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 256,
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_parameters": 22713216,
+      "name": "minilm-l6",
+      "normalize": true,
+      "query_prefix": "",
+      "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "batch_size": 64,
+      "batched_query_encode_seconds": 8.495172750001075,
+      "corpus_docs_per_second": null,
+      "corpus_embedding": {
+        "cache_hit": true,
+        "cache_key": "ad56bea925b3b1ad7bfd6785",
+        "dim": 384,
+        "encode_seconds": null,
+        "n_vectors": 45336,
+        "storage_mb": 69.64
+      },
+      "device": "mps",
+      "dim": 384,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "n_parameters": 33360000,
+      "name": "bge-small",
+      "normalize": true,
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "batch_size": 32,
+      "batched_seconds_all_queries": 615.2436594169994,
+      "device": "mps",
+      "kind": "cross-encoder",
+      "max_length": 512,
+      "model_id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "n_parameters": 22713601,
+      "name": "minilm-l6-ce",
+      "pairs_scored": 104200,
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "role": "reranker"
+    }
+  ],
+  "notes": [],
+  "run_id": "retrieval_dapfam-20261007T011024Z-bf542c8-3121204c",
+  "seed": 13,
+  "started_at": "2026-10-07T01:10:24Z"
+}
