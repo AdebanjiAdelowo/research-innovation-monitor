@@ -1,7 +1,7 @@
 {
   "artifacts": {
     "per_task_test.csv": "acb92845536e1907a3475ad2a6c9390511b1dfbcb3d98b346399791220e50eb5",
-    "summary.json": "d0e3ceaa74a1beebce8d842200788082b0423f5e545aab5b741ff0d99940737c"
+    "summary.json": "06955283116bec7543b3615330d8ef58efc4903cccdd7c3840a651c668d7f7ba"
   },
   "config": {
     "device": "auto",
@@ -60,10 +60,11 @@
     "python": "3.12.2"
   },
   "experiment": "routing",
-  "finished_at": "2026-10-07T00:10:50Z",
+  "finished_at": "2026-10-09T22:34:13Z",
   "git": {
-    "commit": "331b9c3443ac79a13256eefbd0677bde1cdc5da9",
-    "dirty": true,
+    "commit": "13e4e25ccd0e021b516d35d4270e266e20553b95",
+    "dirty": false,
+    "dirty_paths": [],
     "source": "git"
   },
   "models": [
@@ -107,7 +108,7 @@
     }
   ],
   "notes": [],
-  "run_id": "routing-20261007T000821Z-331b9c3-a01e5003",
+  "run_id": "routing-20261009T223216Z-13e4e25-a01e5003",
   "seed": 13,
-  "started_at": "2026-10-07T00:08:21Z"
+  "started_at": "2026-10-09T22:32:16Z"
 }
