@@ -1,7 +1,7 @@
 {
   "artifacts": {
     "per_query_test.csv": "0e7d97b416cf6c7ea777c27a0e0b233b7863183ce8232fb2bff8614958a028b2",
-    "summary.json": "d0ca215b8c20958b8acb9eea43ead0fe47bdb350d1ba5e19ff6277029abc296e"
+    "summary.json": "6fb1345b25da1af89af2435aafa02b3e46bba4ea16e3101feab180f1d57d1436"
   },
   "config": {
     "bm25": {
@@ -168,9 +168,9 @@
     "python": "3.12.2"
   },
   "experiment": "retrieval_dapfam",
-  "finished_at": "2026-10-07T01:22:21Z",
+  "finished_at": "2026-10-09T22:32:05Z",
   "git": {
-    "commit": "bf542c89972b90995ba3a82d4a6f24b8e9c18e55",
+    "commit": "11430e43b5a4a5edede5cb2a75f3c5a870ec2b96",
     "dirty": false,
     "dirty_paths": [],
     "source": "git"
@@ -178,7 +178,7 @@
   "models": [
     {
       "b": 0.9,
-      "build_seconds": 2.678859708001255,
+      "build_seconds": 2.4678202499926556,
       "idf": "lucene",
       "k1": 0.9,
       "n_documents": 45336,
@@ -192,7 +192,7 @@
     },
     {
       "batch_size": 64,
-      "batched_query_encode_seconds": 5.4149183749977965,
+      "batched_query_encode_seconds": 2.4748047920002136,
       "corpus_docs_per_second": null,
       "corpus_embedding": {
         "cache_hit": true,
@@ -218,7 +218,7 @@
     },
     {
       "batch_size": 64,
-      "batched_query_encode_seconds": 8.495172750001075,
+      "batched_query_encode_seconds": 5.1753825419873465,
       "corpus_docs_per_second": null,
       "corpus_embedding": {
         "cache_hit": true,
@@ -244,7 +244,7 @@
     },
     {
       "batch_size": 32,
-      "batched_seconds_all_queries": 615.2436594169994,
+      "batched_seconds_all_queries": 523.1102483330033,
       "device": "mps",
       "kind": "cross-encoder",
       "max_length": 512,
@@ -257,7 +257,7 @@
     }
   ],
   "notes": [],
-  "run_id": "retrieval_dapfam-20261007T011024Z-bf542c8-3121204c",
+  "run_id": "retrieval_dapfam-20261009T222139Z-11430e4-3121204c",
   "seed": 13,
-  "started_at": "2026-10-07T01:10:24Z"
+  "started_at": "2026-10-09T22:21:39Z"
 }
