@@ -1,8 +1,8 @@
 {
   "artifacts": {
-    "answers.jsonl": "20b20cb3659d66cda5c00bc65708a779f46a80c3d4c4252b26550fca1d814ccc",
-    "per_answer.csv": "cefb5776ecf7fb4c79475ef63a40a65418a802d449e50af54bf6518c04dfde32",
-    "summary.json": "6b2174aec59e8b05b907a0c91caf7b4d9aa37d1db757227d37ba49f0b048f2fb"
+    "answers.jsonl": "7ed18d3579966dc4c942fa281c81832442a008b7531b40242b8b176276cff596",
+    "per_answer.csv": "aee3dc3769156747251d714252728af7b4ea605aac867d342711ad7544c969eb",
+    "summary.json": "ae7f81900e08d0034bbae6ca5775574505ad6c2c737bbbd36e4e78bb184cd625"
   },
   "config": {
     "alpha": 0.6,
@@ -103,9 +103,9 @@
     "python": "3.12.2"
   },
   "experiment": "rag_scifact_local",
-  "finished_at": "2026-10-07T01:29:31Z",
+  "finished_at": "2026-10-10T06:23:53Z",
   "git": {
-    "commit": "bf542c89972b90995ba3a82d4a6f24b8e9c18e55",
+    "commit": "c161bd4bcaf93c3b7e396d7dbe6f6c1f5d7f9048",
     "dirty": false,
     "dirty_paths": [],
     "source": "git"
@@ -153,7 +153,7 @@
     }
   ],
   "notes": [],
-  "run_id": "rag_scifact_local-20261007T011007Z-bf542c8-4161e98d",
+  "run_id": "rag_scifact_local-20261010T060926Z-c161bd4-4161e98d",
   "seed": 13,
-  "started_at": "2026-10-07T01:10:07Z"
+  "started_at": "2026-10-10T06:09:26Z"
 }

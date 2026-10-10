@@ -1,6 +1,6 @@
 {
   "experiment": "rag_scifact_local",
-  "run_id": "rag_scifact_local-20261007T011007Z-bf542c8-4161e98d",
+  "run_id": "rag_scifact_local-20261010T060926Z-c161bd4-4161e98d",
   "dataset": "scifact",
   "n_questions": 100,
   "judge": {
@@ -81,8 +81,8 @@
         },
         "prompt_tokens_mean": 1040.21,
         "completion_tokens_mean": 29.35,
-        "generation_ms_median": 2.4096664983517257,
-        "retrieval_ms_median": 9.700771002826514
+        "generation_ms_median": 2.3364794999451988,
+        "retrieval_ms_median": 9.646707999763748
       },
       "withheld": {
         "n_questions": 100,
@@ -151,8 +151,8 @@
         },
         "prompt_tokens_mean": 1053.5,
         "completion_tokens_mean": 20.8,
-        "generation_ms_median": 1.3355624996620463,
-        "retrieval_ms_median": 9.680729001047439
+        "generation_ms_median": 1.3256664999516943,
+        "retrieval_ms_median": 9.695187500483371
       }
     },
     "llama3.2-3b": {
@@ -223,8 +223,8 @@
         },
         "prompt_tokens_mean": 1689.73,
         "completion_tokens_mean": 62.35,
-        "generation_ms_median": 5230.118312500053,
-        "retrieval_ms_median": 61.318040498008486
+        "generation_ms_median": 4319.505416500078,
+        "retrieval_ms_median": 56.22402100016188
       },
       "withheld": {
         "n_questions": 100,
@@ -293,8 +293,8 @@
         },
         "prompt_tokens_mean": 1708.98,
         "completion_tokens_mean": 43.38,
-        "generation_ms_median": 4117.121708499326,
-        "retrieval_ms_median": 24.530041502657696
+        "generation_ms_median": 3307.615582999915,
+        "retrieval_ms_median": 20.54895799960832
       }
     }
   },
