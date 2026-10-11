@@ -36,3 +36,26 @@ rerun at a commit that exists; the comparison is in the section below.
 All other run records name commits older than the rewrite and are unaffected.
 
 ## Reruns
+
+Three experiments were rerun on 2026-10-09 and 2026-10-10 with the original
+configurations, model revisions, dataset versions and seeds, each from a clean tree.
+Configuration hashes, package versions and dataset manifests are identical between
+each original record and its rerun.
+
+| Experiment | Original run (commit) | Rerun (commit) | Outcome |
+|---|---|---|---|
+| `retrieval_dapfam` | `bf542c8`, no longer in the repository | `11430e4` | Per-query scores bit-for-bit identical |
+| `rag_scifact_local` | `bf542c8`, no longer in the repository | `c161bd4` | All 400 answers identical in text; all metrics identical |
+| `routing` | `331b9c3`, tree recorded as modified | `13e4e25` | Per-task predictions bit-for-bit identical |
+
+The files that differ between an original and its rerun are `run.json` and
+`summary.json`, and in the RAG run also `per_answer.csv` and `answers.jsonl`. In all
+of them the only fields that differ are the run identifier, timestamps and measured
+latencies. Latency depends on what else the machine was doing: the two original
+runs at `bf542c8` overlapped in time (their records show 01:10 to 01:29 and 01:10
+to 01:22 UTC), while the reruns ran one after another. The reported latencies are
+those of the reruns.
+
+The routing run was repeated for a different reason: its original record says the
+tree had uncommitted changes and does not list them. The rerun reproduces its
+predictions exactly from a clean tree.

@@ -347,16 +347,16 @@ Reranking the hybrid (convex) candidates with `minilm-l6-ce`, by depth (no reran
 | ndcg@10 | 0.202 | 0.194 | 0.181 | 0.166 |
 | Median latency (ms) | 150 | 270 | 614 | 1097 |
 
-**DAPFAM (patents)**: 45,336 documents, 892 test and 355 dev queries. Run [`retrieval_dapfam-20261007T011024Z-bf542c8-3121204c`](results/retrieval_dapfam/run.json), commit `bf542c8`, device `mps`.
+**DAPFAM (patents)**: 45,336 documents, 892 test and 355 dev queries. Run [`retrieval_dapfam-20261009T222139Z-11430e4-3121204c`](results/retrieval_dapfam/run.json), commit `11430e4`, device `mps`.
 
 | System | ndcg@10 | 95% CI | Recall@20 | Recall@100 | MRR@10 | Median latency (ms) |
 |---|---:|---|---:|---:|---:|---:|
 | bm25 | 0.193 | [0.179, 0.208] | 0.124 | 0.252 | 0.405 | 0.7 |
-| dense:minilm-l6 | 0.210 | [0.196, 0.225] | 0.140 | 0.299 | 0.428 | 43.6 |
-| dense:bge-small | 0.218 | [0.203, 0.233] | 0.143 | 0.302 | 0.444 | 71.8 |
-| hybrid (RRF) | 0.226 | [0.211, 0.241] | 0.153 | 0.309 | 0.448 | 72.5 |
-| hybrid (convex) | 0.228 | [0.214, 0.244] | 0.152 | 0.312 | 0.455 | 72.5 |
-| hybrid (convex)+rerank:minilm-l6-ce@10 | 0.218 | [0.204, 0.233] | 0.152 | 0.312 | 0.415 | 137.0 |
+| dense:minilm-l6 | 0.210 | [0.196, 0.225] | 0.140 | 0.299 | 0.428 | 8.3 |
+| dense:bge-small | 0.218 | [0.203, 0.233] | 0.143 | 0.302 | 0.444 | 12.3 |
+| hybrid (RRF) | 0.226 | [0.211, 0.241] | 0.153 | 0.309 | 0.448 | 13.1 |
+| hybrid (convex) | 0.228 | [0.214, 0.244] | 0.152 | 0.312 | 0.455 | 13.1 |
+| hybrid (convex)+rerank:minilm-l6-ce@10 | 0.218 | [0.204, 0.233] | 0.152 | 0.312 | 0.415 | 108.1 |
 
 Selected on dev: BM25 k1=0.9, b=0.9; hybrid encoder `bge-small`; RRF k=20; convex weight of the dense score 0.7. Latency is for the hybrid encoder's pipeline; fused systems share one latency because fusion itself takes well under a millisecond.
 
@@ -375,7 +375,7 @@ Reranking the hybrid (convex) candidates with `minilm-l6-ce`, by depth (no reran
 | Depth | 10 | 20 | 50 | 100 |
 |---|---:|---:|---:|---:|
 | ndcg@10 | 0.218 | 0.204 | 0.186 | 0.177 |
-| Median latency (ms) | 137 | 215 | 344 | 592 |
+| Median latency (ms) | 108 | 188 | 461 | 670 |
 
 By relevance domain (IN: query and target share an IPC class; OUT: they do not):
 
@@ -421,7 +421,7 @@ Entailment judges against human SciFact evidence labels (340 dev pairs; threshol
 | nli-deberta-v3-xsmall | 0.1 | 0.603 | 0.766 | 0.261 | 0.054 | 0.769 |
 | deberta-v3-base-mnli-fever-anli | 0.4 | 0.755 | 0.725 | 0.688 | 0.178 | 0.858 |
 
-Generation on 100 SciFact test claims, judge `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` at threshold 0.4. Run [`rag_scifact_local-20261007T011007Z-bf542c8-4161e98d`](results/rag_scifact_local/run.json), commit `bf542c8`, device `mps`.
+Generation on 100 SciFact test claims, judge `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` at threshold 0.4. Run [`rag_scifact_local-20261010T060926Z-c161bd4-4161e98d`](results/rag_scifact_local/run.json), commit `c161bd4`, device `mps`.
 
 | Generator | Evidence | Pure abstention | Abstention with claims | Answers with claims | Citation recall | Citation precision | Unsupported sentences | Uncited sentences | Cited documents judged relevant |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -432,17 +432,17 @@ Generation on 100 SciFact test claims, judge `MoritzLaurer/DeBERTa-v3-base-mnli-
 
 A pure abstention makes no claim. An abstention with claims contains the abstention phrase and at least one other sentence; those sentences are scored like any others. Citation metrics are over answers with at least one claim and are conditional on the judge above. With evidence withheld no cited document can be one the benchmark judges relevant, so that column is zero by construction.
 
-`llama3.2-3b`: median generation time 5.2 s, mean 1690 prompt and 62 completion tokens per answer; median retrieval time 10 ms.
+`llama3.2-3b`: median generation time 4.3 s, mean 1690 prompt and 62 completion tokens per answer; median retrieval time 10 ms.
 
 ### Tool routing
 
-120 templated test requests and 120 paraphrases of them written by `llama3.2`. Run [`routing-20261007T000821Z-331b9c3-a01e5003`](results/routing/run.json), commit `331b9c3`, device `mps`.
+120 templated test requests and 120 paraphrases of them written by `llama3.2`. Run [`routing-20261009T223216Z-13e4e25-a01e5003`](results/routing/run.json), commit `13e4e25`, device `mps`.
 
 | Router | Exact match (templated) | Exact match (paraphrased) | 95% CI | F1 | Unnecessary calls per request | Missed tools per request | Median latency (ms) |
 |---|---:|---:|---|---:|---:|---:|---:|
 | rules | 1.000 | 0.558 | [0.467, 0.650] | 0.808 | 0.29 | 0.37 | 0.0 |
-| embedding | 0.450 | 0.483 | [0.400, 0.575] | 0.795 | 0.31 | 0.39 | 16.1 |
-| llm:llama3.2-3b | 0.492 | 0.492 | [0.400, 0.583] | 0.842 | 0.57 | 0.07 | 697.3 |
+| embedding | 0.450 | 0.483 | [0.400, 0.575] | 0.795 | 0.31 | 0.39 | 7.3 |
+| llm:llama3.2-3b | 0.492 | 0.492 | [0.400, 0.583] | 0.842 | 0.57 | 0.07 | 370.9 |
 
 F1, unnecessary calls and missed tools are on the paraphrased requests.
 
