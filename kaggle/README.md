@@ -12,41 +12,56 @@ CUDA machine, at a pinned commit:
 | trends | `configs/trends/arxiv.yaml` | arXiv backtest and the grants lead-lag test |
 | chunking | `configs/retrieval/chunking_litsearch.yaml` | Chunk-size ablation on full text |
 
-## One-time setup
+## Where the code comes from
 
-The repository is private, so Kaggle needs a token to clone it.
+The repository is private. The runner gets the code in one of two ways.
 
-1. On GitHub, create a fine-grained personal access token: Settings > Developer
-   settings > Fine-grained tokens. Repository access: only
-   `research-innovation-monitor`. Permissions: Contents, read-only. Nothing else.
-2. On Kaggle, open the notebook, then Add-ons > Secrets > Add a new secret. Name it
-   `GITHUB_TOKEN`, paste the token as the value, and tick the box that attaches it to
-   the notebook.
+**Git bundle (default).** `prepare.py` writes a Git bundle of the current commit and a
+`SESSION.json` naming that commit and the stages to run. Both go into a private
+Kaggle dataset attached to the script. The runner clones the bundle, checks out the
+commit and verifies the hash, so each run record names a real commit and a clean
+tree. No credential is involved. The bundle holds only what Git tracks: no benchmark
+data and no model weights.
 
-The token never appears in the script, the notebook output or the results archive.
-The script passes it to `git clone` through that command's environment and searches
-the archive for it before finishing.
+**GitHub clone.** With `SOURCE = "github"` the runner clones the repository at `REF`
+using a token from the Kaggle secret `GITHUB_TOKEN`: a fine-grained personal access
+token limited to this repository with Contents read-only. The token is passed to
+`git clone` through that command's environment only, and the archive is searched for
+it before the script finishes. This route is for running the script by hand in a
+notebook, where a secret can be attached.
 
-## Running
+## Running a session
 
-1. Create a Kaggle notebook. Settings: accelerator **GPU T4 x2**, internet on.
-   For the trends stage, add the dataset `Cornell-University/arxiv` as input.
-2. Paste `run_gpu_experiments.py` into a cell. `REPO_URL` and `REF` are already set;
-   `REF` is the commit whose code is run. Trim `STAGES` as described below.
-3. Run. The last lines print the archive name, its SHA-256 and the status and
-   duration of each stage.
-4. Download `rim_results_<ref>-<time>.zip` and the `.sha256` file beside it.
-5. In the repository, import the archive:
+```bash
+# 1. Stage one session from a clean tree (uploads nothing).
+uv run python kaggle/prepare.py --username <kaggle username> \
+    --stages judge retrieval --out ~/kaggle-staging/research-innovation-monitor
 
-   ```bash
-   uv run rim import-results path/to/rim_results_<ref>-<time>.zip --commit <REF>
-   uv run python scripts/make_results_tables.py
-   ```
+# 2. Upload the bundle as a private dataset (create once, then add versions).
+kaggle datasets create  -p ~/kaggle-staging/research-innovation-monitor/source
+kaggle datasets version -p ~/kaggle-staging/research-innovation-monitor/source -m "<commit>"
 
-   The import checks the archive checksum, that every run record names `REF` and a
-   clean tree, and the checksum of every result file, before it copies anything. A
-   result directory that already exists with a different run is moved to
-   `results/historical/` first.
+# 3. Submit the script. Kaggle runs it on its own; nothing has to stay open.
+kaggle kernels push -p ~/kaggle-staging/research-innovation-monitor/kernel
+
+# 4. Later: check, then fetch the archive and its checksum.
+kaggle kernels status <kaggle username>/research-innovation-monitor-gpu
+kaggle kernels output <kaggle username>/research-innovation-monitor-gpu -p ~/kaggle-staging/output
+
+# 5. Import and regenerate the tables.
+uv run rim import-results ~/kaggle-staging/output/rim_results_<commit>-<time>.zip --commit <commit>
+uv run python scripts/make_results_tables.py
+```
+
+The kernel metadata asks for a private script with a GPU ("T4 x2"), internet access
+and the source dataset; a session with the trends stage also attaches
+`Cornell-University/arxiv`. The script prints the GPUs it found, and the session
+manifest records them.
+
+The import checks the archive checksum, that every run record names the expected
+commit and a clean tree, and the checksum of every result file, before it copies
+anything. A result directory that already exists with a different run is moved to
+`results/historical/` first.
 
 ## Sessions
 
@@ -84,6 +99,7 @@ an out-of-memory error rather than falling back to another configuration; a
 quantized run would be a different experiment and would need its own config and name.
 
 Approximate downloads on the GPU machine: models 20 GB, datasets 4 GB, plus the
-attached arXiv snapshot (5.6 GB, read in place). Nothing is written to the local
-machine except the results archive, which holds summaries, per-query scores and
-run records.
+attached arXiv snapshot (5.6 GB, read in place). The checkout and the datasets live
+outside Kaggle's kept output folder, which receives only the results archive and its
+checksum. The archive holds summaries, per-query scores, run records and the raw
+per-run files that Git ignores.

@@ -1,24 +1,28 @@
 """Run the GPU experiments on Kaggle (or any CUDA machine) at a pinned commit.
 
-Paste into a Kaggle notebook cell with the "GPU T4 x2" accelerator and internet
-enabled, and run. The script clones the private repository at REF, installs it, runs
-the selected stages and writes ``rim_results_<REF>-<time>.zip`` and its SHA-256 to
-/kaggle/working. See kaggle/README.md for the one-time setup of the access token.
+Run as a Kaggle script with the "GPU T4 x2" accelerator and internet enabled. The
+script checks the repository out at one commit, installs it, runs the selected stages
+and writes ``rim_results_<commit>-<time>.zip`` and its SHA-256 to /kaggle/working.
 
 Every run record inside the archive names the commit, the device, the package
 versions and the dataset revisions, so results copied back into ``results/`` keep
-their provenance. REF must be a full commit hash, not a branch name: a branch can
-move between the run and the write-up. REF is the commit whose code is run; it is
-older than the commit that wrote it into this file.
+their provenance. The commit is always a full hash, not a branch name: a branch can
+move between the run and the write-up.
 
-The repository is private, so the clone needs a GitHub token. The token is read from
-the Kaggle secret named by TOKEN_SECRET (or, off Kaggle, the RIM_GITHUB_TOKEN
-environment variable). It is passed to git through the environment of the clone
-command only: it is not written to the git configuration, to a URL, to the command
-line or to the environment of the experiments, and the finished archive is searched
-for it before the script reports success.
+The code comes from one of two places, chosen by SOURCE:
 
-For the trends stage, attach the dataset "Cornell-University/arxiv" to the notebook.
+``bundle``  (default) a Git bundle in a private Kaggle dataset attached to the
+            script, staged by ``kaggle/prepare.py``. ``SESSION.json`` beside the
+            bundle names the commit and the stages. No credential is involved.
+``github``  a clone of the private repository at REF. The clone needs a GitHub
+            token, read from the Kaggle secret named by TOKEN_SECRET (or, off
+            Kaggle, the RIM_GITHUB_TOKEN environment variable). It is passed to git
+            through the environment of the clone command only: it is not written to
+            the git configuration, to a URL, to the command line or to the
+            environment of the experiments, and the finished archive is searched for
+            it before the script reports success.
+
+For the trends stage, attach the dataset "Cornell-University/arxiv" as well.
 """
 
 from __future__ import annotations
@@ -35,14 +39,23 @@ import zipfile
 from datetime import UTC, datetime
 from pathlib import Path
 
+SOURCE = os.environ.get("RIM_SOURCE", "bundle")  # "bundle" or "github"
 REPO_URL = "https://github.com/AdebanjiAdelowo/research-innovation-monitor.git"
+# Used with SOURCE = "github" only; a bundle session takes both from SESSION.json.
 REF = ""  # full 40-character commit hash
-TOKEN_SECRET = "GITHUB_TOKEN"
 # All stages together may not fit in one 12-hour session; see kaggle/README.md.
 STAGES = ["judge", "retrieval", "rag", "routing", "decomposition", "trends", "chunking"]
+TOKEN_SECRET = "GITHUB_TOKEN"
 
+BUNDLE = "research-innovation-monitor.bundle"
+SESSION = "SESSION.json"
+INPUT = Path(os.environ.get("RIM_INPUT_DIR", "/kaggle/input"))
+# Outputs. Everything left here is kept by Kaggle, so only the archive is.
 WORK = Path(os.environ.get("RIM_WORK_DIR", "/kaggle/working"))
-ARXIV_SNAPSHOT = Path("/kaggle/input/arxiv/arxiv-metadata-oai-snapshot.json")
+# The checkout, with the datasets it downloads, stays out of the kept outputs.
+CHECKOUT = Path(os.environ.get("RIM_CHECKOUT_DIR", "/tmp/rim"))
+ARXIV_FILE = "arxiv-metadata-oai-snapshot.json"
+ARXIV_SNAPSHOT = "<arxiv snapshot>"  # replaced by the attached file's path at run time
 DORISMAE_URL = "https://zenodo.org/api/records/8299749/files/DORIS-MAE_dataset_v1.json/content"
 
 COMMANDS = {
@@ -66,7 +79,7 @@ COMMANDS = {
     # run loads the NSF awards itself for the lead-lag test.
     "trends": [
         ["rim", "prepare-nsf", "2010", "2024"],
-        ["rim", "prepare-arxiv", str(ARXIV_SNAPSHOT)],
+        ["rim", "prepare-arxiv", ARXIV_SNAPSHOT],
         ["rim", "trends", "configs/trends/arxiv.yaml"],
     ],
     "chunking": [
@@ -138,15 +151,38 @@ def git_with_token(args: list[str], token: str, cwd: Path | None = None) -> None
         )
 
 
-def checkout(token: str) -> Path:
-    repo = WORK / "research-innovation-monitor"
+def find_input(name: str) -> Path:
+    """The one attached file called ``name``.
+
+    Kaggle's mount layout has changed over time (``/kaggle/input/<slug>`` and
+    ``/kaggle/input/datasets/<owner>/<slug>``), so the file is searched for.
+    """
+    found = sorted(INPUT.rglob(name)) if INPUT.exists() else []
+    if len(found) != 1:
+        sys.exit(f"expected one {name} under {INPUT}, found {[str(f) for f in found]}")
+    return found[0]
+
+
+def read_session(bundle: Path) -> tuple[str, list[str]]:
+    """Commit and stages of a bundle session, from the file staged beside the bundle."""
+    session = json.loads((bundle.parent / SESSION).read_text())
+    return session["commit"], list(session["stages"])
+
+
+def checkout(source: str, ref: str, token: str = "") -> Path:
+    """A checkout of exactly ``ref``, from the Git bundle or from GitHub."""
+    repo = CHECKOUT / "research-innovation-monitor"
     if repo.exists():
         shutil.rmtree(repo)
-    git_with_token(["clone", "--no-checkout", REPO_URL, str(repo)], token)
-    sh(["git", "checkout", "--detach", REF], cwd=repo)
+    repo.parent.mkdir(parents=True, exist_ok=True)
+    if source == "bundle":
+        sh(["git", "clone", "--quiet", "--no-checkout", str(find_input(BUNDLE)), str(repo)])
+    else:
+        git_with_token(["clone", "--no-checkout", REPO_URL, str(repo)], token)
+    sh(["git", "checkout", "--quiet", "--detach", ref], cwd=repo)
     head = capture(["git", "rev-parse", "HEAD"], cwd=repo)
-    if head != REF:
-        sys.exit(f"Checked out {head}, expected {REF}.")
+    if head != ref:
+        sys.exit(f"Checked out {head}, expected {ref}.")
     return repo
 
 
@@ -181,25 +217,37 @@ def archive_contains(archive: Path, needles: list[bytes]) -> bool:
 
 
 def main() -> None:
-    if len(REF) != 40:
-        sys.exit("Set REF to a full commit hash before running.")
+    if SOURCE not in ("bundle", "github"):
+        sys.exit(f"SOURCE must be 'bundle' or 'github', not {SOURCE!r}.")
+    ref, stage_names, token = REF, STAGES, ""
+    if SOURCE == "bundle":
+        ref, stage_names = read_session(find_input(BUNDLE))
+    if len(ref) != 40:
+        sys.exit("The commit must be a full 40-character hash.")
+    unknown = [s for s in stage_names if s not in COMMANDS]
+    if unknown:
+        sys.exit(f"Unknown stages: {unknown}")
+    arxiv = str(find_input(ARXIV_FILE)) if "trends" in stage_names else ""
     started = utc_now()
-    token = read_token()
-    repo = checkout(token)
+    if SOURCE == "github":
+        token = read_token()
+    repo = checkout(SOURCE, ref, token)
+    print(f"source: {SOURCE}  commit: {ref}  stages: {stage_names}", flush=True)
     sh([sys.executable, "-m", "pip", "install", "-q", "-e", ".[ml,data,gpu]"], cwd=repo)
     gpus = capture(["nvidia-smi", "--query-gpu=name,memory.total", "--format=csv,noheader"])
     print("GPUs:", gpus or "none found", flush=True)
 
-    collected = WORK / "rim_collected"
+    collected = CHECKOUT / "rim_collected"
     if collected.exists():
         shutil.rmtree(collected)
     (collected / "results").mkdir(parents=True)
 
     stages = []
-    for stage in STAGES:
+    for stage in stage_names:
         entry = {"stage": stage, "status": "completed", "started_at": utc_now(), "results": []}
         clock = time.perf_counter()
         for cmd in COMMANDS[stage]:
+            cmd = [arxiv if part == ARXIV_SNAPSHOT else part for part in cmd]
             try:
                 sh(cmd, cwd=repo)
             except subprocess.CalledProcessError as exc:
@@ -215,24 +263,27 @@ def main() -> None:
 
     manifest = {
         "repository": REPO_URL,
-        "commit": REF,
+        "source": SOURCE,
+        "commit": ref,
         "tree_clean_at_end": capture(["git", "status", "--porcelain"], cwd=repo) == "",
         "started_at": started,
         "finished_at": utc_now(),
         "gpus": gpus.splitlines(),
         "python": sys.version.split()[0],
         "kaggle_kernel": os.environ.get("KAGGLE_KERNEL_RUN_TYPE"),
-        "stages_requested": STAGES,
+        "stages_requested": stage_names,
         "stages": stages,
     }
     stamp = started.replace("-", "").replace(":", "")
-    manifest_path = collected / "results" / "gpu_sessions" / f"{REF[:12]}-{stamp}.json"
+    manifest_path = collected / "results" / "gpu_sessions" / f"{ref[:12]}-{stamp}.json"
     manifest_path.parent.mkdir(parents=True)
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
 
-    base = WORK / f"rim_results_{REF[:12]}-{stamp}"
+    base = WORK / f"rim_results_{ref[:12]}-{stamp}"
     archive = Path(shutil.make_archive(str(base), "zip", collected, "results"))
-    if archive_contains(archive, [token.encode(), basic_credential(token).encode()]):
+    shutil.rmtree(collected)
+    needles = [token.encode(), basic_credential(token).encode()] if token else []
+    if needles and archive_contains(archive, needles):
         archive.unlink()
         sys.exit("The access token was found in the results; the archive was deleted.")
     digest = sha256_file(archive)
