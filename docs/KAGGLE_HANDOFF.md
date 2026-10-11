@@ -8,7 +8,7 @@ Where the GPU experiments stand and how to continue. Updated 2026-10-11.
 |---|---|
 | Kernel | `adebanjiadelowo/research-innovation-monitor-gpu` (private script), version 1 |
 | URL | https://www.kaggle.com/code/adebanjiadelowo/research-innovation-monitor-gpu |
-| Submitted | 2026-10-11, about 12:03 UTC; accepted with status `QUEUED` |
+| Submitted | 2026-10-11, about 12:03 UTC; started 12:27 UTC |
 | Commit run | `2fe9d3136c99b067e71ccfd40aa7719853b4c8a5` |
 | Code source | Git bundle in the private dataset `adebanjiadelowo/research-innovation-monitor-src`, version 1 |
 | Stages | `judge`, `retrieval` |
@@ -38,7 +38,7 @@ the other stages still run. Runtime was estimated at 2 to 5 hours before any GPU
 run; the manifest records the real durations.
 
 Commit `2fe9d31` is on GitHub: `main` was pushed at `84e49d7` on 2026-10-11 and CI
-passed there. The kernel was still `QUEUED` when last checked, at 12:13 UTC that day.
+passed there. The kernel started at 12:27 UTC that day and was `RUNNING` when last checked, at 17:03 UTC.
 
 ## When resuming
 
