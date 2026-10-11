@@ -37,8 +37,8 @@ A stage that fails is marked `failed` in the manifest and its results are absent
 the other stages still run. Runtime was estimated at 2 to 5 hours before any GPU
 run; the manifest records the real durations.
 
-Commit `2fe9d31` exists in the local repository only. GitHub `main` is at `871c8f0`;
-the later commits have not been pushed.
+Commit `2fe9d31` is on GitHub: `main` was pushed at `84e49d7` on 2026-10-11 and CI
+passed there. The kernel was still `QUEUED` when last checked, at 12:13 UTC that day.
 
 ## When resuming
 
