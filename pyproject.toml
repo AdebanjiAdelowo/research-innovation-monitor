@@ -26,6 +26,8 @@ dependencies = [
 [project.optional-dependencies]
 # Neural encoders, rerankers and local generation. Not needed for the unit tests.
 ml = ["torch>=2.2", "sentence-transformers>=3.0", "transformers>=4.41"]
+# Placement of a model over several GPUs (the 7B generator on two 16 GB cards).
+gpu = ["accelerate>=0.30"]
 # Dataset download from the Hugging Face Hub.
 data = ["huggingface_hub>=0.23", "fsspec>=2024.2"]
 app = ["fastapi>=0.110", "uvicorn>=0.29", "streamlit>=1.33"]

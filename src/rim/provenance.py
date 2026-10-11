@@ -29,6 +29,7 @@ TRACKED_PACKAGES = (
     "torch",
     "sentence-transformers",
     "transformers",
+    "accelerate",
     "huggingface_hub",
     "snowballstemmer",
 )
