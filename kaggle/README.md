@@ -103,3 +103,17 @@ attached arXiv snapshot (5.6 GB, read in place). The checkout and the datasets l
 outside Kaggle's kept output folder, which receives only the results archive and its
 checksum. The archive holds summaries, per-query scores, run records and the raw
 per-run files that Git ignores.
+
+## Session 1 results
+
+The judge and four retrieval experiments finished in the first session. See the
+[measured report](../docs/GPU_SESSION1.md) and [scientific audit](../docs/SCIENTIFIC_AUDIT.md).
+GPU completion must be checked against stage manifests and logs. Configuration,
+source and artifact validation passed; judge source fingerprints were absent,
+and retrieval Parquet fingerprints differed from local runs. Raw rankings reproduce
+the stored retrieval scores against local relevance judgments.
+
+Session 1 took 9 hours 41 minutes elapsed; retrieval accounted for 9.64 hours.
+The earlier estimates in the session table are not measured runtimes. Sessions 2
+and 3 have not been submitted. No new experiment should be launched without an
+explicit instruction.

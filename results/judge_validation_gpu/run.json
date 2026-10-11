@@ -1,0 +1,115 @@
+{
+  "artifacts": {
+    "dev_scores.csv": "70c0f15407c37dd655aafdb91a58edffa55d9b0450c388dc8dcb6256e5fc8d05",
+    "summary.json": "7c7289b2c48c84db12e4c34875e2b1685dc4555d3fdaa1011fbc9bf3fdf00bb3"
+  },
+  "config": {
+    "device": "auto",
+    "experiment": "judge_validation_gpu",
+    "judges": [
+      {
+        "max_length": 512,
+        "model_id": "cross-encoder/nli-deberta-v3-xsmall",
+        "name": "nli-deberta-v3-xsmall",
+        "revision": "a150876415327c80daeff35ca6f68f5ed8cf5c24"
+      },
+      {
+        "max_length": 512,
+        "model_id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+        "name": "deberta-v3-base-mnli-fever-anli",
+        "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb"
+      },
+      {
+        "max_length": 512,
+        "model_id": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli",
+        "name": "deberta-v3-large-mnli-fever-anli-ling-wanli",
+        "revision": "b3546ea6b0346eb6f8d5d68b13c7dc6d0376b3d7"
+      }
+    ],
+    "n_bootstrap": 10000,
+    "output_dir": "results",
+    "seed": 13,
+    "thresholds": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ]
+  },
+  "config_sha256": "3cfee0d0ee215d6f40ccd12c0a929f76fab7e4845d9f414a9e856bdce46b8e6a",
+  "datasets": [],
+  "environment": {
+    "hardware": {
+      "cpu_count": 4,
+      "cuda_device_count": 2,
+      "cuda_device_name": "Tesla T4",
+      "device": "cuda",
+      "machine": "x86_64",
+      "platform": "Linux-6.18.48+-x86_64-with-glibc2.39",
+      "processor": "x86_64"
+    },
+    "packages": {
+      "accelerate": "1.14.0",
+      "huggingface_hub": "1.29.0",
+      "numpy": "2.1.3",
+      "pandas": "2.3.3",
+      "pyarrow": "23.0.1",
+      "scikit-learn": "1.6.1",
+      "scipy": "1.16.3",
+      "sentence-transformers": "5.7.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.16.1"
+    },
+    "python": "3.13.15"
+  },
+  "experiment": "judge_validation_gpu",
+  "finished_at": "2026-10-11T12:30:37Z",
+  "git": {
+    "commit": "2fe9d3136c99b067e71ccfd40aa7719853b4c8a5",
+    "dirty": false,
+    "dirty_paths": [],
+    "source": "git"
+  },
+  "models": [
+    {
+      "device": "cuda",
+      "entailment_index": 1,
+      "kind": "nli",
+      "max_length": 512,
+      "model_id": "cross-encoder/nli-deberta-v3-xsmall",
+      "name": "nli-deberta-v3-xsmall",
+      "revision": "a150876415327c80daeff35ca6f68f5ed8cf5c24",
+      "role": "judge"
+    },
+    {
+      "device": "cuda",
+      "entailment_index": 0,
+      "kind": "nli",
+      "max_length": 512,
+      "model_id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "name": "deberta-v3-base-mnli-fever-anli",
+      "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+      "role": "judge"
+    },
+    {
+      "device": "cuda",
+      "entailment_index": 0,
+      "kind": "nli",
+      "max_length": 512,
+      "model_id": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli",
+      "name": "deberta-v3-large-mnli-fever-anli-ling-wanli",
+      "revision": "b3546ea6b0346eb6f8d5d68b13c7dc6d0376b3d7",
+      "role": "judge"
+    }
+  ],
+  "notes": [],
+  "run_id": "judge_validation_gpu-20261011T122809Z-2fe9d31-3cfee0d0",
+  "seed": 13,
+  "started_at": "2026-10-11T12:28:09Z"
+}

@@ -1,0 +1,372 @@
+{
+  "artifacts": {
+    "per_query_test.csv": "190cb5c6a2d3c296e27338fd09f76b49b322cf4193d292d60dec2927eda48743",
+    "summary.json": "4184ee136e6ac307dc123e23f3427a54112ca8d3ab30e1b1e998f606ea01337f"
+  },
+  "config": {
+    "bm25": {
+      "b": 0.75,
+      "b_grid": [
+        0.3,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "k1": 1.2,
+      "k1_grid": [
+        0.6,
+        0.9,
+        1.2,
+        1.6,
+        2.0
+      ],
+      "remove_stopwords": true,
+      "stem": true
+    },
+    "dataset": {
+      "dev_fraction": 0.3,
+      "fields": [
+        "title",
+        "text"
+      ],
+      "max_queries": null,
+      "name": "litsearch",
+      "qrels_group": null
+    },
+    "device": "auto",
+    "encoders": [
+      {
+        "batch_size": 64,
+        "dim": 256,
+        "doc_prefix": "",
+        "dtype": "float32",
+        "kind": "sentence-transformers",
+        "max_seq_length": 256,
+        "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "name": "minilm-l6",
+        "normalize": true,
+        "query_prefix": "",
+        "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf"
+      },
+      {
+        "batch_size": 64,
+        "dim": 256,
+        "doc_prefix": "",
+        "dtype": "float32",
+        "kind": "sentence-transformers",
+        "max_seq_length": 512,
+        "model_id": "BAAI/bge-small-en-v1.5",
+        "name": "bge-small",
+        "normalize": true,
+        "query_prefix": "Represent this sentence for searching relevant passages: ",
+        "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+      },
+      {
+        "batch_size": 128,
+        "dim": 256,
+        "doc_prefix": "",
+        "dtype": "float32",
+        "kind": "sentence-transformers",
+        "max_seq_length": 512,
+        "model_id": "BAAI/bge-base-en-v1.5",
+        "name": "bge-base",
+        "normalize": true,
+        "query_prefix": "Represent this sentence for searching relevant passages: ",
+        "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a"
+      },
+      {
+        "batch_size": 128,
+        "dim": 256,
+        "doc_prefix": "",
+        "dtype": "float32",
+        "kind": "sentence-transformers",
+        "max_seq_length": 512,
+        "model_id": "sentence-transformers/allenai-specter",
+        "name": "specter",
+        "normalize": true,
+        "query_prefix": "",
+        "revision": "2c68eeca61259b2dd70c3f2628219f925df7031a"
+      }
+    ],
+    "evaluation": {
+      "confidence": 0.95,
+      "ks": [
+        1,
+        5,
+        10,
+        20,
+        100
+      ],
+      "n_bootstrap": 10000,
+      "n_latency_queries": 50,
+      "n_permutations": 10000,
+      "primary_metric": "ndcg@10"
+    },
+    "experiment": "retrieval_litsearch_gpu",
+    "fusion": {
+      "alpha_grid": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "depth": 100,
+      "normalization": "minmax",
+      "rrf_k": 60,
+      "rrf_k_grid": [
+        10,
+        20,
+        60,
+        100
+      ]
+    },
+    "hybrid_encoder": null,
+    "output_dir": "results",
+    "rerankers": [
+      {
+        "batch_size": 32,
+        "depths": [
+          10,
+          20,
+          50,
+          100
+        ],
+        "kind": "cross-encoder",
+        "max_dev_queries": 150,
+        "max_length": 512,
+        "model_id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "name": "minilm-l6-ce",
+        "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+      },
+      {
+        "batch_size": 64,
+        "depths": [
+          10,
+          20,
+          50,
+          100
+        ],
+        "kind": "cross-encoder",
+        "max_dev_queries": 150,
+        "max_length": 512,
+        "model_id": "BAAI/bge-reranker-v2-m3",
+        "name": "bge-reranker-v2-m3",
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
+      }
+    ],
+    "seed": 13,
+    "top_k": 100
+  },
+  "config_sha256": "18e666e2a71229f19fb3be699a8816a6acc1f544425d06cb5132b01fa9824493",
+  "datasets": [
+    {
+      "files": {
+        "corpus.parquet": "f2af15dce1e4d63fccd3dca0b67ce2b42e87c81ffdec973621b1b9ad47ba5305",
+        "qrels.parquet": "fd940c7a8a2bef5394b2ba46f18f73dcfe35190e67b403c9d71d25d257cad2b2",
+        "queries.parquet": "e71cf2ba405df11b01b7c9c953c8e7565dd7a569b2dbaa3470412eaffc98c3b7"
+      },
+      "license": "MIT (code repository); the dataset card states no licence",
+      "license_url": "https://github.com/princeton-nlp/LitSearch/blob/main/LICENSE",
+      "n_documents": 64183,
+      "n_qrels": 639,
+      "n_queries": 597,
+      "name": "litsearch",
+      "notes": "Corpus text is title and abstract from the corpus_clean configuration. Query IDs are derived from the question text. Treated as not redistributable because the dataset card carries no explicit licence.",
+      "redistributable": false,
+      "retrieved_at": "2026-10-11T12:33:46Z",
+      "revision": "9573fb284a1026c998df47024b888a163f0f0e25",
+      "source": "LitSearch",
+      "source_url": "https://huggingface.co/datasets/princeton-nlp/LitSearch"
+    }
+  ],
+  "environment": {
+    "hardware": {
+      "cpu_count": 4,
+      "cuda_device_count": 2,
+      "cuda_device_name": "Tesla T4",
+      "device": "cuda",
+      "machine": "x86_64",
+      "platform": "Linux-6.18.48+-x86_64-with-glibc2.39",
+      "processor": "x86_64"
+    },
+    "packages": {
+      "accelerate": "1.14.0",
+      "huggingface_hub": "1.29.0",
+      "numpy": "2.1.3",
+      "pandas": "2.3.3",
+      "pyarrow": "23.0.1",
+      "scikit-learn": "1.6.1",
+      "scipy": "1.16.3",
+      "sentence-transformers": "5.7.0",
+      "snowballstemmer": "3.1.1",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.16.1"
+    },
+    "python": "3.13.15"
+  },
+  "experiment": "retrieval_litsearch_gpu",
+  "finished_at": "2026-10-11T18:53:39Z",
+  "git": {
+    "commit": "2fe9d3136c99b067e71ccfd40aa7719853b4c8a5",
+    "dirty": false,
+    "dirty_paths": [],
+    "source": "git"
+  },
+  "models": [
+    {
+      "b": 0.5,
+      "build_seconds": 10.19481697899937,
+      "idf": "lucene",
+      "k1": 1.6,
+      "n_documents": 64183,
+      "n_terms": 86224,
+      "role": "lexical",
+      "tokenizer": {
+        "pattern": "[a-z0-9]+",
+        "remove_stopwords": true,
+        "stem": true
+      }
+    },
+    {
+      "batch_size": 64,
+      "batched_query_encode_seconds": 0.21641029300008086,
+      "corpus_docs_per_second": 485.161570078985,
+      "corpus_embedding": {
+        "cache_hit": false,
+        "cache_key": "0281e74fb096ea7c59bbf801",
+        "dim": 384,
+        "encode_seconds": 132.29201148300126,
+        "n_vectors": 64183,
+        "storage_mb": 98.59
+      },
+      "device": "cuda",
+      "dim": 384,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 256,
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "n_parameters": 22713216,
+      "name": "minilm-l6",
+      "normalize": true,
+      "query_prefix": "",
+      "revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "batch_size": 64,
+      "batched_query_encode_seconds": 0.4675638480002817,
+      "corpus_docs_per_second": 188.43755836156865,
+      "corpus_embedding": {
+        "cache_hit": false,
+        "cache_key": "ff1ed48ad23952a79139a238",
+        "dim": 384,
+        "encode_seconds": 340.60619633399983,
+        "n_vectors": 64183,
+        "storage_mb": 98.59
+      },
+      "device": "cuda",
+      "dim": 384,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "n_parameters": 33360000,
+      "name": "bge-small",
+      "normalize": true,
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "batch_size": 128,
+      "batched_query_encode_seconds": 1.5448977949999971,
+      "corpus_docs_per_second": 56.666574226441085,
+      "corpus_embedding": {
+        "cache_hit": false,
+        "cache_key": "6ce023ca07397759a03fd19a",
+        "dim": 768,
+        "encode_seconds": 1132.6430241489998,
+        "n_vectors": 64183,
+        "storage_mb": 197.17
+      },
+      "device": "cuda",
+      "dim": 768,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "BAAI/bge-base-en-v1.5",
+      "n_parameters": 109482240,
+      "name": "bge-base",
+      "normalize": true,
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "batch_size": 128,
+      "batched_query_encode_seconds": 1.3275294300001406,
+      "corpus_docs_per_second": 55.654526660089566,
+      "corpus_embedding": {
+        "cache_hit": false,
+        "cache_key": "f31c24497de1cee94ccd444d",
+        "dim": 768,
+        "encode_seconds": 1153.239526983998,
+        "n_vectors": 64183,
+        "storage_mb": 197.17
+      },
+      "device": "cuda",
+      "dim": 768,
+      "doc_prefix": "",
+      "kind": "sentence-transformers",
+      "max_seq_length": 512,
+      "model_id": "sentence-transformers/allenai-specter",
+      "n_parameters": 109938432,
+      "name": "specter",
+      "normalize": true,
+      "query_prefix": "",
+      "revision": "2c68eeca61259b2dd70c3f2628219f925df7031a",
+      "role": "encoder",
+      "storage_dtype": "float32"
+    },
+    {
+      "batch_size": 32,
+      "batched_seconds_all_queries": 208.4266497790013,
+      "device": "cuda",
+      "kind": "cross-encoder",
+      "max_length": 512,
+      "model_id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "n_parameters": 22713601,
+      "name": "minilm-l6-ce",
+      "pairs_scored": 57400,
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "role": "reranker"
+    },
+    {
+      "batch_size": 64,
+      "batched_seconds_all_queries": 4593.846913456,
+      "device": "cuda",
+      "kind": "cross-encoder",
+      "max_length": 512,
+      "model_id": "BAAI/bge-reranker-v2-m3",
+      "n_parameters": 567755777,
+      "name": "bge-reranker-v2-m3",
+      "pairs_scored": 57400,
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "role": "reranker"
+    }
+  ],
+  "notes": [],
+  "run_id": "retrieval_litsearch_gpu-20261011T163345Z-2fe9d31-18e666e2",
+  "seed": 13,
+  "started_at": "2026-10-11T16:33:45Z"
+}

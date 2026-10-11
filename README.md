@@ -520,18 +520,43 @@ Strongest full-period trends:
 
 ![Backtest](results/trends_nsf/backtest.png)
 
-### Not yet run
+### GPU retrieval and judge evaluation
 
-These need a CUDA GPU or data that is only practical to process there. Configs and the runner are in place ([kaggle/](kaggle/README.md)); no numbers are reported for them.
+CUDA evaluation uses the same seed and pinned model revisions as the local baselines, with additional encoders and rerankers. Test nDCG@10 and 95% query-bootstrap intervals are shown below. The headline reranker and its depth are selected on dev, rather than by the highest test score.
+
+| Benchmark | Test queries | BM25 | Selected dense | Fusion input | Headline reranker | 95% CI |
+|---|---:|---:|---:|---:|---:|---|
+| scifact | 300 | 0.6826 | 0.7421 | 0.7598 | 0.7592 | [0.7194, 0.7986] |
+| scidocs | 702 | 0.1508 | 0.2080 | 0.2104 | 0.2007 | [0.1849, 0.2162] |
+| litsearch | 424 | 0.4371 | 0.4651 | 0.5324 | 0.5611 | [0.5209, 0.6010] |
+| dapfam | 892 | 0.1931 | 0.2354 | 0.2433 | 0.2318 | [0.2171, 0.2478] |
+
+The dev-selected dense system improves over BM25 on all four benchmarks (Holm-adjusted p < 0.003 within each benchmark). Reranking reduces nDCG@10 on SCIDOCS and DAPFAM (adjusted p = 0.0176 and 0.0007). Its change on SciFact is inconclusive (adjusted p = 1.0); LitSearch improves numerically but does not pass the corrected significance threshold (adjusted p = 0.1368).
+
+![GPU reranking changes with paired 95% confidence intervals](results/gpu_sessions/reranking_effects.png)
+
+| GPU judge | Dev accuracy | 95% CI | Balanced accuracy | False-positive rate |
+|---|---:|---|---:|---:|
+| nli-deberta-v3-xsmall | 0.6676 | [0.6176, 0.7147] | 0.6032 | 0.0545 |
+| deberta-v3-base-mnli-fever-anli | 0.7676 | [0.7206, 0.8118] | 0.7551 | 0.1782 |
+| deberta-v3-large-mnli-fever-anli-ling-wanli | 0.8324 | [0.7912, 0.8706] | 0.8199 | 0.1139 |
+
+The large judge has higher observed balanced accuracy than the base judge (0.8199 versus 0.7551). These are dev-set results, with pair-level accuracy intervals; no paired judge significance test or held-out test-set judge evaluation was recorded. The GPU judge run lacks source dataset fingerprints. Generation scores above still use the base judge.
+
+Retrieval source revisions match the local runs, and shared baseline nDCG@10 scores match per query. Serialized Parquet fingerprints differ, so byte-identical datasets and a controlled device-only comparison are not established. [Detailed GPU results and protocol](docs/GPU_SESSION1.md).
+
+### Additional evaluations
+
+Evaluation coverage for CUDA configurations is listed below. See [GPU execution instructions](kaggle/README.md) for the experimental setup.
 
 | Experiment | What it measures | Status |
 |---|---|---|
-| `retrieval_*_gpu` | Larger encoders (bge-base, SPECTER) and `bge-reranker-v2-m3` | PENDING |
-| `rag_scifact_gpu` | RQ4 with an open 7B generator on all 300 test claims | PENDING |
-| `judge_validation_gpu` | A larger entailment judge | PENDING |
-| `routing_gpu, decomposition_gpu` | 7B model as router and decomposer | PENDING |
-| `trends_arxiv` | RQ5 on arXiv and RQ6 (grants against papers) | PENDING |
-| `chunking_litsearch` | Chunk-size ablation on full text | PENDING |
+| `retrieval_*_gpu` | Larger encoders (bge-base, SPECTER) and `bge-reranker-v2-m3` | evaluated |
+| `rag_scifact_gpu` | RQ4 with an open 7B generator on all 300 test claims | not evaluated |
+| `judge_validation_gpu` | A larger entailment judge | evaluated |
+| `routing_gpu, decomposition_gpu` | 7B model as router and decomposer | not evaluated |
+| `trends_arxiv` | RQ5 on arXiv and RQ6 (grants against papers) | not evaluated |
+| `chunking_litsearch` | Chunk-size ablation on full text | not evaluated |
 
 <!-- results:end -->
 

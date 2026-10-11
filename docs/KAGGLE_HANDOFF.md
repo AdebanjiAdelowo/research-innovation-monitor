@@ -1,6 +1,6 @@
 # Kaggle handoff
 
-Where the GPU experiments stand and how to continue. Updated 2026-10-11.
+Where the GPU experiments stand and how to continue. Updated 2026-10-12.
 
 ## Current submission: session 1
 
@@ -33,12 +33,40 @@ Expected outputs in the kernel's output folder:
   the status and duration of each stage.
 - `rim_results_2fe9d3136c99-<time>.zip.sha256`.
 
-A stage that fails is marked `failed` in the manifest and its results are absent;
-the other stages still run. Runtime was estimated at 2 to 5 hours before any GPU
+A stage that fails is marked `failed` in the manifest; later commands in that
+stage are skipped, while other stages still run. Earlier commands in a failed
+stage can have produced results, so inspect individual run records as well. Runtime was estimated at 2 to 5 hours before any GPU
 run; the manifest records the real durations.
 
-Commit `2fe9d31` is on GitHub: `main` was pushed at `84e49d7` on 2026-10-11 and CI
-passed there. The kernel started at 12:27 UTC that day and was `RUNNING` when last checked, at 17:03 UTC.
+## Completed session 1
+
+Kaggle reports COMPLETE. Outputs were downloaded on 2026-10-12 and validated;
+judge and retrieval both completed. Judge took 162.2 seconds; retrieval took
+34,719.3 seconds (9.64 hours). Finished at 2026-10-11 22:09:20 UTC.
+All five runs are imported into new `results/*_gpu/` directories, with no changes
+to existing results. No requested stage failed or was skipped. Other stages were
+not requested. Do not resubmit session 1 or launch another experiment yet.
+
+Archive SHA-256:
+`83345e374cc0a9728c1a5695ccd4bd287cefd5bbc48e00cd564da2edba3995f0`.
+Downloaded archive, checksum and log: `/private/tmp/rim-session1/` (temporary storage;
+preserve separately if needed). Raw rankings are present locally under GPU result
+directories and ignored by Git. The archive remains available from Kaggle.
+
+[Scientific audit](SCIENTIFIC_AUDIT.md) documents passing integrity and source checks,
+Parquet fingerprint differences and absent judge dataset fingerprints.
+[Experiment report](GPU_SESSION1.md) contains measured tables and uncertainty.
+The larger judge improves observed dev balanced accuracy; retrieval gains depend
+on the benchmark, and headline reranking harms SCIDOCS and DAPFAM.
+
+Validation and regeneration:
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/check_gpu_results.py
+PYTHONPATH=src .venv/bin/python scripts/make_gpu_report.py
+PYTHONPATH=src .venv/bin/python scripts/make_results_tables.py
+PYTHONPATH=src .venv/bin/python scripts/make_results_tables.py --check
+```
 
 ## When resuming
 
@@ -52,7 +80,7 @@ kaggle kernels status adebanjiadelowo/research-innovation-monitor-gpu
 kaggle kernels output adebanjiadelowo/research-innovation-monitor-gpu \
     -p ~/kaggle-staging/research-innovation-monitor/output/session1
 
-# 3. Read the manifest inside the archive: every stage should be "completed" and
+# 3. Read the manifest inside the archive: classify each requested stage independently and
 #    "tree_clean_at_end" should be true. Read the log for any "STAGE FAILED" line.
 
 # 4. Import. This checks the archive checksum, the commit and clean tree in every
@@ -80,7 +108,8 @@ If the kernel ended in `error`, read the log first. A failure before the first s
 
 ## Sessions not yet submitted
 
-All remain PENDING. Submit one at a time, after the previous one is imported.
+These remain unsubmitted. Do not launch them without a new instruction.
+The first session used about 9.69 elapsed hours; earlier runtime estimates were low.
 
 | Session | Stages | Notes |
 |---|---|---|

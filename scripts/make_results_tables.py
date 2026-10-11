@@ -14,6 +14,8 @@ import json
 import sys
 from pathlib import Path
 
+from make_gpu_report import gpu_section
+
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
 START, END = "<!-- results:start -->", "<!-- results:end -->"
@@ -355,24 +357,24 @@ def trends_section() -> list[str]:
 
 def pending_section() -> list[str]:
     out = [
-        "### Not yet run",
+        "### Additional evaluations",
         "",
-        "These need a CUDA GPU or data that is only practical to process there. Configs and the "
-        "runner are in place ([kaggle/](kaggle/README.md)); no numbers are reported for them.",
+        "Evaluation coverage for CUDA configurations is listed below. "
+        "See [GPU execution instructions](kaggle/README.md) for the experimental setup.",
         "",
         "| Experiment | What it measures | Status |",
         "|---|---|---|",
     ]
     for name, what in GPU_RUNS:
         present = any(RESULTS.glob(f"{name.split(',')[0].strip()}/summary.json"))
-        out.append(f"| `{name}` | {what} | {'run' if present else 'PENDING'} |")
+        out.append(f"| `{name}` | {what} | {'evaluated' if present else 'not evaluated'} |")
     return [*out, ""]
 
 
 def render() -> str:
     lines: list[str] = []
     for section in (retrieval_section, decomposition_section, rag_section, routing_section,
-                    trends_section, pending_section):  # fmt: skip
+                    trends_section, gpu_section, pending_section):  # fmt: skip
         lines += section()
     return "\n".join(lines).rstrip() + "\n"
 
