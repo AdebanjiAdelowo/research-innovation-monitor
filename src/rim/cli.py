@@ -125,6 +125,13 @@ def _prepare_arxiv(args: argparse.Namespace) -> None:
     print(f"arxiv: {len(papers)} papers")
 
 
+def _import_results(args: argparse.Namespace) -> None:
+    from rim.results_import import import_archive
+
+    summary = import_archive(args.archive, args.repo, commit=args.commit, sha256=args.sha256)
+    print(json.dumps(summary, indent=2))
+
+
 def _env(_: argparse.Namespace) -> None:
     from rim.provenance import environment_info, git_info
 
@@ -183,6 +190,13 @@ def main(argv: list[str] | None = None) -> None:
     arxiv.add_argument("--first-year", type=int, default=2010)
     arxiv.add_argument("--last-year", type=int, default=2024)
     arxiv.set_defaults(func=_prepare_arxiv)
+
+    imp = sub.add_parser("import-results", help="check and import a GPU results archive")
+    imp.add_argument("archive")
+    imp.add_argument("--repo", default=".")
+    imp.add_argument("--commit", help="commit every run in the archive must name")
+    imp.add_argument("--sha256", help="expected checksum of the archive")
+    imp.set_defaults(func=_import_results)
 
     env = sub.add_parser("env", help="print the provenance of this environment")
     env.set_defaults(func=_env)
